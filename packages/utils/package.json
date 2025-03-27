@@ -1,0 +1,33 @@
+{
+    "name": "@noah-libjs/utils",
+    "version": "0.1.101",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c rollup.config.js",
+        "build:watch": "rollup -c rollup.config.js --watch",
+        "clean": "rm dist -rf",
+        "prebuild": "pnpm clean"
+    },
+    "main": "dist/index.js",
+    "directories": {
+        "lib": "dist"
+    },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "rollup": "^2.70.2"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "peerDependencies": {
+        "radash": "^12.1.0",
+        "dayjs": "^1.11.13"
+    },
+    "gitHead": "607e3267c47fa08e9a13c7794ef66d1f1fb0c93f"
+}
