@@ -7,7 +7,8 @@
         "build": "rollup -c rollup.config.js",
         "build:watch": "rollup -c rollup.config.js --watch",
         "clean": "rm dist -rf",
-        "prebuild": "pnpm clean"
+        "prebuild": "pnpm clean",
+        "build:types": "api-extractor run"
     },
     "main": "dist/index.js",
     "directories": {
