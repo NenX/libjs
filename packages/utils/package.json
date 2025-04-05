@@ -11,6 +11,7 @@
         "build:types": "api-extractor run"
     },
     "main": "dist/index.js",
+    "types": "dist/types.d.ts",
     "directories": {
         "lib": "dist"
     },

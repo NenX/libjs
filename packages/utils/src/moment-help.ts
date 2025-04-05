@@ -1,8 +1,9 @@
-import dayjs, { Dayjs, ConfigType } from "dayjs"
+import dayjs from "dayjs"
 import { isFunction, isString } from "./helper"
 
 
-type TOutput = dayjs.Dayjs
+export type Dayjs = dayjs.Dayjs
+export type DayjsConfigType = dayjs.ConfigType
 
 
 function getFn<T extends string>(format: T,) {
@@ -17,7 +18,7 @@ function getFn<T extends string>(format: T,) {
     }, { format })
 }
 
-export function getMomentObj(s: ConfigType): TOutput {
+export function getMomentObj(s: DayjsConfigType): Dayjs {
     return dayjs(s)
 }
 
@@ -31,14 +32,14 @@ export const formatTime = getFn('HH:mm:ss')
 
 
 export function getMomentRange(m = dayjs) {
-    type DT = [TOutput, TOutput]
+    type DT = [Dayjs, Dayjs]
     return {
         昨天: [m().add(-1, 'day'), m().add(-1, 'day')] as DT,
         今天: [m(), m()] as DT,
         明天: [m().add(1, 'day'), m().add(1, 'day')] as DT,
         上周: [m().add(-1, 'week').startOf('week'), m().add(-1, 'week').endOf('week')] as DT,
         这周: [m().startOf('week'), m().endOf('week')] as DT,
-        下周:[m().add(1, 'week').startOf('week'), m().add(1, 'week').endOf('week')] as DT,
+        下周: [m().add(1, 'week').startOf('week'), m().add(1, 'week').endOf('week')] as DT,
         上月: [m().add(-1, 'month').startOf('month'), m().add(-1, 'month').endOf('month')] as DT,
         这月: [m().startOf('month'), m().endOf('month')] as DT,
         下月: [m().add(1, 'month').startOf('month'), m().add(1, 'month').endOf('month')] as DT,
@@ -71,5 +72,4 @@ export function dayjs_quarter(input: Dayjs, which_quarter?: number): [Dayjs, num
     }
 }
 
-export { dayjs, Dayjs, }
-export type Dayjs_ConfigType = ConfigType
+export { dayjs }

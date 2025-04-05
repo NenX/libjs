@@ -1,11 +1,12 @@
 import { isFunction, isNumber, isObject, isString, keys, toInt, toFloat, } from "./helper";
 import { safe_json_parse } from "./json-helper";
 import { isBoolean, isNil, isNull, isObjectLike, toString } from "./helper";
+import { AnyObject } from "./type-utils";
 
 export type TCommonFileType = 'application/vnd.ms-excel' | 'text/csv;charset=utf-8' | 'application/msword'
-export function sleep(sec: number) {
-    return new Promise<void>((resolve) => setTimeout(resolve, sec * 1000))
-}
+// export function sleep(sec: number) {
+//     return new Promise<void>((resolve) => setTimeout(resolve, sec * 1000))
+// }
 
 export function getSearchParamsValue(key: string) {
     const url = new URL(location.toString())
@@ -155,12 +156,15 @@ export function safeGetFromFuncOrData(fn: any) {
 
 export function numberLikeCompare(a: number | string | boolean, b: number | string | boolean) {
     if (a === b) return true
+    if (isString(a) && isString(b)) {
+        return a === b
+    }
     if (isNil(a) || isNil(b)) return false
     if (isObject(a) || isObject(b)) return false
     if (isBoolean(a) && !isBoolean(b)) return false
     if (isBoolean(b) && !isBoolean(a)) return false
-    if (toInt(a) === toInt(b)) return true
-    if (toFloat(a) === toFloat(b)) return true
+    if (toInt(a, NaN) === toInt(b, NaN)) return true
+    if (toFloat(a, NaN) === toFloat(b, NaN)) return true
     if (toString(a) === toString(b)) return true
     return false
 }
@@ -320,3 +324,13 @@ export function confirm_operation() {
 // '😎'.charCodeAt(0).toString(16) == 'd83d' // UTF-16 码元
 // '😎'.charCodeAt(1).toString(16) == 'de0e'
 // '😎'.codePointAt(0)?.toString(16) == '1f60e'// Unicode 码点
+
+export function simple_encrypt(data: AnyObject | any[]) {
+    if (!data) return null
+    return JSON.stringify(data).split('').map((_, idx) => ~_.charCodeAt(0) + idx * 119)
+}
+export function simple_decrypt(code: number[]) {
+    if (!code) return null
+    const str = expect_array(code).map((_, idx) => String.fromCharCode(~(_ - idx * 119))).join('')
+    return safe_json_parse(str) as AnyObject
+}
