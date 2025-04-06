@@ -6,7 +6,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "rollup -c rollup.config.js",
         "build:watch": "rollup -c rollup.config.js --watch",
-        "clean": "rm dist -rf",
+        "clean": "rimraf dist -rf",
         "prebuild": "pnpm clean",
         "build:types": "api-extractor run"
     },
