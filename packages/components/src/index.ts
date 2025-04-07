@@ -1,6 +1,6 @@
 // export * from './style'
 
-export * from './pack_components'
+export * from './packs'
 export * from './GlobalModal'
 export * from './Monaco'
 export * from './MyLazyComponent'

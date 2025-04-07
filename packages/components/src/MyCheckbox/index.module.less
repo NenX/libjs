@@ -1,0 +1,58 @@
+@issue-bg-color: red;
+@border-width: 1px !important;
+
+
+.wrapper {
+
+  input {
+    padding: 0 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  :global(.ant-select-selector) {
+    padding: 0 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  :global(.ant-select-selection-search-input) {
+    padding: 0 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+}
+
+.block-box {
+  display: block !important;
+
+  &>div {
+    margin-bottom: 6px;
+  }
+}
+
+.flex-box {
+  display: flex;
+}
+
+.warning {
+
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background: @issue-bg-color !important;
+    border-color: @issue-bg-color !important;
+  }
+
+  :global(.ant-input) {
+    color: @issue-bg-color !important;
+    border-color: @issue-bg-color !important;
+
+
+  }
+
+  :global(.ant-select-selection-search-input) {
+    border-color: @issue-bg-color !important;
+  }
+}

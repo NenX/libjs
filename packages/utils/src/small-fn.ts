@@ -18,7 +18,7 @@ export function getSearchParamsAll(url?: URL) {
         [..._url.searchParams.entries()]
             .reduce((a, b) => Object.assign(a, { [b[0]]: b[1] }), {})
         : {}
-    return searchParams as { [x: string]: string }
+    return searchParams as AnyObject<string>
 }
 
 

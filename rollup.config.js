@@ -28,7 +28,6 @@ const sharedOptions = {
             presets: ['@babel/preset-react'],
             plugins: [
                 '@babel/plugin-transform-runtime',
-                'babel-plugin-lodash',
                 // [
                 //     "import",
                 //     {

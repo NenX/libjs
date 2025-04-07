@@ -19,6 +19,7 @@
     "types": "dist/index.d.ts",
     "peerDependencies": {
         "@monaco-editor/react": "^4.5.1",
+        "monaco-editor": "^0.39.0",
         "axios": ">=0.26.0",
         "classnames": "*",
         "dayjs": "^1.11.13",
@@ -37,7 +38,8 @@
         "rollup-plugin-postcss": "^4.0.2"
     },
     "dependencies": {
-        "@noah-libjs/utils": "workspace:*"
+        "@noah-libjs/utils": "workspace:*",
+        "@noah-libjs/request": "workspace:*"
     },
     "publishConfig": {
         "access": "public"

@@ -1,5 +1,5 @@
 {
-    "name": "@noah-libjs/utils",
+    "name": "@noah-libjs/request",
     "version": "0.0.3",
     "description": "",
     "scripts": {
@@ -11,7 +11,6 @@
         "build:types": "api-extractor run"
     },
     "main": "dist/index.js",
-    "types": "dist/typing.d.ts",
     "directories": {
         "lib": "dist"
     },
@@ -22,14 +21,13 @@
         "access": "public"
     },
     "dependencies": {
-        "radash": "^12.1.0"
+        "axios": "^0.26.1",
+        "@noah-libjs/utils": "workspace:*"
     },
     "devDependencies": {
         "rollup": "^2.70.2"
     },
-    "peerDependencies": {
-        "dayjs": "^1.11.13"
-    },
+    "peerDependencies": {},
     "keywords": [],
     "author": "",
     "license": "MIT",

@@ -2,8 +2,9 @@ import { Input, InputRef } from 'antd';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { getInputStyle, } from 'src/utils';
 import { IMyInputProps } from './types';
+import { TCommonComponent } from 'src/types';
 export * from './types';
-export const MyInput = forwardRef<InputRef, IMyInputProps>((props, myRef) => {
+const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<InputRef, IMyInputProps>((props, myRef) => {
     const { width, style = {}, placeholder, name, warning = false, form, value, onChange, ...others } = props
     const [_value, set_value] = useState(value)
 
@@ -31,3 +32,8 @@ export const MyInput = forwardRef<InputRef, IMyInputProps>((props, myRef) => {
 })
 
 
+MyInput.DisplayFC = (props) => {
+    return props.value
+}
+
+export { MyInput }
