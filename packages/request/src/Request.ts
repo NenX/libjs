@@ -8,9 +8,9 @@ import { IRequest_AxiosRequestConfig, IRequest_ResponseError, IRequest_SpawnConf
 import { AnyObject, EventEmitter, MyLog } from '@noah-libjs/utils';
 export * from './types';
 
-export class Request extends EventEmitter<{ beforeRequest: any, afterResponse: any, responseErr: any, message: [boolean, string, any] }> {
+export class Request extends EventEmitter<{ request: any, response: any, error: any, message: [boolean, string, any] }> {
     ins!: AxiosInstance
-    token: string = ''
+    token?: string = ''
     constructor(config: IRequest_SpawnConfig = {}) {
         super()
         this.spawn(config)
@@ -90,15 +90,15 @@ export class Request extends EventEmitter<{ beforeRequest: any, afterResponse: a
         const ins = axios.create(config)
 
         const _onErr = (e: IRequest_ResponseError) => {
-            this.emit('responseErr', e)
+            this.emit('error', e)
             config.logger && Request.logger.error(e)
             return onRejected(e)
         }
         ins.interceptors.request.use((config) => {
-            this.emit('beforeRequest', config)
+            this.emit('request', config)
+
             // TODO: remove
-            config.headers!.Authorization = config.headers!.Authorization || this.token
-            const params = (config.params = config.params ?? {})
+            config.headers!.Authorization = config.headers!.Authorization || this.token || ''
             // params.pathname = location.pathname
 
 
@@ -115,7 +115,7 @@ export class Request extends EventEmitter<{ beforeRequest: any, afterResponse: a
                 if (Request.checkRTCode(response)) {
 
                     logger && Request.logger.log({ url, data, params, method, }, response.data)
-                    this.emit('afterResponse', response)
+                    this.emit('response', response)
                     const isSameOrigin = url?.startsWith('http') ? new URL(url).origin === location.origin : true
                     if (isSameOrigin) {
                         const token = headers['Authorization'] || headers['authorization']

@@ -1,5 +1,6 @@
 
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+export type { AxiosError, AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
 
 
 export interface IRequest_AxiosRequestConfig<D = any> extends AxiosRequestConfig<D> {

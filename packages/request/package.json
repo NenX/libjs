@@ -22,9 +22,11 @@
     },
     "dependencies": {
         "axios": "^0.26.1",
+        "store": "2.x",
         "@noah-libjs/utils": "workspace:*"
     },
     "devDependencies": {
+        "@types/store": "^2.0.2",
         "rollup": "^2.70.2"
     },
     "peerDependencies": {},

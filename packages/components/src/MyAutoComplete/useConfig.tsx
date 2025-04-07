@@ -1,7 +1,8 @@
 // import { ICommonOption, getPresetOptions, getSameOptions } from '@lm_fe/env';
 import { getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption } from '@noah-libjs/utils';
 import React, { useEffect, useState } from 'react';
-import { IMyAutoCompleteProps } from './types';
+import { IMemoriseItem, IMyAutoCompleteProps } from './types';
+import { request } from '@noah-libjs/request';
 
 
 const defaultOptions: ICommonOption[] = []
@@ -20,7 +21,6 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         name,
         onChange,
         onBlur,
-        memories_ops,
     } = props;
 
     const [__options, set__options] = useState<ICommonOption[]>([])
@@ -63,9 +63,9 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         }
         if (_memorable) {
 
-            memories_ops?.get(_memorieskey)
+            request.get<IMemoriseItem[]>(`/api/text-memories?key.equals=${_memorieskey}`, { ignore_usr: true })
                 .then(r => {
-                    const arr = r ?? [];
+                    const arr = r.data ?? [];
                     _options.push(...arr.map(_ => ({ label: _.value, value: _.value, id: _.id })))
                     set__options(_options)
 
@@ -82,13 +82,13 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
             const thisValue = value
             if (!_memorable || !thisValue || __options.some(_ => _.value === thisValue)) return
 
-            memories_ops?.post(_memorieskey, _memoriesname, thisValue)
+            request.post<IMemoriseItem>(`/api/text-memories`, { key: _memorieskey, name: _memoriesname, value: thisValue }, { ignore_usr: true })
                 .then(init)
         }, 10);
     };
 
     function remove(item: ICommonOption) {
-        memories_ops?.delete?.(item.id)
+        request.delete<IMemoriseItem>(`/api/text-memories/${item.id}`, { params: {}, ignore_usr: true })
             .then(r => {
                 init()
                 if (value === item.label) {

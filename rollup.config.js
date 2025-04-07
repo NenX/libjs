@@ -51,7 +51,7 @@ const sharedOptions = {
         dir: path.resolve(__dirname, 'dist'),
 
         exports: 'named',
-        format: 'cjs',
+        format: 'esm',
         externalLiveBindings: false,
         freeze: false,
         plugins: [
@@ -64,11 +64,11 @@ const sharedOptions = {
         ]
     },
     external: [
-        'react', 'react-dom', 'axios', 'antd', 'store', 'lodash', 'moment', '@ant-design/icons',
+        'react', 'react-dom', 'antd', 'store', 'lodash', 'moment', '@ant-design/icons',
         '@lm_fe/static', , 'dayjs',
         ...Object.keys(require('./package.json').dependencies || {}),
         ...Object.keys(require('./package.json').peerDependencies || {}),
-        /antd/, /lodash/, /rc-/, /@ant-design/, /monaco/
+        /antd/, /lodash/, /rc-/, /@ant-design/, /monaco/, /@noah-libjs/,/axios/
     ]
 }
 

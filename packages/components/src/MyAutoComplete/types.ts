@@ -11,11 +11,7 @@ export interface IMemoriseItem {
 
 export type IMyAutoCompleteProps = Omit<AutoCompleteProps, 'options' | 'onChange'> & {
     onChange?(str?: string): void
-    memories_ops?: {
-        get(key: string): Promise<IMemoriseItem[]>
-        post(key: string, name: string, value: string): Promise<IMemoriseItem>
-        delete(id: number): Promise<IMemoriseItem>
-    },
+
     optionKey?: string,
     memorieskey?: string,
     memoriesname?: string,

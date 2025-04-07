@@ -19,15 +19,17 @@ function createInstance(defaultConfig = {}) {
     return instance as AxiosInstance;
 }
 
-export { Request }
 
-export const request = new Request;
+const request = new Request;
 
 
-export const rawRequest = createInstance({})
+// export const rawRequest = createInstance({})
 
-export const asRequest = new Request({ config: { baseURL: '/as' } })
-export const fubaoRequest = new Request({ config: { baseURL: '/' } })
+// export const asRequest = new Request({ config: { baseURL: '/as' } })
+// export const fubaoRequest = new Request({ config: { baseURL: '/' } })
+
+export { Request, createInstance, request }
+
 
 
 
