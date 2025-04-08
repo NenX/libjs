@@ -13,6 +13,7 @@ export type IMyAutoCompleteProps = Omit<AutoCompleteProps, 'options' | 'onChange
     onChange?(str?: string): void
 
     optionKey?: string,
+    uniqueKey?: string,
     memorieskey?: string,
     memoriesname?: string,
     memorable?: boolean,

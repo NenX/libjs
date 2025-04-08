@@ -61,11 +61,11 @@ function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   return input_type === 'MA' ? options[1] : options[0]
 
 }
-function parse_MC_dict_options(props?: ICompatibleProps): ICommonOption[] | undefined {
+export function parse_MC_dict_options(props?: ICompatibleProps): ICommonOption[] | undefined {
   if (!props?.uniqueKey) return
 
   const { uniqueKey, useString } = props
-  const fixed_uniqueKey = uniqueKey.startsWith('uniqueKey.') ? uniqueKey : `uniqueKey.${uniqueKey}`
+  const fixed_uniqueKey = uniqueKey.includes('.') ? uniqueKey : `uniqueKey.${uniqueKey}`
   const enums = getDictionariesEnumerations(fixed_uniqueKey)
   if (!enums.length) return
 
@@ -73,10 +73,9 @@ function parse_MC_dict_options(props?: ICompatibleProps): ICommonOption[] | unde
     .sort((a, b) => a.id! - b.id!)
     .map(e => {
       const dict_value = e.value ?? e.note
-      const value = useString ? dict_value?.toString() : dict_value
+      const value = useString ? (e.note ?? e.label) : dict_value
       return { label: e.label, value: value }
     })
-  console.log('fixed_uniqueKey', { fixed_uniqueKey, uniqueKey, enums, options, props })
   return options
 
 }

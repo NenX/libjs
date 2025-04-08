@@ -3,6 +3,7 @@ import { getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption }
 import React, { useEffect, useState } from 'react';
 import { IMemoriseItem, IMyAutoCompleteProps } from './types';
 import { request } from '@noah-libjs/request';
+import { parse_MC_dict_options } from 'src/MyCheckbox/utils';
 
 
 const defaultOptions: ICommonOption[] = []
@@ -19,6 +20,7 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         memoriesname,
         formName = 'unsetFormName',
         name,
+        uniqueKey,
         onChange,
         onBlur,
     } = props;
@@ -55,8 +57,8 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
 
         const preOptions = optionKey ? getPresetOptions(optionKey as any) : null
         const searchValue = searchKey ? getSearchParamsValue(searchKey) : null
-
-        const _options = preOptions ?? (typeof options === 'string' ? getSameOptions(options) : options.map(o => typeof o === 'string' ? { value: o, label: o } : o))
+        const dic_op = parse_MC_dict_options({ ...props, useString: true })
+        const _options = preOptions ?? dic_op ?? (typeof options === 'string' ? getSameOptions(options) : options.map(o => typeof o === 'string' ? { value: o, label: o } : o))
 
         if (searchValue) {
             _options.push({ value: searchValue, label: searchValue })
