@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { TCommonComponent } from '../types';
+import { TCommonComponent } from '../util-types';
 import { IArrayInputProps } from './types';
 export const ArrayInput: TCommonComponent<IArrayInputProps, string> = lazy(() => import('./Inner'))
 

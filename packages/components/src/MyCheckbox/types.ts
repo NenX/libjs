@@ -5,6 +5,19 @@ import { IArrayInputProps } from "src/ArrayInput";
 import { IMyDatePickerProps } from "src/MyDatePicker/utils";
 import { IMyInputProps } from "src/MyInput";
 
+export interface ICompatibleProps {
+    marshal?: any,
+    optionKey?: string,
+    useString?: boolean,
+    options?: any,
+    sp?: any[],
+    config?: any,
+    type?: any,
+    startIndex?: any,
+    value?: any,
+    uniqueKey?: string
+}
+
 export interface IMyCheckboxProps {
     value?: string | ICommonOption[];
     options?: ICheckboxWithInputOption[] | string;

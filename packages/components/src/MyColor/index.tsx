@@ -3,7 +3,7 @@ import { isString } from "@noah-libjs/utils";
 import { Button, Space } from "antd";
 import React from "react";
 import { ColorPicker_L } from "src/LazyAntd";
-import { TCommonComponent } from "src/types";
+import { TCommonComponent } from "src/util-types";
 import { IMyColorProps } from "./types";
 
 const MyColor: TCommonComponent<IMyColorProps> = function MyColor(props) {

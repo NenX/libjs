@@ -9,6 +9,6 @@ function Checkbox_<T extends Object = any>(props: SelectProps<T>) {
     return <Inner {...props} />
 }
 
-type CheckboxType = typeof Checkbox_ & { Option: typeof GroupInner };
+type CheckboxType = typeof Checkbox_ & { Group: typeof GroupInner };
 
-export const Checkbox_L: CheckboxType = Object.assign(Checkbox_, { Option: GroupInner })
+export const Checkbox_L: CheckboxType = Object.assign(Checkbox_, { Group: GroupInner })

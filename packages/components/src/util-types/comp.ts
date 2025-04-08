@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 type TBase<PROPS = any, V = any, D = { disabled?: boolean, value?: V, onChange?(v: V | null, v2?: any): void, isDisplay?: boolean } & PROPS> = FC<D>
 
 export type TCommonComponentDisplay<PROPS = any, V = any> = TBase<PROPS, V>

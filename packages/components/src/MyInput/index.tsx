@@ -2,7 +2,7 @@ import { Input, InputRef } from 'antd';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { getInputStyle, } from 'src/utils';
 import { IMyInputProps } from './types';
-import { TCommonComponent } from 'src/types';
+import { TCommonComponent } from 'src/util-types';
 export * from './types';
 const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<InputRef, IMyInputProps>((props, myRef) => {
     const { width, style = {}, placeholder, name, warning = false, form, value, onChange, ...others } = props

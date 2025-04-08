@@ -7,7 +7,8 @@ import styles from './index.module.less';
 import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
 import { getMarshal, parseValue, parse_MC_option, parse_MC_value } from './utils';
 import { cloneDeep, ICommonOption, isNil, numberLikeCompare } from '@noah-libjs/utils';
-import { TCommonComponent } from 'src/types';
+import { TCommonComponent } from 'src/util-types';
+import { Checkbox_L } from 'src/LazyAntd';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
   const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 64, vertical = false, uniqueKey } = props;
   const options = parse_MC_option(props)
@@ -118,7 +119,7 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
   }
   if (options.length === 0) return null
   return (
-    <Checkbox.Group className={classNames([styles['wrapper'], vertical ? styles['block-box'] : styles['flex-box']])} disabled={disabled} value={__data.map(_ => _.value)} onChange={handleBoxGroupChange}
+    <Checkbox_L.Group className={classNames([styles['wrapper'], vertical ? styles['block-box'] : styles['flex-box']])} disabled={disabled} value={__data.map(_ => _.value)} onChange={handleBoxGroupChange}
       style={{ width: '100%', flexWrap: 'wrap' }}>
       {options.map((option, index) => {
         const { prefix, sufix, suffix, parentheses } = option
@@ -164,9 +165,9 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
                 }, 10);
               }}
             >
-              <Checkbox value={option.value} >
+              <Checkbox_L value={option.value} >
                 {option.label}
-              </Checkbox>
+              </Checkbox_L>
             </span>
             {
               surround_node
@@ -177,7 +178,7 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
 
 
       })}
-    </Checkbox.Group>
+    </Checkbox_L.Group>
 
   );
 };

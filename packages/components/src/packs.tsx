@@ -10,6 +10,7 @@ import { MySwitch } from './MySwitch'
 
 
 export * from './MyInput'
+export * from './MyCheckbox'
 
 export const packs = {
     MI: MyInput,

@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { TCommonComponent } from 'src/types';
+import { TCommonComponent } from 'src/util-types';
 import { DisplayFC } from './Display';
 import { IMyDatePickerProps } from './utils';
 export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';

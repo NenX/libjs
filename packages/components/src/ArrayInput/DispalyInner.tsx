@@ -1,6 +1,6 @@
 import { safe_json_parse_arr } from '@noah-libjs/utils';
 import React, { useEffect, useState } from 'react';
-import { TCommonComponentDisplay } from '../types';
+import { TCommonComponentDisplay } from '../util-types';
 import { componentMap } from './components';
 import { IArrayInputProps } from './types';
 import { getOption } from './utils';

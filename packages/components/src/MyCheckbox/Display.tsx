@@ -1,6 +1,6 @@
 import { ICommonOption } from '@noah-libjs/utils';
 import React from 'react';
-import { TCommonComponentDisplay } from 'src/types';
+import { TCommonComponentDisplay } from 'src/util-types';
 import { IMyCheckboxProps } from './types';
 import { displayValue, getMarshal, parse_MC_option, parseValue } from './utils';
 export * from './types';

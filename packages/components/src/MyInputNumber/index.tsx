@@ -1,6 +1,6 @@
 import { Checkbox, InputNumber, InputNumberProps } from 'antd';
 import React from 'react';
-import { TCommonComponent } from 'src/types';
+import { TCommonComponent } from 'src/util-types';
 import { getInputStyle } from 'src/utils';
 import { IMyInputNumberProps } from './types';
 export * from './types';

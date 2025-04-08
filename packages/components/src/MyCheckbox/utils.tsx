@@ -1,6 +1,7 @@
 
-import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
-import { isNil, isString, safe_json_parse_arr, ICommonOption, getDualModeOptions, getPresetOptions, getDictionariesEnumerations, } from '@noah-libjs/utils';
+import { ICommonOption, getDictionariesEnumerations, getDualModeOptions, getPresetOptions, isNil, isString, safe_json_parse_arr, } from '@noah-libjs/utils';
+import { IMchc_FormDescriptions_Field_Nullable } from 'src/util-types';
+import { ICheckboxWithInputOption, ICompatibleProps, IMyCheckboxProps } from './types';
 export function parseValue(value?: string | number | ICommonOption[], marshal?: number, type?: 'single' | 'multiple'): ICommonOption[] {
   if (isNil(value))
     return []
@@ -34,18 +35,6 @@ export function parseValue(value?: string | number | ICommonOption[], marshal?: 
   }
 }
 
-interface ICompatibleProps {
-  marshal?: any,
-  optionKey?: string,
-  useString?: boolean,
-  options?: any,
-  sp?: any[],
-  config?: any,
-  type?: any,
-  startIndex?: any,
-  value?: any,
-  uniqueKey?: string
-}
 function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   if (!props) return []
   const { useString, type, config, startIndex, sp } = props
@@ -123,7 +112,7 @@ export function parse_MC_value(props: IMyCheckboxProps, changedValue: ICommonOpt
 }
 
 
-export function get_check_invert_values(configs: any[]) {
+export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nullable[]) {
   if (!Array.isArray(configs)) return {}
   const children = configs.filter(_ => ['MC', 'MA'].includes(_?.inputType!) || Array.isArray(_?.children))
 
