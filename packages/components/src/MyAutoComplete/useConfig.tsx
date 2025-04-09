@@ -65,7 +65,12 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         }
         if (_memorable) {
 
-            request.get<IMemoriseItem[]>(`/api/text-memories?key.equals=${_memorieskey}`, { ignore_usr: true })
+            request.get<IMemoriseItem[]>(`/api/text-memories`, {
+                ignore_usr: true, params: {
+                    'key.equals': _memorieskey,
+                    size: 9999,
+                }
+            })
                 .then(r => {
                     const arr = r.data ?? [];
                     _options.push(...arr.map(_ => ({ label: _.value, value: _.value, id: _.id })))
@@ -83,8 +88,10 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         setTimeout(() => {
             const thisValue = value
             if (!_memorable || !thisValue || __options.some(_ => _.value === thisValue)) return
+            const data = { key: _memorieskey, name: _memoriesname, value: thisValue }
+            console.log('blur', { data, props })
 
-            request.post<IMemoriseItem>(`/api/text-memories`, { key: _memorieskey, name: _memoriesname, value: thisValue }, { ignore_usr: true })
+            request.post<IMemoriseItem>(`/api/text-memories`, data, { ignore_usr: true })
                 .then(init)
         }, 10);
     };
