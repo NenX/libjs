@@ -1,8 +1,10 @@
+
+
 export const EMPTY_PLACEHOLDER = '-'
 export const TOKEN_KEY = 'Σ(っ °Д °;)っ'
 export const ARG_URS1_KEY = 'usr1'
 export const ARG_URS2_KEY = 'usr2'
-
+export const noop = function () { }
 export const ROMAN_NUMERALS = {
     1: 'Ⅰ',
     2: 'Ⅱ',
