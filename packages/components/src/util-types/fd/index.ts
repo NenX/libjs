@@ -30,6 +30,8 @@ export interface IMchc_FormDescriptions_InputProps {
     labelCol?: number
     wrapperCol?: number
     rows?: number
+    defaultValue?: any,
+    defaultChecked?: boolean
     DisplayFC_render?: (value?: any) => any,
     targetLabelCol?: number
     options?: string | ICommonOption[] | string[],
