@@ -5,7 +5,6 @@ import { IMonacoProps } from './types';
 
 function MonacoInner(props: IMonacoProps) {
     const { value, onChange, language, defaultValue, height = '400px', theme = "vs-dark" } = props
-    console.log('MyMonaco', props)
     const [inner_value, set_inner_value] = useState(value)
     const inited = useRef(false)
     useEffect(() => {
