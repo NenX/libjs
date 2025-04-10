@@ -1,10 +1,10 @@
 import { EMPTY_PLACEHOLDER, getMomentObj } from '@noah-libjs/utils';
 import React from 'react';
-import { IMyDatePickerProps, formatProps, getIsUnknown } from './utils';
+import { IMyDatePickerProps, formatDatePickerProps, getIsUnknown } from './utils';
 
 
 export const DisplayFC = (_props: IMyDatePickerProps) => {
-  const props = formatProps(_props)
+  const props = formatDatePickerProps(_props)
 
   const { value, format } = props
   const isUnknown = getIsUnknown(props)

@@ -38,7 +38,8 @@ export function getUnknown(props: IMyDatePickerProps) {
 
     return (showUnknown || unknown)
 }
-export function formatProps(props: IMyDatePickerProps) {
+export type ICommonProps = { format?: any, time_only?: boolean, showTime?: any, getPopupContainer?: any }
+export function formatDatePickerProps<T extends ICommonProps>(props: T) {
 
 
 

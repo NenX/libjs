@@ -11,6 +11,7 @@ import { MySwitch } from './MySwitch'
 
 export * from './MyInput'
 export * from './MyCheckbox'
+export * from './MyDatePicker'
 
 export const packs = {
     MI: MyInput,
@@ -31,6 +32,7 @@ export const packs = {
     MyColor,
     MySwitch,
     ArrayInput,
+    MArr: ArrayInput,
 
     MySelect,
     MS: MySelect,

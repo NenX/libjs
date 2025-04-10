@@ -1,13 +1,13 @@
 import { Checkbox } from 'antd';
 import dayjs from 'dayjs';
 import React, { memo, useCallback } from 'react';
-import { IMyDatePickerProps, UNKNOWN_TIME_SYMBOL, areEqual, formatProps, getIsUnknown, getUnknown, handleChangeValue } from './utils';
+import { IMyDatePickerProps, UNKNOWN_TIME_SYMBOL, areEqual, formatDatePickerProps, getIsUnknown, getUnknown, handleChangeValue } from './utils';
 import { DatePicker_L, MonthPicker_L, TimePicker_L } from 'src/LazyAntd';
 import { getInputStyle } from 'src/utils';
 import { TCommonComponent } from 'src/util-types';
 export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
 function CusDatePicker(_props: IMyDatePickerProps) {
-  const props = formatProps(_props)
+  const props = formatDatePickerProps(_props)
   const {
     value = undefined,
     onChange,

@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { TCommonComponent } from 'src/util-types';
 import { DisplayFC } from './Display';
 import { IMyDatePickerProps } from './utils';
+export { formatDatePickerProps } from './utils'
 export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
 export { TMyDatePicker };
 
