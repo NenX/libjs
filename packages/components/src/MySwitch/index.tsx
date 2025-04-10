@@ -1,17 +1,10 @@
-import { CloseOutlined } from "@ant-design/icons";
-import { isString } from "@noah-libjs/utils";
-import { Button, Space } from "antd";
 import React from "react";
-import { ColorPicker_L } from "src/LazyAntd";
+import { Switch_L } from "src/LazyAntd";
 import { TCommonComponent } from "src/util-types";
 import { IMySwitchProps } from "./types";
 
-const MySwitch: TCommonComponent<IMySwitchProps, string> = function MySwitch(props) {
-    const { value, onChange, size } = props
-    return <Space.Compact>
-        <ColorPicker_L size={size} value={isString(value) ? value : undefined} onChange={(value, css) => onChange?.(css)} />
-        <Button size={size} icon={<CloseOutlined />} onClick={() => onChange?.(null)} />
-    </Space.Compact>
+const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(props) {
+    return <Switch_L {...props} />
 }
 
 MySwitch.DisplayFC = (props) => {
