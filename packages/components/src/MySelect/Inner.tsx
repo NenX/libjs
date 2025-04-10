@@ -103,6 +103,7 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     value={_value}
     onChange={handleChange}
     mode={type}
+    dropdownStyle={{ minWidth: 120 }}
     {...others}
     options={options as any}
   />
