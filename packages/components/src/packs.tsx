@@ -21,7 +21,8 @@ export const packs = {
 
     MyInputNumber,
     InputNumber: MyInputNumber,
-
+    input_number: MyInputNumber,
+    
     MyDatePicker,
     DatePicker: MyDatePicker,
     DP: MyDatePicker,
