@@ -31,19 +31,27 @@ export const formatDateTimeNoSecond = getFn('YYYY-MM-DD HH:mm')
 export const formatTime = getFn('HH:mm:ss')
 
 
+function start() {
+    return dayjs().set('hour', 0).set('minute', 0).set('second', 0)
+}
+function end() {
+    return dayjs().set('hour', 23).set('minute', 59).set('second', 59)
+}
+
 export function getMomentRange(m = dayjs) {
     type DT = [Dayjs, Dayjs]
+
     return {
-        昨天: [m().add(-1, 'day'), m().add(-1, 'day')] as DT,
-        今天: [m(), m()] as DT,
-        明天: [m().add(1, 'day'), m().add(1, 'day')] as DT,
-        上周: [m().add(-1, 'week').startOf('week'), m().add(-1, 'week').endOf('week')] as DT,
-        这周: [m().startOf('week'), m().endOf('week')] as DT,
-        下周: [m().add(1, 'week').startOf('week'), m().add(1, 'week').endOf('week')] as DT,
-        上月: [m().add(-1, 'month').startOf('month'), m().add(-1, 'month').endOf('month')] as DT,
-        这月: [m().startOf('month'), m().endOf('month')] as DT,
-        下月: [m().add(1, 'month').startOf('month'), m().add(1, 'month').endOf('month')] as DT,
-        今年: [m().startOf('year'), m().endOf('year')] as DT,
+        昨天: [start().add(-1, 'day'), end().add(-1, 'day')] as DT,
+        今天: [start(), end()] as DT,
+        明天: [start().add(1, 'day'), end().add(1, 'day')] as DT,
+        上周: [start().add(-1, 'week').startOf('week'), end().add(-1, 'week').endOf('week')] as DT,
+        这周: [start().startOf('week'), end().endOf('week')] as DT,
+        下周: [start().add(1, 'week').startOf('week'), end().add(1, 'week').endOf('week')] as DT,
+        上月: [start().add(-1, 'month').startOf('month'), end().add(-1, 'month').endOf('month')] as DT,
+        这月: [start().startOf('month'), end().endOf('month')] as DT,
+        下月: [start().add(1, 'month').startOf('month'), end().add(1, 'month').endOf('month')] as DT,
+        今年: [start().startOf('year'), end().endOf('year')] as DT,
     }
 }
 
