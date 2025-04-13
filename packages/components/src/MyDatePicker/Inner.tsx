@@ -5,6 +5,7 @@ import { IMyDatePickerProps, UNKNOWN_TIME_SYMBOL, areEqual, formatDatePickerProp
 import { DatePicker_L, MonthPicker_L, TimePicker_L } from 'src/LazyAntd';
 import { getInputStyle } from 'src/utils';
 import { TCommonComponent } from 'src/util-types';
+import { presets_date, getMomentRange } from '@noah-libjs/utils';
 export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
 function CusDatePicker(_props: IMyDatePickerProps) {
   const props = formatDatePickerProps(_props)
@@ -91,7 +92,7 @@ function CusDatePicker(_props: IMyDatePickerProps) {
             onChange={handleChange}
             disabledDate={disabledDate}
             format={format}
-
+            presets={presets_date()}
             {...rest}
             style={_style}
             placeholder={'请选择'}

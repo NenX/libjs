@@ -31,28 +31,47 @@ export const formatDateTimeNoSecond = getFn('YYYY-MM-DD HH:mm')
 export const formatTime = getFn('HH:mm:ss')
 
 
-function start() {
-    return dayjs().set('hour', 0).set('minute', 0).set('second', 0)
+function start(m = dayjs) {
+    return m().set('hour', 0).set('minute', 0).set('second', 0)
 }
-function end() {
-    return dayjs().set('hour', 23).set('minute', 59).set('second', 59)
+function end(m = dayjs) {
+    return m().set('hour', 23).set('minute', 59).set('second', 59)
 }
 
 export function getMomentRange(m = dayjs) {
     type DT = [Dayjs, Dayjs]
 
     return {
-        昨天: [start().add(-1, 'day'), end().add(-1, 'day')] as DT,
-        今天: [start(), end()] as DT,
-        明天: [start().add(1, 'day'), end().add(1, 'day')] as DT,
-        上周: [start().add(-1, 'week').startOf('week'), end().add(-1, 'week').endOf('week')] as DT,
-        这周: [start().startOf('week'), end().endOf('week')] as DT,
-        下周: [start().add(1, 'week').startOf('week'), end().add(1, 'week').endOf('week')] as DT,
-        上月: [start().add(-1, 'month').startOf('month'), end().add(-1, 'month').endOf('month')] as DT,
-        这月: [start().startOf('month'), end().endOf('month')] as DT,
-        下月: [start().add(1, 'month').startOf('month'), end().add(1, 'month').endOf('month')] as DT,
-        今年: [start().startOf('year'), end().endOf('year')] as DT,
+        昨天: [start(m).add(-1, 'day'), end(m).add(-1, 'day')] as DT,
+        今天: [start(m), end(m)] as DT,
+        明天: [start(m).add(1, 'day'), end(m).add(1, 'day')] as DT,
+        上周: [start(m).add(-1, 'week').startOf('week'), end(m).add(-1, 'week').endOf('week')] as DT,
+        这周: [start(m).startOf('week'), end(m).endOf('week')] as DT,
+        下周: [start(m).add(1, 'week').startOf('week'), end(m).add(1, 'week').endOf('week')] as DT,
+        上月: [start(m).add(-1, 'month').startOf('month'), end(m).add(-1, 'month').endOf('month')] as DT,
+        这月: [start(m).startOf('month'), end(m).endOf('month')] as DT,
+        下月: [start(m).add(1, 'month').startOf('month'), end(m).add(1, 'month').endOf('month')] as DT,
+        今年: [start(m).startOf('year'), end(m).endOf('year')] as DT,
     }
+}
+export function presets_date() {
+
+    return [
+        { label: '一月前', value: start().add(-1, 'month') },
+        { label: '一周前', value: start().add(-1, 'week') },
+        { label: '一天前', value: start().add(-1, 'day') },
+
+        { label: '一天后', value: start().add(1, 'day') },
+        { label: '两天后', value: start().add(2, 'day') },
+        { label: '三天后', value: start().add(3, 'day') },
+
+        { label: '一周后', value: start().add(1, 'week') },
+        { label: '两周后', value: start().add(2, 'week') },
+
+        { label: '一月后', value: start().add(1, 'month') },
+        { label: '两月后', value: start().add(2, 'month') },
+        { label: '半年后', value: start().add(6, 'month') },
+    ]
 }
 
 export function isMoment(m: any) {
