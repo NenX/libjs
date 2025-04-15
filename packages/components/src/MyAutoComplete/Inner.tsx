@@ -9,7 +9,7 @@ import { useConfig_MyAutoComplete } from './useConfig';
 export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
 
   const {
-    dropdownMatchSelectWidth = 120,
+    popupMatchSelectWidth = 140,
     getPopupContainer = () => document.body,
     options: _options,
     style = {},
@@ -29,10 +29,10 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
 
   return (
     <AutoComplete
-      dropdownStyle={{ minWidth: 180 }}
+      // dropdownStyle={{ minWidth: 180 }}
 
       title={JSON.stringify(options)}
-      popupMatchSelectWidth={dropdownMatchSelectWidth}
+      popupMatchSelectWidth={popupMatchSelectWidth}
       style={_style}
       // bordered={false}
       allowClear
