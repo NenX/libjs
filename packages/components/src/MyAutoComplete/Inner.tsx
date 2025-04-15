@@ -29,6 +29,8 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
 
   return (
     <AutoComplete
+      dropdownStyle={{ minWidth: 120 }}
+
       title={JSON.stringify(options)}
       popupMatchSelectWidth={dropdownMatchSelectWidth}
       style={_style}
