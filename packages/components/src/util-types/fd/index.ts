@@ -14,6 +14,7 @@ export interface IMchc_FormDescriptions_InputProps {
     showTime?: boolean
     showEdit?: boolean
     height?: any
+    watch?: (value: any, form?: FormInstance) => void
     dependency?: {
         show?: { key: string, value: any[] }
         disabled?: { key: string, value: any[] }
