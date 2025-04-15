@@ -31,7 +31,16 @@ function RenderComponent(p: { target?: ICommonOption, handleInputChange(a: any, 
 const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
 
 
-  const { onChange, value, marshal: _marshal, fetch_options, ...others } = props
+
+  const {
+    onChange,
+    value,
+    marshal: _marshal,
+    fetch_options,
+
+    popupMatchSelectWidth = 140,
+
+    ...others } = props
   const { options, loading, data, setData } = use_options(props)
   const _style = getInputStyle(props)
 
@@ -103,7 +112,8 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     value={_value}
     onChange={handleChange}
     mode={type}
-    dropdownStyle={{ minWidth: 120 }}
+    // dropdownStyle={{ minWidth: 120 }}
+    popupMatchSelectWidth={popupMatchSelectWidth}
     {...others}
     options={options as any}
   />
