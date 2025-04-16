@@ -1,6 +1,4 @@
-import Select from 'antd/es/select';
-import React from 'react';
+import { Option } from 'rc-select';
 
-export default function LazyInner(props: any) {
-    return <Select.Option {...props} />
-}
+
+export const SelectOption_L = Option

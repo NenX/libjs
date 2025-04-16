@@ -20,6 +20,19 @@ export function getSearchParamsAll(url?: URL) {
         : {}
     return searchParams as AnyObject<string>
 }
+export function setSearchParamsValue(key: string, value: string | number) {
+    const url = new URL(location.toString())
+    url?.searchParams?.set(key, `${value}`)
+    return url
+
+}
+export function setSearchParamsAll(data: AnyObject<string | number>) {
+    const _url = new URL(location.href);
+    Object.keys(data).forEach(k => {
+        _url?.searchParams?.set(k, `${data[k]}`)
+    })
+    return _url
+}
 
 
 
