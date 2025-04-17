@@ -14,7 +14,6 @@ export interface IMchc_FormDescriptions_InputProps {
     showTime?: boolean
     showEdit?: boolean
     height?: any
-    watch?: (value: any, form?: FormInstance) => void
     dependency?: {
         show?: { key: string, value: any[] }
         disabled?: { key: string, value: any[] }
@@ -122,7 +121,7 @@ export type IMchc_FormDescriptions_Field<RAW = false> = {
     ellipsis?: { showTitle?: boolean; } | boolean
     updatedTime?: string
     span?: number
-    containerType?: 'section(default)' | 'tabs' | 'plain'
+    containerType?: 'section(default)' | 'tabs' | 'plain' | 'segs'
     collapsed?: boolean,
     styles?: RAW extends false ? AnyObject : string
     props?: RAW extends false ? IMchc_FormDescriptions_InputProps : string
@@ -158,6 +157,7 @@ export type IMchc_FormDescriptions_Field<RAW = false> = {
     processRemote?(v: any, form?: FormInstance): any
     processLocal?(v: any, form?: FormInstance): any
     checkWarn?(v: any, form?: FormInstance): boolean
+    fd_lazy?: boolean
 }
 export type IMchc_FormDescriptions_Field_Nullable<RAW = false> = IMchc_FormDescriptions_Field<RAW> | null
 export type IMchc_FormDescriptions_Field_Nullable_Arr<RAW = false> = IMchc_FormDescriptions_Field_Nullable<RAW>[]

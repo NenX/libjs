@@ -1,5 +1,6 @@
 // export * from './style'
 
+export * from './util-types'
 export * from './packs'
 export * from './GlobalModal'
 export * from './Monaco'
