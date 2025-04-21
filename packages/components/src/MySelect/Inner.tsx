@@ -37,7 +37,7 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     value,
     marshal: _marshal,
     fetch_options,
-
+    uniqueKey,
     popupMatchSelectWidth = 140,
 
     ...others } = props

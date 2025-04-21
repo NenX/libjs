@@ -1,13 +1,13 @@
 import { AnyObject, ICommonOption, T_FETCH_OPTIONS } from "@noah-libjs/utils"
 import { ButtonProps, FormInstance } from "antd"
 import { SizeType } from "antd/lib/config-provider/SizeContext"
-import React, { CSSProperties } from "react"
+import React, { CSSProperties, FC, ReactNode } from "react"
 import { IMchc_FormDescriptions_FormItemLayout } from "./FormItemLayout"
 import { IMchc_FormDescriptions_InputType } from "./InputType"
 import { IMchc_FormDescriptions_Rules } from "./Rules"
 import { IMchc_FormDescriptions_SpecialConfig } from "./SpecialConfig"
 import { IMchc_FormDescriptions_TranferRules } from "./TranferRules"
-
+// export { ButtonProps, FormInstance, CSSProperties, FC, ReactNode, SizeType, AnyObject, ICommonOption, T_FETCH_OPTIONS }
 
 export interface IMchc_FormDescriptions_InputProps {
     language?: 'json' | 'javascript' | 'rust' | 'java'
@@ -57,8 +57,8 @@ export interface IMchc_FormDescriptions_InputProps {
     defaultData?: AnyObject
     btnText?: string
     standalone?: boolean
-    node?: React.ReactNode
-    component?: React.FC<{ value?: any, onChange?(v: any): void, form?: FormInstance }>
+    node?: ReactNode
+    component?: FC<{ value?: any, onChange?(v: any): void, form?: FormInstance }>
     width?: number
     startIndex?: number
     inputWidth?: number
@@ -131,7 +131,7 @@ export type IMchc_FormDescriptions_Field<RAW = false> = {
     rules?: RAW extends false ? IMchc_FormDescriptions_Rules : string
     specialConfig?: RAW extends false ? IMchc_FormDescriptions_SpecialConfig : string
     tranferRules?: RAW extends false ? IMchc_FormDescriptions_TranferRules : string
-    render?(value: any, rowData: any, index: number): React.ReactNode
+    render?(value: any, rowData: any, index: number): ReactNode
     disabled_check?: boolean
     // fucking 兼容
     name?: RAW extends false ? string : never

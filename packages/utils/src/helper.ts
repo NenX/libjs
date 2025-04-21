@@ -1,4 +1,4 @@
-import { isArray, isSymbol } from "radash";
+import { isArray, isObject, isString, isSymbol } from "radash";
 
 export * from "radash";
 
@@ -15,7 +15,11 @@ export function isObjectLike(value: any) {
 export function isNull(value: any): value is null {
     return value === null;
 }
-
+export function size(value: any) {
+    if (isString(value) || isArray(value)) return value.length
+    if (isObject(value)) return Object.keys(value).length
+    return 0
+}
 export function isNil(value: any): value is null | undefined {
     return value == null;
 }
