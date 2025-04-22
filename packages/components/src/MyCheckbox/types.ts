@@ -4,6 +4,7 @@ import React from "react";
 import { IArrayInputProps } from "src/ArrayInput";
 import { IMyDatePickerProps } from "src/MyDatePicker/utils";
 import { IMyInputProps } from "src/MyInput";
+import { TMarshal, TMode } from "src/utils";
 
 export interface ICompatibleProps {
     marshal?: any,
@@ -22,13 +23,13 @@ export interface IMyCheckboxProps {
     value?: string | ICommonOption[];
     options?: ICheckboxWithInputOption[] | string;
     onChange?(v?: any): void;
-    type?: 'single' | 'multiple';
+    type?: TMode;
     disabled?: boolean;
     inputWidth?: number;
     optionKey?: string
     config?: { inputType?: string }
     uniqueKey?: string
-    marshal?: number
+    marshal?: TMarshal
     sp?: ICheckboxWithInputOption[]
     vertical?: boolean
     startIndex?: number

@@ -4,6 +4,7 @@ import { IMyCheckboxProps } from 'src/MyCheckbox';
 import { IMyDatePickerProps } from 'src/MyDatePicker/utils';
 import { IMyInputProps } from 'src/MyInput';
 import { IMyInputNumberProps } from 'src/MyInputNumber';
+import { TMarshal, TMode } from 'src/utils';
 
 
 
@@ -29,13 +30,13 @@ export type TOption =
 
 export interface IMySelectProps extends Omit<SelectProps<any>, 'options'> {
     // options?: (Partial<TOption> & { prefix?: string, suffix?: string, label: string, value: any, warning?: boolean })[]
-    type?: 'multiple' | 'tags';
+    type?: TMode;
     options?: ICommonOption[]
     optionKey?: string
     uniqueKey?: string
     value?: any;
     onChange?(v: any): void;
-    marshal?: number
+    marshal?: TMarshal
     startIndex?: number
     useString?: boolean
     fetch_options?: T_FETCH_OPTIONS

@@ -3,7 +3,7 @@ import { getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption }
 import React, { useEffect, useState } from 'react';
 import { IMemoriseItem, IMyAutoCompleteProps } from './types';
 import { request } from '@noah-libjs/request';
-import { parse_MC_dict_options } from 'src/MyCheckbox/utils';
+import { parse_MC_dict_options } from 'src/utils';
 
 
 const defaultOptions: ICommonOption[] = []

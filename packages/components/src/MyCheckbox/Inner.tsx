@@ -1,25 +1,26 @@
-import { Checkbox } from 'antd';
+import { cloneDeep, ICommonOption, isNil, numberLikeCompare } from '@noah-libjs/utils';
 import { default as classNames, default as classnames } from 'classnames';
-import React, { CSSProperties, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, useEffect, useRef } from 'react';
+import { Checkbox_L } from 'src/LazyAntd';
+import { TCommonComponent } from 'src/util-types';
+import { getMarshal, parse_MC_value, use_options } from 'src/utils';
 import MyCheckbox_DisplayFC from './Display';
 import { components } from './components';
 import styles from './index.module.less';
 import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
-import { getMarshal, parseValue, parse_MC_option, parse_MC_value } from './utils';
-import { cloneDeep, ICommonOption, isNil, numberLikeCompare } from '@noah-libjs/utils';
-import { TCommonComponent } from 'src/util-types';
-import { Checkbox_L } from 'src/LazyAntd';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
   const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 64, vertical = false, uniqueKey } = props;
-  const options = parse_MC_option(props)
-  const longOptions = options.length > 2
-  const [__data, setData] = useState<ICommonOption[]>([]);
+  // const options = parse_MC_option(props)
+  // const [__data, setData] = useState<ICommonOption[]>([]);
   const marshal = getMarshal(props)
+  const { options, loading, data: __data, setData } = use_options(props)
+
+  const longOptions = options.length > 2
   const forcusInfo = useRef<{ index?: number, type?: 'child' | 'parent' }>({})
   // mchcEnv.logger.log('MyCheckbox', { MyCheckboxProps, options, __data })
   useEffect(() => {
-    const _value = parseValue(value, marshal, type)
-    setData(_value);
+    // const _value = parseValue(value, marshal, type)
+    // setData(_value);
     // if (isNil(value)) {
     //   setData([]);
     // } else {
@@ -32,8 +33,8 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
     //   return onChange?.(undefined)
     // }
     // const v = marshal ? (Number(marshal) == 2 ? changedValue : JSON.stringify(changedValue,)) : (type === 'single' ? (changedValue[0]?.value ?? null) : changedValue.map(_ => _.value).join(','))
-    // console.log('abc', changedValue, marshal, v)
     const v = parse_MC_value(props, changedValue)
+    console.log('abc', changedValue, marshal, v)
     onChange?.(v)
   }
 
@@ -65,13 +66,13 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
     const target = tempData.find(d => d.value === option.value)
     if (!target) return
 
-
+    console.log('target', { target, inputValue })
 
 
     target.text = inputValue
 
 
-    setData(tempData);
+    // setData(tempData);
     safe_onChange(tempData);
   };
 
@@ -114,6 +115,7 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
   };
   function isChecked(value: any) {
     // return __data.some(d => d.value === value)
+    debugger
     return __data.some(d => numberLikeCompare(d.value, value))
 
   }

@@ -40,7 +40,9 @@ function CusDatePicker(_props: IMyDatePickerProps) {
 
 
   const handleChange = (date?: any, dateString?: string | string[]) => {
+
     const newValue = handleChangeValue(props, date)
+    console.log('target handleChange', { date, newValue })
     onChange?.(newValue);
   }
 
@@ -120,7 +122,8 @@ function CusDatePicker(_props: IMyDatePickerProps) {
     </span>
   );
 }
-const df = memo<IMyDatePickerProps>(CusDatePicker, areEqual)
+const df = CusDatePicker
+// const df = memo<IMyDatePickerProps>(CusDatePicker, areEqual)
 CusDatePicker.MonthPicker = MonthPicker_L;
 const MyDatePickerInner: TCommonComponent<IMyDatePickerProps, string> = df
 

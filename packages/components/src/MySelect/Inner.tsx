@@ -2,11 +2,10 @@ import { ICommonOption, isNil, numberLikeCompare } from '@noah-libjs/utils';
 import { Col, Row } from 'antd';
 import React, { useMemo } from 'react';
 import { Select_L } from 'src/LazyAntd';
-import { getInputStyle } from 'src/utils';
+import { check_multiple, get_mode, getInputStyle, getMarshal, parse_MC_value, use_options } from 'src/utils';
 import { TCommonComponent } from '../util-types';
 import { componentMap } from './components';
 import { IMySelectProps } from './types';
-import { check_multiple, getMarshal, get_mode, parse_MC_value, use_options } from './utils';
 
 function RenderComponent(p: { target?: ICommonOption, handleInputChange(a: any, b: any): void }) {
   const { target, handleInputChange } = p
