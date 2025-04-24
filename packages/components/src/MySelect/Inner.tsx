@@ -6,6 +6,7 @@ import { check_multiple, get_mode, getInputStyle, getMarshal, parse_MC_value, us
 import { TCommonComponent } from '../util-types';
 import { componentMap } from './components';
 import { IMySelectProps } from './types';
+import styles from '../MyCheckbox/index.module.less';
 
 function RenderComponent(p: { target?: ICommonOption, handleInputChange(a: any, b: any): void }) {
   const { target, handleInputChange } = p
@@ -37,13 +38,12 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     marshal: _marshal,
     fetch_options,
     uniqueKey,
-    popupMatchSelectWidth = 140,
+    popupMatchSelectWidth = 120,
 
     ...others } = props
   const { options, loading, data, setData } = use_options(props)
   const _style = getInputStyle(props)
-  if (isInt(popupMatchSelectWidth))
-    _style.minWidth = _style.minWidth || popupMatchSelectWidth
+
 
   const marshal = getMarshal(props)
   const needToRenderComponent = options.some(_ => _.inputType);
@@ -101,6 +101,7 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
 
   };
   const _value = is_multiple ? data.map(_ => _.value) : data[0]?.value
+  const _warning = data.some(_ => _.warning)
 
   const target = (Array.isArray(data) ? data : []).find(_ => _.inputType)
   // 多选不支持 非 marshal 不支持
@@ -108,6 +109,7 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
   const select_node = loading ? <span>'数据加载中...'</span> : <Select_L
     title={JSON.stringify(options)}
     loading={loading}
+    className={_warning  ? styles['warning'] : undefined}
     style={_style}
     allowClear
     value={_value}

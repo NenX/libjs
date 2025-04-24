@@ -10,7 +10,7 @@ import { isInt } from '@noah-libjs/utils';
 export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
 
   const {
-    popupMatchSelectWidth = 140,
+    popupMatchSelectWidth = 120,
     getPopupContainer = () => document.body,
     options: _options,
     style = {},
@@ -21,10 +21,9 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
     onChange,
     ...rest
   } = props;
-  const _style = getInputStyle({ ...props, width: width ?? style.width ?? '100%' })
+  const _style = getInputStyle({ ...props })
 
-  if (isInt(popupMatchSelectWidth))
-    _style.minWidth = _style.minWidth || popupMatchSelectWidth
+
 
   const { safeOnChange, onBlur, options, remove, init_value } = useConfig_MyAutoComplete(props)
 
