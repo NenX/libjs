@@ -8,6 +8,7 @@ import { IMyDatePickerProps } from 'src/MyDatePicker/utils';
 import { IMyInputProps } from 'src/MyInput';
 import { IMySelectProps } from '../MySelect';
 import { IMyCheckboxProps } from 'src/MyCheckbox';
+import { SizeType } from 'antd/es/config-provider/SizeContext';
 
 
 
@@ -33,6 +34,7 @@ export type TOption =
     { inputType: 'Checkbox', props?: IMyCheckboxProps }
 
 export interface IArrayInputProps {
+    size?: SizeType
     autoFocus?: boolean
     disabled?: boolean
     inputWidth?: number,

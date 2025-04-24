@@ -10,6 +10,9 @@ import { MySwitch } from './MySwitch'
 
 
 export * from './MyInput'
+export * from './MySelect'
+export * from './MyCheckbox'
+export * from './ArrayInput'
 export * from './MyCheckbox'
 export * from './MyDatePicker'
 
@@ -22,7 +25,7 @@ export const packs = {
     MyInputNumber,
     InputNumber: MyInputNumber,
     input_number: MyInputNumber,
-    
+
     MyDatePicker,
     DatePicker: MyDatePicker,
     DP: MyDatePicker,

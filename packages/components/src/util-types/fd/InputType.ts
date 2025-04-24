@@ -11,6 +11,7 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "MySelect" |
     "MS" |
     "MyCheckbox" |
+    "straw" |
     "ArrayInput" |
     "search_select" |
     "TemplateTextarea" |

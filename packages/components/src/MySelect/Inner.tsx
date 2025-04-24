@@ -1,4 +1,4 @@
-import { ICommonOption, isNil, numberLikeCompare } from '@noah-libjs/utils';
+import { ICommonOption, isInt, isNil, numberLikeCompare } from '@noah-libjs/utils';
 import { Col, Row } from 'antd';
 import React, { useMemo } from 'react';
 import { Select_L } from 'src/LazyAntd';
@@ -42,6 +42,8 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     ...others } = props
   const { options, loading, data, setData } = use_options(props)
   const _style = getInputStyle(props)
+  if (isInt(popupMatchSelectWidth))
+    _style.minWidth = _style.minWidth || popupMatchSelectWidth
 
   const marshal = getMarshal(props)
   const needToRenderComponent = options.some(_ => _.inputType);

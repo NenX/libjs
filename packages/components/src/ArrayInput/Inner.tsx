@@ -47,7 +47,7 @@ function ArrayInputInner(props: IArrayInputProps) {
                 return <span key={opt.value} style={{ display: 'flex', alignItems: 'center', }}>
                     {opt.prefix ? <span style={{ margin: '0 2px', whiteSpace: 'nowrap' }}>{opt.prefix}</span> : null}
                     {opt.label ? <span style={{ margin: '0 2px', whiteSpace: 'nowrap' }}>{opt.label}:</span> : null}
-                    {C ? <C disabled={disabled} autoFocus={index === 0 ? autoFocus : undefined} size="small" {...props}
+                    {C ? <C disabled={disabled} autoFocus={index === 0 ? autoFocus : undefined}  {...props}
                         onFocus={(e) => {
                             forcusInfo.current = { index, }
 

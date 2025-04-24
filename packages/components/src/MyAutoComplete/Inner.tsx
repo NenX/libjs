@@ -4,6 +4,7 @@ import React from 'react';
 import { getInputStyle } from 'src/utils';
 import { IMyAutoCompleteProps } from './types';
 import { useConfig_MyAutoComplete } from './useConfig';
+import { isInt } from '@noah-libjs/utils';
 
 
 export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
@@ -22,7 +23,8 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
   } = props;
   const _style = getInputStyle({ ...props, width: width ?? style.width ?? '100%' })
 
-  // const [dirty, setDirty] = useState(false)
+  if (isInt(popupMatchSelectWidth))
+    _style.minWidth = _style.minWidth || popupMatchSelectWidth
 
   const { safeOnChange, onBlur, options, remove, init_value } = useConfig_MyAutoComplete(props)
 

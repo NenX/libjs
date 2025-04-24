@@ -115,7 +115,6 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
   };
   function isChecked(value: any) {
     // return __data.some(d => d.value === value)
-    debugger
     return __data.some(d => numberLikeCompare(d.value, value))
 
   }

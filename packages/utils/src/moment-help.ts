@@ -51,7 +51,7 @@ export function getMomentRange(m = dayjs) {
         上月: [start(m).add(-1, 'month').startOf('month'), end(m).add(-1, 'month').endOf('month')] as DT,
         这月: [start(m).startOf('month'), end(m).endOf('month')] as DT,
         下月: [start(m).add(1, 'month').startOf('month'), end(m).add(1, 'month').endOf('month')] as DT,
-        今年: [start(m).startOf('year'), end(m).endOf('year')] as DT,
+        近一年: [start(m).add(-1, 'year'), end(m)] as DT,
     }
 }
 export function presets_date() {
