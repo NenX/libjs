@@ -18,6 +18,7 @@ const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNum
 
   // const node = <Input disabled={disabled} {...others} placeholder={placeholder ?? '请输入数值'} allowClear style={_style} type='number' value={isUnkown ? undefined : value!} onChange={e => onChange?.(e.target.value)} />
   const node = <InputNumber {...others}
+    disabled={disabled}
     placeholder={placeholder ?? '请输入'}
     style={{ width: '100%', ..._style, }}
     value={isUnkown ? undefined : value}
