@@ -37,7 +37,7 @@ function ArrayInputInner(props: IArrayInputProps) {
                 const props = opt.props ?? {}
 
                 let style: CSSProperties = props.style ?? {}
-                if (['MyInput', 'Input', 'MA', 'MyAutoComplete'].includes(opt.inputType!)) {
+                if (['MyInput', 'Input', 'MA', 'MyAutoComplete', 'input'].includes(opt.inputType!)) {
                     style = { width: inputWidth, ...style }
                 }
                 if (['Select', 'MS', 'MySelect'].includes(opt.inputType!)) {

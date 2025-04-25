@@ -1,23 +1,26 @@
 import { isInt } from "@noah-libjs/utils"
 import React from "react"
 
-interface IBase { style?: React.CSSProperties, width?: any, inputWidth?: any, disabled?: boolean, popupMatchSelectWidth?: boolean | number }
+interface IBase { style?: React.CSSProperties, width?: any, inputWidth?: any, disabled?: boolean, warning?: boolean, warn?: boolean }
 interface IProps extends IBase {
 
 }
 export function getInputStyle(props: IProps = {}) {
-    const { style = {}, width, inputWidth, popupMatchSelectWidth = 120 } = props
+    const { style = {}, width, inputWidth, warning, warn } = props
     if (width) {
         style.width = style.width || width
     }
     if (inputWidth) {
-        style.width = style.width || inputWidth
+        style.minWidth = style.minWidth || inputWidth
     }
-
+    if (warning || warn) {
+        style.border = '1px solid red';
+        style.color = 'red';
+    }
     // if (isInt(popupMatchSelectWidth))
     //     style.width = style.width || (popupMatchSelectWidth / 2)
 
-    
+
     style.width = style.width ?? '100%'
 
     return {
