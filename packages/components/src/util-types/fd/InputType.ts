@@ -1,5 +1,6 @@
 export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     'PatientAutoComplete' |
+    'PatientSelect' |
     'rangeDate' |
     "MyButton" |
     "MyEditTable" |
