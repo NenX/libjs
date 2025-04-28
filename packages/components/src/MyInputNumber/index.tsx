@@ -9,7 +9,6 @@ const UNKNOWN_NUMBER_SYMBOL = 2147483647
 type IProps = InputNumberProps
 const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNumber_(props) {
   const { unknown, value, onChange, placeholder, warning, disabled, ...others } = props
-  console.log('xxd', props)
   const _style = getInputStyle(props)
   const isUnkown = !!unknown && value === UNKNOWN_NUMBER_SYMBOL
   if (unknown) {

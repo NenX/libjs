@@ -17,7 +17,6 @@ export function parseValue(value?: string | number | ICommonOption[], marshal?: 
     return arr
   } else {
     if (type === 'multiple') {
-      console.log('abc 00', isString, marshal, value)
 
       return isString
         ? (
