@@ -71,7 +71,7 @@ export interface IMchc_FormDescriptions_InputProps {
     PatientAutoComplete_url?: string,
     PatientAutoComplete_filterKey?: string
     PatientAutoComplete_displayKey?: [string, string, string]
-
+    onIdxChange?: (idx: number, arr: any[]) => void
 
     addressBtns?: {
         name: string,
