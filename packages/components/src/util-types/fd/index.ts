@@ -67,6 +67,7 @@ export interface IMchc_FormDescriptions_InputProps {
     memorieskey?: string,
     memoriesname?: string,
     formDescriptions?: IMchc_FormDescriptions_Field_Nullable[]
+    fds?: IMchc_FormDescriptions_Field_Nullable[]
     PatientAutoComplete_url?: string,
     PatientAutoComplete_filterKey?: string
     PatientAutoComplete_displayKey?: [string, string, string]
