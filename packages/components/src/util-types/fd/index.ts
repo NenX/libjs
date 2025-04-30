@@ -79,6 +79,7 @@ export interface IMchc_FormDescriptions_InputProps {
         props?: ButtonProps
     }[]
     check_invert_values?: { [x: string]: [any, any] }
+    onPatientSelect?(v: any, form?: FormInstance): void
     onPatientAutoComplete?(v: any, form?: FormInstance): void
 
 }
