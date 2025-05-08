@@ -89,7 +89,6 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
             const thisValue = value
             if (!_memorable || !thisValue || __options.some(_ => _.value === thisValue)) return
             const data = { key: _memorieskey, name: _memoriesname, value: thisValue }
-            console.log('blur', { data, props })
 
             request.post<IMemoriseItem>(`/api/text-memories`, data, { ignore_usr: true })
                 .then(init)

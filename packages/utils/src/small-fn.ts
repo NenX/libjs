@@ -152,7 +152,6 @@ export function copyText(text: string) {
     textareaC.select();
     var res = document.execCommand('copy');
     document.body.removeChild(textareaC);
-    console.log("复制成功");
     return res;
 }
 

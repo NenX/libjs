@@ -113,7 +113,6 @@ export class GlobalModal<T extends { [x: string]: (...args: any) => any, }> {
     }
     confirmOnce({ storeKey, cb, ...others }: ModalFuncProps & { storeKey: string, cb(): void }) {
         const isAllow = localStorage.get(storeKey)
-        console.log('isAllow', isAllow)
         if (isNil(isAllow)) {
             Modal.confirm({
                 ...others,

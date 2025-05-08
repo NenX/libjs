@@ -42,7 +42,6 @@ function CusDatePicker(_props: IMyDatePickerProps) {
   const handleChange = (date?: any, dateString?: string | string[]) => {
 
     const newValue = handleChangeValue(props, date)
-    console.log('target handleChange', { date, newValue })
     onChange?.(newValue);
   }
 

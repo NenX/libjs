@@ -14,7 +14,6 @@ function ArrayInputInner(props: IArrayInputProps) {
 
     useEffect(() => {
         const arr = nMarshal === 0 ? value?.split(',') : (nMarshal === 1 ? safe_json_parse_arr(value) : value)
-        console.log('ArrayInput', nMarshal, value, arr, props)
 
         const v = Array.isArray(arr) ? arr : []
         set_value(v)

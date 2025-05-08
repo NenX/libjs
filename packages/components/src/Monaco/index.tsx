@@ -7,7 +7,6 @@ const MyMonaco: TMonaco = Object.assign(
     {
         config(vs: string) {
             import('@monaco-editor/react/dist/index').then(mod => {
-                console.log('mod', { mod, vs })
                 mod.loader.config({ paths: { vs } });
             })
         }

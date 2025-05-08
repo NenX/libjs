@@ -34,7 +34,6 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
     // }
     // const v = marshal ? (Number(marshal) == 2 ? changedValue : JSON.stringify(changedValue,)) : (type === 'single' ? (changedValue[0]?.value ?? null) : changedValue.map(_ => _.value).join(','))
     const v = parse_MC_value(props, changedValue)
-    console.log('abc', changedValue, marshal, v)
     onChange?.(v)
   }
 
@@ -66,7 +65,6 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
     const target = tempData.find(d => d.value === option.value)
     if (!target) return
 
-    console.log('target', { target, inputValue })
 
 
     target.text = inputValue
