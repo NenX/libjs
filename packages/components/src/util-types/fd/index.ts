@@ -81,7 +81,7 @@ export interface IMchc_FormDescriptions_InputProps {
     check_invert_values?: { [x: string]: [any, any] }
     onPatientSelect?(v: any, form?: FormInstance): void
     onPatientAutoComplete?(v: any, form?: FormInstance): void
-    onFormTabsChanged?(data: any[], index?: number, changed?: any, form?: FormInstance): void
+    onFormTabsChanged?(data: any[], index: number, changed?: any, form?: FormInstance): void
 
 }
 type IMchc_FormDescriptions_FilterTypeRaw = 'in' | 'equals' | 'contains' | 'greaterOrEqualThan' | 'lessOrEqualThan';
