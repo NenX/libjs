@@ -8,7 +8,7 @@ import { IMchc_FormDescriptions_Rules } from "./Rules"
 import { IMchc_FormDescriptions_SpecialConfig } from "./SpecialConfig"
 import { IMchc_FormDescriptions_TranferRules } from "./TranferRules"
 // export { ButtonProps, FormInstance, CSSProperties, FC, ReactNode, SizeType, AnyObject, ICommonOption, T_FETCH_OPTIONS }
-
+export type TOptions = string | ICommonOption[] | string[]
 export interface IMchc_FormDescriptions_InputProps {
     language?: 'json' | 'javascript' | 'rust' | 'java'
     showTime?: boolean
@@ -34,7 +34,7 @@ export interface IMchc_FormDescriptions_InputProps {
     defaultChecked?: boolean
     DisplayFC_render?: (value?: any) => any,
     targetLabelCol?: number
-    options?: string | ICommonOption[] | string[],
+    options?: TOptions | (() => TOptions),
     fetch_options?: T_FETCH_OPTIONS,
     optionKey?: string
     uniqueKey?: string
@@ -81,7 +81,7 @@ export interface IMchc_FormDescriptions_InputProps {
     check_invert_values?: { [x: string]: [any, any] }
     onPatientSelect?(v: any, form?: FormInstance): void
     onPatientAutoComplete?(v: any, form?: FormInstance): void
-    onFormTabsChanged?(data: any[], index: number, changed?: any, form?: FormInstance): void
+    onFormTabsChanged?(data: any[], index: number, changed?: AnyObject, form?: FormInstance): void
 
 }
 type IMchc_FormDescriptions_FilterTypeRaw = 'in' | 'equals' | 'contains' | 'greaterOrEqualThan' | 'lessOrEqualThan';

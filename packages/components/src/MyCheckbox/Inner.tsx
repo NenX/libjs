@@ -10,8 +10,7 @@ import styles from './index.module.less';
 import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
   const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 64, vertical = false, uniqueKey } = props;
-  // const options = parse_MC_option(props)
-  // const [__data, setData] = useState<ICommonOption[]>([]);
+
   const marshal = getMarshal(props)
   const { options, loading, data: __data, setData } = use_options(props)
 

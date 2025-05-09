@@ -1,7 +1,7 @@
-import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isNumber, isString, numberLikeCompare, safe_fetch_options, safe_json_parse_arr, T_FETCH_OPTIONS } from "@noah-libjs/utils";
+import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isFunction, isNumber, isString, numberLikeCompare, safe_fetch_options, safe_json_parse_arr, T_FETCH_OPTIONS } from "@noah-libjs/utils";
 import React from "react";
 import { useEffect, useState } from "react";
-import { IMchc_FormDescriptions_Field_Nullable } from "src/util-types";
+import { IMchc_FormDescriptions_Field_Nullable, TOptions } from "../util-types";
 
 export type TMarshal = 0 | 1 | 2
 export type TMode = 'multiple' | 'tags'
@@ -12,7 +12,7 @@ interface ICompatibleProps {
   marshal?: TMarshal,
   mode?: TMode,
   type?: TMode,
-  options?: string | (ICommonOption | string)[]
+  options?: TOptions | (() => TOptions)
   fetch_options?: T_FETCH_OPTIONS
 
   useString?: boolean,
@@ -208,7 +208,7 @@ export function parse_MC_dict_options(props?: ICompatibleProps): ICommonOption[]
 function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   if (!props) return []
   const { useString, type, config, startIndex, sp } = props
-  const _options = props.options
+  const _options = isFunction(props.options) ? props.options() : props.options
   if (!isString(_options)) return isArray(_options) ? _options.map(_ => isString(_) ? { value: _, label: _ } : _) : []
 
   const input_type = config?.inputType ?? 'MC'
