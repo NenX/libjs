@@ -1,9 +1,9 @@
 // import { ICommonOption, getPresetOptions, getSameOptions } from '@lm_fe/env';
-import { getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption } from '@noah-libjs/utils';
+import { getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption, isFunction } from '@noah-libjs/utils';
 import React, { useEffect, useState } from 'react';
 import { IMemoriseItem, IMyAutoCompleteProps } from './types';
 import { request } from '@noah-libjs/request';
-import { parse_MC_dict_options } from 'src/utils';
+import { parse_MC_dict_options, parse_MC_option } from 'src/utils';
 
 
 const defaultOptions: ICommonOption[] = []
@@ -54,11 +54,11 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
     }
 
     function init() {
-
+        let calc_options = isFunction(options) ? options() : options
         const preOptions = optionKey ? getPresetOptions(optionKey as any) : null
         const searchValue = searchKey ? getSearchParamsValue(searchKey) : null
         const dic_op = parse_MC_dict_options({ ...props, useString: true })
-        const _options = preOptions ?? dic_op ?? (typeof options === 'string' ? getSameOptions(options) : options.map(o => typeof o === 'string' ? { value: o, label: o } : o))
+        const _options = parse_MC_option({ ...props, useString: true })
 
         if (searchValue) {
             _options.push({ value: searchValue, label: searchValue })

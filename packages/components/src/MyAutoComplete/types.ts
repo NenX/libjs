@@ -1,5 +1,6 @@
 import { ICommonOption } from '@noah-libjs/utils';
 import { AutoCompleteProps } from 'antd';
+import { TOptions } from 'src/util-types';
 
 export interface IMemoriseItem {
     "id": 6591,
@@ -21,5 +22,6 @@ export type IMyAutoCompleteProps = Omit<AutoCompleteProps, 'options' | 'onChange
     formName?: string,
     searchKey?: string,
     width?: any,
-    options?: string | (string | ICommonOption)[]
+    options?: TOptions | (() => TOptions)
+
 }

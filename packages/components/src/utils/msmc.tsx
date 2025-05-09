@@ -50,7 +50,7 @@ export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nu
 export function getMarshal(props?: ICompatibleProps) {
   if (!props) return 1
   const { marshal, value, uniqueKey } = props
-  if (uniqueKey !== undefined) {
+  if (marshal === undefined && uniqueKey !== undefined) {
     return 0
   }
   const _marshal = marshal ?? 1
@@ -226,5 +226,10 @@ export function displayValue(_options: ICommonOption[], value: ICommonOption[], 
   return _value.map(_ => _.label).join(',')
 
 }
+export function get_unknown_conf(props: { showUnknown?: boolean, unknown?: boolean }) {
 
+  const { showUnknown, unknown } = props
+
+  return (showUnknown || unknown)
+}
 const defaultOptions: ICommonOption[] = []

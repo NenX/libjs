@@ -1,17 +1,18 @@
 import { Checkbox, InputNumber, InputNumberProps } from 'antd';
 import React from 'react';
 import { TCommonComponent } from 'src/util-types';
-import { getInputStyle } from 'src/utils';
+import { get_unknown_conf, getInputStyle } from 'src/utils';
 import { IMyInputNumberProps } from './types';
 export * from './types';
 // .ant-input-affix-wrapper-borderless
 const UNKNOWN_NUMBER_SYMBOL = 2147483647
 type IProps = InputNumberProps
 const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNumber_(props) {
-  const { unknown, value, onChange, placeholder, warning, disabled, ...others } = props
+  const { value, onChange, placeholder, warning, disabled, ...others } = props
   const _style = getInputStyle(props)
-  const isUnkown = !!unknown && value === UNKNOWN_NUMBER_SYMBOL
-  if (unknown) {
+  const unkown_conf = get_unknown_conf(props)
+  const isUnkown = unkown_conf && value === UNKNOWN_NUMBER_SYMBOL
+  if (unkown_conf) {
     _style.flex = 1;
   }
 
@@ -24,7 +25,7 @@ const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNum
     onChange={onChange}
   />
 
-  return unknown ? <span style={{ display: 'flex', alignItems: 'center' }}>
+  return unkown_conf ? <span style={{ display: 'flex', alignItems: 'center' }}>
     {node}
     <span style={{ marginLeft: 6 }}>
       <Checkbox
@@ -42,9 +43,11 @@ const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNum
   </span> : node
 }
 function DisplayFC(props: Omit<IProps, 'onChange'> & { unknown?: boolean, warning?: boolean, onChange?: (v: any) => void }) {
-  const { unknown, value, } = props
+  const { value, } = props
+  const unkown_conf = get_unknown_conf(props)
+
   const _style = getInputStyle(props)
-  const isUnkown = !!unknown && value === UNKNOWN_NUMBER_SYMBOL
+  const isUnkown = unkown_conf && value === UNKNOWN_NUMBER_SYMBOL
   if (isUnkown) {
     return <span>不详</span>
   }

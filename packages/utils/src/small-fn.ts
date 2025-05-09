@@ -198,8 +198,13 @@ export function safe_number_parse(value: any, defaultValue = NaN) {
     return isNaN(rawParse) ? defaultValue : rawParse
 }
 
-export function expect_array<T>(value?: T[] | null) {
-    if (!Array.isArray(value)) return []
+export function expect_array<T>(value?: T[] | null, default_v: T[] = []) {
+    if (!Array.isArray(value)) {
+        if (Array.isArray(default_v))
+            return default_v
+
+        return []
+    }
     return value
 }
 

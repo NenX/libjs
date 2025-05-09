@@ -21,7 +21,7 @@ export function getInputStyle(props: IProps = {}) {
     //     style.width = style.width || (popupMatchSelectWidth / 2)
 
 
-    style.width = style.width ?? '100%'
+    // style.width = style.width ?? '100%'
 
     return {
         // background: disabled ? style.background : '#fff',

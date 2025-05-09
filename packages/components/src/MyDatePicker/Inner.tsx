@@ -1,11 +1,11 @@
+import { presets_date } from '@noah-libjs/utils';
 import { Checkbox } from 'antd';
 import dayjs from 'dayjs';
-import React, { memo, useCallback } from 'react';
-import { IMyDatePickerProps, UNKNOWN_TIME_SYMBOL, areEqual, formatDatePickerProps, getIsUnknown, getUnknown, handleChangeValue } from './utils';
+import React, { useCallback } from 'react';
 import { DatePicker_L, MonthPicker_L, TimePicker_L } from 'src/LazyAntd';
-import { getInputStyle } from 'src/utils';
 import { TCommonComponent } from 'src/util-types';
-import { presets_date, getMomentRange } from '@noah-libjs/utils';
+import { get_unknown_conf, getInputStyle } from 'src/utils';
+import { formatDatePickerProps, getIsUnknown, handleChangeValue, IMyDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
 export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
 function CusDatePicker(_props: IMyDatePickerProps) {
   const props = formatDatePickerProps(_props)
@@ -70,40 +70,39 @@ function CusDatePicker(_props: IMyDatePickerProps) {
     [validDate, maxDate, minDate],
   )
 
+  const node = props.time_only
+    ? <TimePicker_L
+      getPopupContainer={getPopupContainer}
+      value={isUnknown ? null : transValue(value)}
+      onChange={handleChange}
+      disabledDate={disabledDate}
+      format={format}
+      {...rest}
+      style={_style}
+      placeholder={'请选择'}
+    />
+    : <DatePicker_L
+      getPopupContainer={getPopupContainer}
+      value={isUnknown ? null : transValue(value)}
+      onChange={handleChange}
+      disabledDate={disabledDate}
+      format={format}
+      presets={presets_date()}
+      {...rest}
+      style={_style}
+      placeholder={'请选择'}
 
+
+    />
 
 
   return (
-    <span>
-      {
-        props.time_only
-          ? <TimePicker_L
-            getPopupContainer={getPopupContainer}
-            value={isUnknown ? null : transValue(value)}
-            onChange={handleChange}
-            disabledDate={disabledDate}
-            format={format}
-            {...rest}
-            style={_style}
-            placeholder={'请选择'}
-          />
-          : <DatePicker_L
-            getPopupContainer={getPopupContainer}
-            value={isUnknown ? null : transValue(value)}
-            onChange={handleChange}
-            disabledDate={disabledDate}
-            format={format}
-            presets={presets_date()}
-            {...rest}
-            style={_style}
-            placeholder={'请选择'}
 
-          // disabled={isUnknown}
+    get_unknown_conf(props)
+      ? <span style={{ display: 'flex', alignItems: 'center' }}>
+        {node}
+        <span style={{ marginLeft: 6, flex: 1 }}>
 
-          />
-      }
-      {
-        getUnknown(props) ? <span style={{ marginLeft: 6 }}>
           <Checkbox checked={isUnknown}
             skipGroup
             onChange={e => {
@@ -116,9 +115,9 @@ function CusDatePicker(_props: IMyDatePickerProps) {
             }}
           />
           <span style={{ marginLeft: 6 }}>不详</span>
-        </span> : null
-      }
-    </span>
+        </span>
+
+      </span > : node
   );
 }
 const df = CusDatePicker

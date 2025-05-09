@@ -3,6 +3,7 @@
 import { formatDate, formatDateTimeNoSecond } from '@noah-libjs/utils';
 import dayjs from 'dayjs';
 import { DatePickerProps } from 'src/LazyAntd';
+import { get_unknown_conf } from 'src/utils';
 export const defaultGetPopupContainer = () => document.body
 
 export function areEqual(prevProps: any, nextProps: any) {
@@ -30,14 +31,7 @@ export type IMyDatePickerProps = {
     unknown?: boolean
 } & Omit<DatePickerProps, 'value'>
 
-export function getUnknown(props: IMyDatePickerProps) {
 
-
-
-    const { showUnknown, unknown } = props
-
-    return (showUnknown || unknown)
-}
 export type ICommonProps = { format?: any, time_only?: boolean, showTime?: any, getPopupContainer?: any }
 export function formatDatePickerProps<T extends ICommonProps>(props: T) {
 
@@ -62,7 +56,7 @@ export function getIsUnknown(props: IMyDatePickerProps) {
     const { value, } = props
     const symbolValue = handleChangeValue(props, UNKNOWN_TIME_SYMBOL)
     const _value = handleChangeValue(props, value)
-    const isUnknown = _value === symbolValue && getUnknown(props)
+    const isUnknown = _value === symbolValue && get_unknown_conf(props)
     return isUnknown
 }
 

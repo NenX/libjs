@@ -37,6 +37,8 @@ export interface IMchc_FormDescriptions_InputProps {
     options?: TOptions | (() => TOptions),
     fetch_options?: T_FETCH_OPTIONS,
     optionKey?: string
+    uncheckedText?: string
+    checkedText?: string
     uniqueKey?: string
     separator?: string
     sp?: ICommonOption[]

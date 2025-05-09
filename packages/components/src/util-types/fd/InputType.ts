@@ -41,6 +41,8 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "MyAddress" |
     "MyColor" |
     "MySwitch" |
+    "Switch" |
+    "switch" |
     "radio" |
     "month_picker" |
     "single_time_picker" |
@@ -54,6 +56,8 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "country_select" |
     "checkbox_with_input" |
     "text_area" |
+    "DateTimeInput" |
+    "TextArea" |
     "MyMonaco" |
     "radio_group" |
     "checkbox_with_single_input" |

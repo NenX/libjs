@@ -1,14 +1,18 @@
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { isNil } from "@noah-libjs/utils";
 import React from "react";
 import { Switch_L } from "src/LazyAntd";
 import { TCommonComponent } from "src/util-types";
 import { IMySwitchProps } from "./types";
-
 const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(props) {
     return <Switch_L {...props} />
 }
 
-MySwitch.DisplayFC = (props) => {
-    return props.checked ? (props.checkedChildren ?? '是') : (props.unCheckedChildren ?? '否');
+MySwitch.DisplayFC = ({ value, checkedChildren, checkedText, unCheckedChildren, uncheckedText }) => {
+    if (isNil(value))
+        return ''
+    return value ? (checkedChildren ?? checkedText ?? <CheckOutlined />) : (unCheckedChildren ?? uncheckedText ?? <CloseOutlined />);
 }
 
 export { MySwitch };
+

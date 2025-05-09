@@ -35,6 +35,8 @@ export const packs = {
 
     MyColor,
     MySwitch,
+    switch: MySwitch,
+    Switch: MySwitch,
     ArrayInput,
     MArr: ArrayInput,
 
@@ -47,7 +49,7 @@ export const packs = {
     Checkbox: MyCheckbox,
     MC: MyCheckbox,
     checkbox: MyCheckbox,
-    CheckboxWithInput: MyCheckbox,
+    // CheckboxWithInput: MyCheckbox,
 
     MyAutoComplete,
     MA: MyAutoComplete,
