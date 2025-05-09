@@ -155,7 +155,8 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "blood_sugar_nursing_Table" |
     "past_delivery_nursing_table" |
     "special_nursing_table" |
-    "oxytocin_nursing_table" |
+    "nursing_table" |
+
     // "neonatal_care_table" |
     "lmp-info" |
     "induced_fetus" |

@@ -1,7 +1,9 @@
 import { isArray, isObject, isString, isSymbol } from "radash";
 
 export * from "radash";
-
+export function identity<T>(value: T) {
+    return value;
+}
 const symbolProto = Symbol ? Symbol.prototype : undefined
 const symbolToString = symbolProto ? symbolProto.toString : undefined;
 var INFINITY = 1 / 0;
