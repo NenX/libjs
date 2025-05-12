@@ -1,10 +1,11 @@
 import { ICommonOption } from "@noah-libjs/utils";
 import { AutoCompleteProps } from "antd";
 import React from "react";
-import { IArrayInputProps } from "src/ArrayInput";
-import { IMyDatePickerProps } from "src/MyDatePicker/utils";
-import { IMyInputProps } from "src/MyInput";
-import { TMarshal, TMode } from "src/utils";
+import { IArrayInputProps } from "../ArrayInput";
+import { IMyDatePickerProps } from "../MyDatePicker/utils";
+import { IMyInputProps } from "../MyInput";
+import { TMarshal, TMode } from "../utils";
+import { TOptions } from "../util-types";
 
 export interface ICompatibleProps {
     marshal?: any,
@@ -20,8 +21,9 @@ export interface ICompatibleProps {
 }
 
 export interface IMyCheckboxProps {
-    value?: string | ICommonOption[];
-    options?: ICheckboxWithInputOption[] | string;
+    value?: string | number | ICommonOption[];
+    options?: TOptions | (() => TOptions)
+
     onChange?(v?: any): void;
     type?: TMode;
     disabled?: boolean;
@@ -30,7 +32,7 @@ export interface IMyCheckboxProps {
     config?: { inputType?: string }
     uniqueKey?: string
     marshal?: TMarshal
-    sp?: ICheckboxWithInputOption[]
+    sp?: ICommonOption[]
     vertical?: boolean
     startIndex?: number
     onBlur?(e: any): void

@@ -1,10 +1,11 @@
 import { ICommonOption, T_FETCH_OPTIONS } from '@noah-libjs/utils';
 import { AutoCompleteProps, SelectProps } from 'antd';
-import { IMyCheckboxProps } from 'src/MyCheckbox';
-import { IMyDatePickerProps } from 'src/MyDatePicker/utils';
-import { IMyInputProps } from 'src/MyInput';
-import { IMyInputNumberProps } from 'src/MyInputNumber';
-import { TMarshal, TMode } from 'src/utils';
+import { IMyCheckboxProps } from '../MyCheckbox';
+import { IMyDatePickerProps } from '../MyDatePicker/utils';
+import { IMyInputProps } from '../MyInput';
+import { IMyInputNumberProps } from '../MyInputNumber';
+import { TMarshal, TMode } from '../utils';
+import { TOptions } from '../util-types';
 
 
 
@@ -31,7 +32,8 @@ export type TOption =
 export interface IMySelectProps extends Omit<SelectProps<any>, 'options'> {
     // options?: (Partial<TOption> & { prefix?: string, suffix?: string, label: string, value: any, warning?: boolean })[]
     type?: TMode;
-    options?: ICommonOption[]
+    options?: TOptions | (() => TOptions)
+
     optionKey?: string
     uniqueKey?: string
     value?: any;

@@ -1,5 +1,5 @@
 import { ICommonOption } from '@noah-libjs/utils';
-import { TCommonComponentDisplay } from 'src/util-types';
+import { TCommonComponentDisplay } from '../util-types';
 import { use_options } from 'src/utils';
 import { IMyCheckboxProps } from './types';
 export * from './types';

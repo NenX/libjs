@@ -1,7 +1,7 @@
 import { Checkbox, InputNumber, InputNumberProps } from 'antd';
 import React from 'react';
-import { TCommonComponent } from 'src/util-types';
-import { get_unknown_conf, getInputStyle } from 'src/utils';
+import { TCommonComponent } from '../util-types';
+import { get_unknown_conf, getInputStyle } from '../utils';
 import { IMyInputNumberProps } from './types';
 export * from './types';
 // .ant-input-affix-wrapper-borderless

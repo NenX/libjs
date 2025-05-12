@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { TCommonComponent } from 'src/util-types';
+import { TCommonComponent } from '../util-types';
 import { IMyCheckboxProps } from './types';
 export * from './types';
 

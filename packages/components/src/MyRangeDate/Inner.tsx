@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import React, { memo, useCallback } from 'react';
-import { RangePicker_L } from 'src/LazyAntd';
-import { TCommonComponent } from 'src/util-types';
-import { getInputStyle } from 'src/utils';
+import { RangePicker_L } from '../LazyAntd';
+import { TCommonComponent } from '../util-types';
+import { getInputStyle } from '../utils';
 import { IMyRangePickerProps, areEqual, formatProps, getIsUnknown, handleChangeValue } from './utils';
 export { IMyRangePickerProps, } from './utils';
 export function MyRangeDate(props: IMyRangePickerProps) {

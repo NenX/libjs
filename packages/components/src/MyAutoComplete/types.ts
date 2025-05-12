@@ -1,6 +1,6 @@
 import { ICommonOption } from '@noah-libjs/utils';
 import { AutoCompleteProps } from 'antd';
-import { TOptions } from 'src/util-types';
+import { TOptions } from '../util-types';
 
 export interface IMemoriseItem {
     "id": 6591,

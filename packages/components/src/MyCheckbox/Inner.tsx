@@ -2,14 +2,14 @@ import { cloneDeep, ICommonOption, isNil, numberLikeCompare } from '@noah-libjs/
 import { default as classNames, default as classnames } from 'classnames';
 import React, { CSSProperties, useEffect, useRef } from 'react';
 import { Checkbox_L } from 'src/LazyAntd';
-import { TCommonComponent } from 'src/util-types';
+import { TCommonComponent } from '../util-types';
 import { getMarshal, parse_MC_value, use_options } from 'src/utils';
 import MyCheckbox_DisplayFC from './Display';
 import { components } from './components';
 import styles from './index.module.less';
 import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
-  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 64, vertical = false, uniqueKey } = props;
+  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 64, vertical = false, style = {} } = props;
 
   const marshal = getMarshal(props)
   const { options, loading, data: __data, setData } = use_options(props)
@@ -118,7 +118,11 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
   if (options.length === 0) return null
   return (
     <Checkbox_L.Group className={classNames([styles['wrapper'], vertical ? styles['block-box'] : styles['flex-box']])} disabled={disabled} value={__data.map(_ => _.value)} onChange={handleBoxGroupChange}
-      style={{ width: '100%', flexWrap: 'wrap' }}>
+      style={{
+        ...style,
+        // width: '100%',
+        flexWrap: 'wrap',
+      }}>
       {options.map((option, index) => {
         const { prefix, sufix, suffix, parentheses } = option
         const _parentheses = parentheses ?? (['MC', 'MArr'].includes(option.inputType!) && !!option?.props?.options)

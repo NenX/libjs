@@ -1,8 +1,8 @@
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { isNil } from "@noah-libjs/utils";
 import React from "react";
-import { Switch_L } from "src/LazyAntd";
-import { TCommonComponent } from "src/util-types";
+import { Switch_L } from "../LazyAntd";
+import { TCommonComponent } from "../util-types";
 import { IMySwitchProps } from "./types";
 const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(props) {
     return <Switch_L {...props} />

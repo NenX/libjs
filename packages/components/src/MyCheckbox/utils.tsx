@@ -1,6 +1,6 @@
 
 import { ICommonOption, isNil, safe_json_parse_arr } from '@noah-libjs/utils';
-import { TMode } from 'src/utils';
+import { TMode } from '../utils';
 
 
 
