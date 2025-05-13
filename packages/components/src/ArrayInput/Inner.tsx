@@ -3,21 +3,24 @@ import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 import { componentMap } from './components';
 import { IArrayInputProps } from './types';
 import { getOption } from './utils';
+import { use_options } from '../utils';
 function ArrayInputInner(props: IArrayInputProps) {
     const { value, onChange, separator = ',', inputWidth = 64, marshal = 1, autoFocus, onBlur, disabled } = props
     const nMarshal = Number(marshal)
-    const _options = getOption(props)
-    const [_value, set_value] = useState<any[]>([])
+    // const _options = getOption(props)
+    // const [_value, set_value] = useState<any[]>([])
     const _value_ref = useRef<any[]>([])
 
     const forcusInfo = useRef<{ index?: number, type?: 'self' | 'friend' }>(autoFocus ? { index: 0, type: 'self' } : {})
+    const { options: _options, loading, data: _value, setData } = use_options(props)
+    _value_ref.current = _value
 
     useEffect(() => {
-        const arr = nMarshal === 0 ? value?.split(',') : (nMarshal === 1 ? safe_json_parse_arr(value) : value)
+        // const arr = nMarshal === 0 ? value?.split(',') : (nMarshal === 1 ? safe_json_parse_arr(value) : value)
 
-        const v = Array.isArray(arr) ? arr : []
-        set_value(v)
-        _value_ref.current = v
+        // const v = Array.isArray(arr) ? arr : []
+        // set_value(v)
+        // _value_ref.current = _value
         return () => {
 
         }

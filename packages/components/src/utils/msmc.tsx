@@ -24,7 +24,7 @@ interface ICompatibleProps {
 
 export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nullable[]) {
   if (!Array.isArray(configs)) return {}
-  const children = configs.filter(_ => ['MC', 'MA'].includes(_?.inputType!) || Array.isArray(_?.children))
+  const children = configs.filter(_ => ['MC', 'MA', 'MS'].includes(_?.inputType!) || Array.isArray(_?.children))
 
   const check_invert_values = children
     .filter(_ => !_?.disabled_check)

@@ -14,6 +14,9 @@ export function safe_json_parse<T = any>(str?: any, retOnErr: T | null = null) {
     }
 }
 export function safe_json_stringify(obj?: any,) {
+    if (isString(obj) && safe_json_parse(obj)) {
+        return obj
+    }
     return JSON.stringify(obj)
 }
 
