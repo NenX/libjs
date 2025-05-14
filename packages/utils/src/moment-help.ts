@@ -1,4 +1,4 @@
-import dayjs from "dayjs"
+import dayjs, { ConfigType, OpUnitType, QUnitType } from "dayjs"
 import { isFunction, isString } from "./helper"
 
 
@@ -7,7 +7,7 @@ export type DayjsConfigType = dayjs.ConfigType
 
 
 function getFn<T extends string>(format: T,) {
-    return Object.assign((s?: any) => {
+    function f(s?: any): string | null {
         if (isFunction(s?.format)) {
             let res = s.format(format)
             if (isString(res))
@@ -15,7 +15,8 @@ function getFn<T extends string>(format: T,) {
         }
         const a = dayjs(s)
         return a.isValid() ? a.format(format) : null
-    }, { format })
+    }
+    return Object.assign(f, { format })
 }
 
 export function getMomentObj(s: DayjsConfigType): Dayjs {
@@ -97,6 +98,10 @@ export function dayjs_quarter(input: Dayjs, which_quarter?: number): [Dayjs, num
         const currentQuarter = Math.floor(currentMonth / 3) + 1;
         return [input, currentQuarter];
     }
+}
+
+export function diff_between(a: ConfigType, b: ConfigType, unit: QUnitType | OpUnitType, float = true) {
+    return dayjs(a).diff(dayjs(b), unit, float);
 }
 
 export { dayjs }

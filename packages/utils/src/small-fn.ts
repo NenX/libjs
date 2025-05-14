@@ -158,7 +158,7 @@ export function copyText(text: string) {
 
 
 
-export function safeExec<T extends (...args: any) => any>(fn?: T, ...args: Parameters<T>[]) {
+export function safeExec<T extends (...args: any) => any>(fn?: T, ...args: Parameters<T>) {
     return isFunction(fn) ? fn(...args) : null
 }
 
