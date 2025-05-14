@@ -4,19 +4,22 @@ import { TCommonComponentDisplay } from '../util-types';
 import { componentMap } from './components';
 import { IArrayInputProps } from './types';
 import { getOption } from './utils';
+import { parse_MC_option, use_options } from '../utils';
 
 const DisplayFC: TCommonComponentDisplay<IArrayInputProps, string> = (props) => {
 
     const { value, separator = ',', marshal = 1 } = props
     const nMarshal = Number(marshal)
 
-    const _options = getOption(props)
-    const [_value, set_value] = useState<any[]>([])
+    //     const _options = parse_MC_option(props)
+    // const [_value, set_value] = useState<any[]>([])
+    const { options: _options, loading, data: _value, setData } = use_options(props)
+
 
     useEffect(() => {
-        const arr = nMarshal == 0 ? value?.split(',') : (nMarshal === 1 ? safe_json_parse_arr(value) : value)
-        const v = Array.isArray(arr) ? arr : []
-        set_value(v)
+        // const arr = nMarshal == 0 ? value?.split(',') : (nMarshal === 1 ? safe_json_parse_arr(value) : value)
+        // const v = Array.isArray(arr) ? arr : []
+        // set_value(v)
 
         return () => {
 

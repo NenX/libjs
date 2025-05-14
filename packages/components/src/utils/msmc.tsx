@@ -86,18 +86,7 @@ export function check_multiple(props: ICompatibleProps,) {
 export function get_mode(props: ICompatibleProps,) {
   return props?.mode ?? props.type
 }
-export function get_select_opt(props: ICompatibleProps) {
 
-  return parse_MC_option(props)
-
-  // const { optionKey, options, uniqueKey, startIndex, useString } = props
-  // const preOptions = optionKey ? getPresetOptions(optionKey as any) : null
-  // const dicOptions = uniqueKey ? getDictionariesEnumerations(uniqueKey) : null
-
-  // const _option = typeof options === 'string' ? getSimpleOptions(options, { start: startIndex, useString }) : options
-  // const a: ICommonOption[] = preOptions ?? _option ?? dicOptions ?? props.options ?? defaultOptions;
-  // return a
-}
 
 
 export function use_options(props: ICompatibleProps) {
@@ -127,7 +116,7 @@ export function use_options(props: ICompatibleProps) {
         .then(set_options)
         .finally(() => setLoading(false))
     } else {
-      set_options(get_select_opt(props))
+      set_options(parse_MC_option(props))
 
     }
   }, [fetch_options, optionKey, _options, uniqueKey]);
