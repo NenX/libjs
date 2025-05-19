@@ -78,10 +78,11 @@ export class Request extends EventEmitter<{ request: any, response: any, error: 
         //     message.warning(msg)
         // }
     }
-
+    config: IRequest_SpawnConfig = {}
     spawn(spawnConfig: IRequest_SpawnConfig = {},) {
         const ins = this.gen(spawnConfig)
         this.ins = ins
+        this.config = spawnConfig
         utils.extend(this, Axios.prototype, this.ins);
         return this.ins
     }

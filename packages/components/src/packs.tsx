@@ -15,6 +15,7 @@ export * from './MyCheckbox'
 export * from './ArrayInput'
 export * from './MyCheckbox'
 export * from './MyDatePicker'
+export * from './MyColor'
 
 export const packs = {
     MI: MyInput,

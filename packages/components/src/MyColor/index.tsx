@@ -7,10 +7,12 @@ import { TCommonComponent } from "../util-types";
 import { IMyColorProps } from "./types";
 
 const MyColor: TCommonComponent<IMyColorProps> = function MyColor(props) {
-    const { value, onChange, size } = props
+    const { value, onChange, size, allowClear = true } = props
     return <Space.Compact>
         <ColorPicker_L size={size} value={isString(value) ? value : undefined} onChange={(value, css) => onChange?.(css)} />
-        <Button size={size} icon={<CloseOutlined />} onClick={() => onChange?.(null)} />
+        {
+            allowClear ? <Button size={size} icon={<CloseOutlined />} onClick={() => onChange?.(null)} /> : null
+        }
     </Space.Compact>
 }
 
