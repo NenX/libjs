@@ -59,7 +59,8 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
                   icon={<CloseOutlined />}
                   onClick={e => {
                     e.stopPropagation()
-                    remove(item)
+                    const ok = confirm('确定删除吗？')
+                    ok && remove(item)
                   }}
                 ></Button>
                 : null
