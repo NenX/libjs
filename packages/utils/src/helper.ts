@@ -1,6 +1,14 @@
-import { isArray, isObject, isString, isSymbol } from "radash";
+import { isArray, isObject, isString, isSymbol, get as r_get } from "radash";
 
 export * from "radash";
+
+export function get<T = any>(value: T, path: string, defaultValue?: T | undefined): T {
+    //@ts-ignore
+    let direct_value = value?.[path]
+    if (direct_value) return direct_value
+    return r_get(value, path, defaultValue)
+}
+
 export function identity<T>(value: T) {
     return value;
 }
