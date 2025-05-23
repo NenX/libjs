@@ -47,12 +47,14 @@ export function getMomentRange(m = dayjs) {
         今天: [start(m), end(m)] as DT,
         明天: [start(m).add(1, 'day'), end(m).add(1, 'day')] as DT,
         上周: [start(m).add(-1, 'week').startOf('week'), end(m).add(-1, 'week').endOf('week')] as DT,
-        这周: [start(m).startOf('week'), end(m).endOf('week')] as DT,
+        // 这周: [start(m).startOf('week'), end(m).endOf('week')] as DT,
+        近一周: [start(m).add(-1, 'week').add(1, 'day'), end(m)] as DT,
         下周: [start(m).add(1, 'week').startOf('week'), end(m).add(1, 'week').endOf('week')] as DT,
         上月: [start(m).add(-1, 'month').startOf('month'), end(m).add(-1, 'month').endOf('month')] as DT,
-        这月: [start(m).startOf('month'), end(m).endOf('month')] as DT,
+        // 这月: [start(m).startOf('month'), end(m).endOf('month')] as DT,
+        近一月: [start(m).add(-1, 'month').add(1, 'day'), end(m)] as DT,
         下月: [start(m).add(1, 'month').startOf('month'), end(m).add(1, 'month').endOf('month')] as DT,
-        近一年: [start(m).add(-1, 'year'), end(m)] as DT,
+        近一年: [start(m).add(-1, 'year').add(1, 'day'), end(m)] as DT,
     }
 }
 export function presets_date() {
