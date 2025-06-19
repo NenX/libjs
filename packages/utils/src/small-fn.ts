@@ -7,7 +7,9 @@ export type TCommonFileType = 'application/vnd.ms-excel' | 'text/csv;charset=utf
 // export function sleep(sec: number) {
 //     return new Promise<void>((resolve) => setTimeout(resolve, sec * 1000))
 // }
-
+export function get_global(){
+    return window ?? globalThis ?? global
+}
 export function getSearchParamsValue(key: string) {
     const url = new URL(location.toString())
     return url?.searchParams?.get(key) ?? null
@@ -50,7 +52,7 @@ export function scrollIntoView(symbol: string, finder: (selectors: string) => El
 }
 
 export function base64ToBinary(data: string, type: TCommonFileType) {
-    const raw = window.atob(data);
+    const raw = get_global().atob(data);
     const uInt8Array = new Uint8Array(raw.length);
     for (let i = 0; i < raw.length; i++) {
         uInt8Array[i] = raw.charCodeAt(i);
@@ -265,7 +267,7 @@ export async function safe_async_call<T extends (...args: any) => any>(cb: T, ..
     return await Promise.resolve(cb(...args)) as ReturnType<typeof cb>
 }
 
-(window as any).safe_async_call = safe_async_call
+(get_global() as any).safe_async_call = safe_async_call
 
 const global_cache_map: { [x: string]: { cache: any, cache_promise: Promise<any> } } = {}
 
