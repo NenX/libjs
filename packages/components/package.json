@@ -1,6 +1,6 @@
 {
     "name": "@noah-libjs/components",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,10 +19,10 @@
     "types": "dist/index.d.ts",
     "peerDependencies": {
         "@monaco-editor/react": "^4.5.1",
-        "monaco-editor": "^0.39.0",
         "axios": ">=0.26.0",
         "classnames": "*",
         "dayjs": "^1.11.13",
+        "monaco-editor": "^0.39.0",
         "react": "*",
         "react-container-dimensions": "1.4.1"
     },
@@ -38,8 +38,8 @@
         "rollup-plugin-postcss": "^4.0.2"
     },
     "dependencies": {
-        "@noah-libjs/utils": "workspace:*",
-        "@noah-libjs/request": "workspace:*"
+        "@noah-libjs/request": "workspace:*",
+        "@noah-libjs/utils": "workspace:*"
     },
     "publishConfig": {
         "access": "public"

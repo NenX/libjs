@@ -1,6 +1,6 @@
 {
     "name": "@noah-libjs/request",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -21,15 +21,14 @@
         "access": "public"
     },
     "dependencies": {
+        "@noah-libjs/utils": "workspace:*",
         "axios": "^0.26.1",
-        "store": "2.x",
-        "@noah-libjs/utils": "workspace:*"
+        "store": "2.x"
     },
     "devDependencies": {
         "@types/store": "^2.0.2",
         "rollup": "^2.70.2"
     },
-    "peerDependencies": {},
     "keywords": [],
     "author": "",
     "license": "MIT",
