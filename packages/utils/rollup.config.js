@@ -39,18 +39,35 @@ export default defineConfig(() => {
           ],
         }),
       ],
-      output: {
-        dir: path.join(__dirname, 'dist'),
-        format: 'esm',
-        plugins: [
-          getBabelOutputPlugin({
-            presets: ['@babel/preset-env'],
-            plugins: [
-              '@babel/plugin-transform-runtime'
-            ]
-          })
-        ]
-      },
+      output: [
+        {
+          // dir: path.join(__dirname, 'dist'),
+          file: path.join(__dirname, 'dist/es.js'),
+          format: 'esm',
+          plugins: [
+            getBabelOutputPlugin({
+              presets: ['@babel/preset-env'],
+              plugins: [
+                '@babel/plugin-transform-runtime'
+              ]
+            })
+          ]
+        },
+        {
+          // dir: path.join(__dirname, 'dist'),
+          file: path.join(__dirname, 'dist/lib.js'),
+
+          format: 'commonjs',
+          plugins: [
+            getBabelOutputPlugin({
+              presets: ['@babel/preset-env'],
+              plugins: [
+                '@babel/plugin-transform-runtime'
+              ]
+            })
+          ]
+        }
+      ],
       external,
       // external: Object.keys({ ...require('./package.json').peerDependencies }) // 增加了这一行。
 

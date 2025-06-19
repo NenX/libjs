@@ -10,7 +10,8 @@
         "prebuild": "pnpm clean",
         "build:types": "api-extractor run"
     },
-    "main": "dist/index.js",
+    "main": "dist/lib.js",
+    "module": "dist/es.js",
     "types": "dist/typing.d.ts",
     "directories": {
         "lib": "dist"
