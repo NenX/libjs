@@ -7,8 +7,12 @@ export type TCommonFileType = 'application/vnd.ms-excel' | 'text/csv;charset=utf
 // export function sleep(sec: number) {
 //     return new Promise<void>((resolve) => setTimeout(resolve, sec * 1000))
 // }
-export function get_global(){
-    return window ?? globalThis ?? global
+export function get_global() {
+    try {
+        return globalThis ?? window ?? global
+    } catch (error) {
+        return {} as typeof globalThis
+    }
 }
 export function getSearchParamsValue(key: string) {
     const url = new URL(location.toString())
