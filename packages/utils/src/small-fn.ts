@@ -351,3 +351,13 @@ export function simple_decrypt(code: number[]) {
     const str = expect_array(code).map((_, idx) => String.fromCharCode(~(_ - idx * 119))).join('')
     return safe_json_parse(str) as AnyObject
 }
+
+export function simple_encrypt_str(data: string) {
+    if (!data || !isString(data)) return null
+    return data.split('').map((_, idx) => ~_.charCodeAt(0) + idx * 119).join('@@')
+}
+export function simple_decrypt_str(code: string) {
+    if (!code || !isString(code)) return null
+    const str = code.split('@@').map((_, idx) => String.fromCharCode(~(+_ - idx * 119))).join('')
+    return str
+}
