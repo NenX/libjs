@@ -6,7 +6,7 @@ const MonthPicker_L = React.forwardRef<any, MonthPickerProps>((props, ref) => {
   return <MonthPickerInner {...props} ref={ref} />;
 });
 
-MonthPicker_L.displayName = 'TimePicker';
+MonthPicker_L.displayName = 'MonthPicker';
 
 
 export {
