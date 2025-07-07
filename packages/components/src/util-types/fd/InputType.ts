@@ -21,6 +21,7 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "MC" |
     "component" |
     "node" |
+    "textareaWithResult" |
     "ArrayPanel" |
     "MyFormList_必须搭配Form使用" |
     "checkbox_group" |
