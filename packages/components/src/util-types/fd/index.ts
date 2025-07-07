@@ -54,7 +54,7 @@ export interface IMchc_FormDescriptions_InputProps {
     TemplateTextarea_type?: {
         url?: string,
         method?: 'post' | 'get',
-        type: number;
+        type?: number;
         title: string;
         depid?: number;
     }[]
