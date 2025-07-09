@@ -88,6 +88,8 @@ export interface IMchc_FormDescriptions_InputProps {
     onPatientSelect?(v: any, form?: FormInstance): void
     onPatientAutoComplete?(v: any, form?: FormInstance): void
     on_row_value_change?(data: any[], index: number, changed?: AnyObject, form?: FormInstance): void
+    onFocus?: React.FocusEventHandler<HTMLInputElement>
+    onBlur?: React.FocusEventHandler<HTMLInputElement>
 
 }
 type IMchc_FormDescriptions_FilterTypeRaw = 'in' | 'equals' | 'contains' | 'greaterOrEqualThan' | 'lessOrEqualThan';
