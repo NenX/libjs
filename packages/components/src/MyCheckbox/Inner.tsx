@@ -9,7 +9,7 @@ import { components } from './components';
 import styles from './index.module.less';
 import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
-  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 64, vertical = false, style = {} } = props;
+  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {} } = props;
 
   const marshal = getMarshal(props)
   const { options, loading, data: __data, setData } = use_options(props)
@@ -87,10 +87,10 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
     const props: any = option.props ?? {}
     let style: CSSProperties = props.style ?? {}
     if (['MyInput', 'Input', 'input', 'MA', 'MyAutoComplete'].includes(inputType)) {
-      style = { width: inputWidth * (longOptions ? 1 : 2), ...style }
+      style = { width: inputWidth * (longOptions ? 1 : 1.5), ...style }
     }
     if (['Select', 'MS', 'MySelect'].includes(inputType)) {
-      style = { minWidth: inputWidth * (longOptions ? 1 : 2), ...style }
+      style = { minWidth: inputWidth * (longOptions ? 1 : 1.5), ...style }
     }
     return C ? <C
       size="small"
