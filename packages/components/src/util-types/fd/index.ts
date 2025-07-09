@@ -29,6 +29,8 @@ export interface IMchc_FormDescriptions_InputProps {
     max?: number
     labelCol?: number
     wrapperCol?: number
+    popupMatchSelectWidth?: number | boolean
+    gen_obj?: () => AnyObject
     rows?: number
     defaultValue?: any,
     defaultChecked?: boolean
