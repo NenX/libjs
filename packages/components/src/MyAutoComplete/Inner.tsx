@@ -10,7 +10,7 @@ import { isInt } from '@noah-libjs/utils';
 export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
 
   const {
-    popupMatchSelectWidth = 120,
+    popupMatchSelectWidth = 140,
     getPopupContainer = () => document.body,
     options: _options,
     style = {},
