@@ -183,11 +183,11 @@ export function create_load_src() {
 }
 const load_src_ = create_load_src()
 
-export function load_src(items: TMixOpt): Promise<Element>;
-export function load_src(items: TMixOpt[]): Promise<Element[]>;
+export function load_src(items: TMixOpt, node?: HTMLHeadElement): Promise<Element>;
+export function load_src(items: TMixOpt[], node?: HTMLHeadElement): Promise<Element[]>;
 
-export function load_src<T extends TMixOpt | TMixOpt[]>(items: T) {
-    return load_src_(items)
+export function load_src<T extends TMixOpt | TMixOpt[],>(items: T, node?: HTMLHeadElement) {
+    return load_src_(items, node)
 };
 
 
