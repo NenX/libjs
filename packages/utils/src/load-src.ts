@@ -3,21 +3,21 @@ import { AnyObject } from "./type-utils";
 interface IOpt {
     id?: string,
     text?: string,
-    url: string,
+    url?: string,
     debug?: boolean
     allowExternal?: boolean
     cache?: boolean
     async?: boolean
-    type?: string
+    type?: 'text/css' | 'text/javascript'
     charset?: string
 
 }
 type TMixOpt = IOpt | string
 export function create_load_src() {
     var cache: AnyObject<Promise<Element>> = {};
-    var head = document.getElementsByTagName("head")[0] || document.documentElement;
+    var head_el = document.getElementsByTagName("head")[0] || document.documentElement;
 
-    function exec(options: TMixOpt) {
+    function exec(options: TMixOpt, node: HTMLHeadElement) {
         let opt: IOpt
         if (typeof options === "string") {
             opt = {
@@ -28,7 +28,7 @@ export function create_load_src() {
             opt = options
         }
 
-        var cacheId = opt.id || opt.url;
+        var cacheId = opt.id || opt.url!;
         var cacheEntry = cache[cacheId];
 
         if (cacheEntry) {
@@ -36,8 +36,7 @@ export function create_load_src() {
                 console.log("load-js: cache hit", cacheId);
             }
             return cacheEntry;
-        }
-        else if (opt.allowExternal !== false) {
+        } else if (opt.allowExternal !== false) {
             var el = getScriptById(opt.id) || getScriptByUrl(opt.url);
 
             if (el) {
@@ -55,7 +54,7 @@ export function create_load_src() {
             throw new Error("load-js: must provide a url or text to load");
         }
 
-        var pending = (opt.url ? loadScript : runScript)(head, createScript(opt));
+        var pending = (opt.url ? loadScript : runScript)(node, createEl(opt));
 
         if (cacheId && opt.cache !== false) {
             cache[cacheId] = pending;
@@ -64,13 +63,13 @@ export function create_load_src() {
         return pending;
     }
 
-    function runScript(head: HTMLHeadElement, script: HTMLScriptElement) {
-        head.appendChild(script);
-        return Promise.resolve(script);
+    function runScript(head: HTMLHeadElement, el: HTMLElement) {
+        head.appendChild(el);
+        return Promise.resolve(el);
     }
 
-    function loadScript(head: HTMLHeadElement, script: HTMLScriptElement) {
-        return new Promise<HTMLScriptElement>(function (resolve, reject) {
+    function loadScript(head: HTMLHeadElement, el: HTMLElement) {
+        return new Promise<HTMLElement>(function (resolve, reject) {
             // Handle Script loading
             var done = false;
 
@@ -82,67 +81,104 @@ export function create_load_src() {
             // https://www.html5rocks.com/en/tutorials/speed/script-loading/
             //
             //@ts-ignore
-            script.onload = script.onreadystatechange = function () {
+            el.onload = el.onreadystatechange = function () {
                 //@ts-ignore
-                if (!done && (!script.readyState || script.readyState === "loaded" || script.readyState === "complete")) {
+                if (!done && (!el.readyState || el.readyState === "loaded" || el.readyState === "complete")) {
                     done = true;
 
                     // Handle memory leak in IE
                     //@ts-ignore
-                    script.onload = script.onreadystatechange = null;
-                    resolve(script);
+                    el.onload = el.onreadystatechange = null;
+                    resolve(el);
                 }
             };
 
-            script.onerror = reject;
+            el.onerror = reject;
 
-            head.appendChild(script);
+            head.appendChild(el);
         });
     }
 
+    function createEl(opt: IOpt) {
+        if (opt.url?.endsWith('css')) {
+            return createLink(opt)
+        }
+        if (opt.type === 'text/css') {
+            return createStyle(opt)
+        }
+        return createScript(opt)
+    }
     function createScript(options: IOpt) {
-        var script = document.createElement("script");
-        script.charset = options.charset || "utf-8";
-        script.type = options.type || "text/javascript";
-        script.async = !!options.async;
-        script.id = options.id || options.url;
+        var el = document.createElement("script");
+        el.charset = options.charset || "utf-8";
+        el.type = options.type || "text/javascript";
+        el.async = !!options.async;
+        el.id = options.id || options.url!;
         //@ts-ignore
-        script.loadJS = "watermark";
+        el.loadJS = "watermark";
 
         if (options.url) {
-            script.src = options.url;
+            el.src = options.url;
         }
 
         if (options.text) {
-            script.text = options.text;
+            el.text = options.text;
         }
 
-        return script;
+        return el;
+    }
+    function createLink(options: IOpt) {
+        var el = document.createElement("link");
+        el.charset = options.charset || "utf-8";
+        el.type = options.type || "text/css";
+        el.id = options.id || options.url!;
+        el.rel = 'stylesheet'
+        //@ts-ignore
+        el.loadJS = "watermark";
+
+        if (options.url) {
+            el.href = options.url;
+        }
+        console.log('createLink', { options, el })
+
+        return el;
+    }
+    function createStyle(options: IOpt) {
+        var el = document.createElement("style");
+        el.id = options.id || options.text!;
+        //@ts-ignore
+        el.loadJS = "watermark";
+
+        if (options.text) {
+            el.textContent = options.text;
+        }
+
+        return el;
     }
 
     function getScriptById(id?: string) {
-        var script = id && document.getElementById(id);
+        var el = id && document.getElementById(id);
 
         //@ts-ignore
-        if (script && script.loadJS !== "watermark") {
+        if (el && el.loadJS !== "watermark") {
             console.warn("load-js: duplicate script with id:", id);
-            return script;
+            return el;
         }
     }
 
     function getScriptByUrl(url?: string) {
-        var script = url && document.querySelector("script[src='" + url + "']");
+        var el = url && document.querySelector("script[src='" + url + "']");
         //@ts-ignore
-        if (script && script.loadJS !== "watermark") {
+        if (el && el.loadJS !== "watermark") {
             console.warn("load-js: duplicate script with url:", url);
-            return script;
+            return el;
         }
     }
 
-    return function load(items: TMixOpt | TMixOpt[]) {
+    return function load(items: TMixOpt | TMixOpt[], node = head_el) {
         return items instanceof Array ?
-            Promise.all(items.map(exec)) :
-            exec(items);
+            Promise.all(items.map(_ => exec(_, node))) :
+            exec(items, node);
     }
 }
 const load_src_ = create_load_src()
