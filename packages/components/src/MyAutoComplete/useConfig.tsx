@@ -2,7 +2,7 @@
 import { getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption, isFunction } from '@noah-libjs/utils';
 import React, { useEffect, useState } from 'react';
 import { IMemoriseItem, IMyAutoCompleteProps } from './types';
-import { request } from '@noah-libjs/request';
+import { request, safe_fetch_options } from '@noah-libjs/request';
 import { parse_MC_dict_options, parse_MC_option } from 'src/utils';
 
 
@@ -20,7 +20,7 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         memoriesname,
         formName = 'unsetFormName',
         name,
-        uniqueKey,
+        fetch_options,
         onChange,
         onBlur,
     } = props;
@@ -35,10 +35,19 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
     const _memorable = memorable || !!memorieskey
 
     useEffect(() => {
-        init()
+        if (!fetch_options)
+            init()
 
         return () => { }
     }, [optionKey, options, searchKey])
+    useEffect(() => {
+        if (fetch_options) {
+            safe_fetch_options(fetch_options)
+                .then(set__options)
+        }
+
+        return () => { }
+    }, [])
     useEffect(() => {
         // if (!init_value && value) {
         //     setInit_value(value)
@@ -54,10 +63,7 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
     }
 
     function init() {
-        let calc_options = isFunction(options) ? options() : options
-        const preOptions = optionKey ? getPresetOptions(optionKey as any) : null
         const searchValue = searchKey ? getSearchParamsValue(searchKey) : null
-        const dic_op = parse_MC_dict_options({ ...props, useString: true })
         const _options = parse_MC_option({ ...props, useString: true })
 
         if (searchValue) {
