@@ -1,7 +1,7 @@
 
 import { Axios, AxiosInstance } from 'axios';
 
-import { Request } from './Request';
+import { Request, request } from './Request';
 //@ts-ignore
 import bind from 'axios/lib/helpers/bind';
 //@ts-ignore
@@ -9,6 +9,7 @@ import bind from 'axios/lib/helpers/bind';
 import utils from 'axios/lib/utils';
 
 export * from './types';
+export * from './helper';
 export { codeMessage } from './constant'
 
 
@@ -20,13 +21,9 @@ function createInstance(defaultConfig = {}) {
 }
 
 
-const request = new Request;
 
 
-// export const rawRequest = createInstance({})
 
-// export const asRequest = new Request({ config: { baseURL: '/as' } })
-// export const fubaoRequest = new Request({ config: { baseURL: '/' } })
 
 export { Request, createInstance, request }
 

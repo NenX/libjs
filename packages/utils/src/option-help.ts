@@ -1,3 +1,4 @@
+import { isFunction } from 'radash';
 import { expect_array, safe_async_call } from './small-fn';
 import { AnyObject } from './type-utils';
 import { ICommonOption } from './types';
@@ -155,12 +156,7 @@ function presetInput(_label?: string): Partial<ICommonOption> {
 
 }
 
-export type T_FETCH_OPTIONS = () => (Promise<ICommonOption[]> | ICommonOption[])
 
-export async function safe_fetch_options(cb: T_FETCH_OPTIONS) {
-    let arr = await safe_async_call(cb)
-    return expect_array(arr)
-}
 
 
 

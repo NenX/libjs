@@ -149,6 +149,9 @@ export class Request extends EventEmitter<{ request: any, response: any, error: 
     put!: TRequest_PreReq
 
 }
+
+export const request = new Request;
+
 function doUnboxing(res: any) {
     const isBoxing = typeof res?.code === 'number' && !!res.data
     if (isBoxing) {

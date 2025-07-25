@@ -1,4 +1,4 @@
-import { ICommonOption, T_FETCH_OPTIONS } from '@noah-libjs/utils';
+
 import { AutoCompleteProps, SelectProps } from 'antd';
 import { IMyCheckboxProps } from '../MyCheckbox';
 import { IMyDatePickerProps } from '../MyDatePicker/utils';
@@ -6,6 +6,7 @@ import { IMyInputProps } from '../MyInput';
 import { IMyInputNumberProps } from '../MyInputNumber';
 import { TMarshal, TMode } from '../utils';
 import { TOptions } from '../util-types';
+import { T_FETCH_OPTIONS } from '@noah-libjs/request';
 
 
 

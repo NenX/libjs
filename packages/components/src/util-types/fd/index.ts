@@ -1,4 +1,4 @@
-import { AnyObject, ICommonOption, T_FETCH_OPTIONS } from "@noah-libjs/utils"
+import { AnyObject, ICommonOption } from "@noah-libjs/utils"
 import { ButtonProps, FormInstance } from "antd"
 import { SizeType } from "antd/lib/config-provider/SizeContext"
 import React, { CSSProperties, FC, ReactNode } from "react"
@@ -7,6 +7,7 @@ import { IMchc_FormDescriptions_InputType } from "./InputType"
 import { IMchc_FormDescriptions_Rules } from "./Rules"
 import { IMchc_FormDescriptions_SpecialConfig } from "./SpecialConfig"
 import { IMchc_FormDescriptions_TranferRules } from "./TranferRules"
+import { T_FETCH_OPTIONS } from "@noah-libjs/request"
 // export { ButtonProps, FormInstance, CSSProperties, FC, ReactNode, SizeType, AnyObject, ICommonOption, T_FETCH_OPTIONS }
 export type TOptions = string | ICommonOption[] | string[]
 export interface IMchc_FormDescriptions_InputProps {
