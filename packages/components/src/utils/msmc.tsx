@@ -115,11 +115,13 @@ export function use_options(props: ICompatibleProps) {
       safe_fetch_options(fetch_options)
         .then(set_options)
         .finally(() => setLoading(false))
-    } else {
-      set_options(parse_MC_option(props))
-
     }
-  }, [fetch_options, optionKey, _options, uniqueKey]);
+  }, []);
+  useEffect(() => {
+    if (!fetch_options) {
+      set_options(parse_MC_option(props))
+    }
+  }, [optionKey, _options, uniqueKey]);
 
   const is_multiple = check_multiple(props)
 
