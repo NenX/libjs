@@ -19,14 +19,14 @@ function use_icon(props: IMyIconSelectProps) {
     console.log('all_keys', { all_keys, all_icons })
 
 
-    function render_Icon(t?: string) {
+    function render_Icon(t?: string, p: IconComponentProps = {}) {
         if (!all_icons.default?.render) return null
         const R = all_icons.default?.render
         if (!t) return null
 
-        if (!all_keys.includes(t!)) return <R title={t} component={QuestionOutlined as any} />
+        if (!all_keys.includes(t!)) return <R title={t} component={QuestionOutlined as any} {...p} {...others} />
         const C = all_icons[t!]
-        return <R title={t} component={C as any} />
+        return <R title={t} component={C as any} {...p} {...others} />
     }
     useEffect(() => {
         import('@ant-design/icons')
@@ -58,16 +58,15 @@ const MyIconSelect: TCommonComponent<IMyIconSelectProps, string> = forwardRef<In
         popupRender={
             (node) => {
 
-                return <Card styles={{ body: { padding: 0 } }}>
+                return <Card size='small' styles={{ body: { width: 580, height: 360, overflowY: 'auto', } }}>
 
                     <List
-                        style={{ width: 640, height: 360, overflowY: 'auto', padding: '6px 24px 6px' }}
-                        bordered
+                        style={{}}
                         grid={{ column: 12 }}
                         dataSource={all_keys}
                         renderItem={(key) => (
-                            <List.Item style={{ cursor: 'pointer', background: key === value ? '#aaa' : '' }} key={key} onClick={() => onChange?.(key)}>
-                                {render_Icon(key)}{node}
+                            <List.Item style={{ cursor: 'pointer', background: key === value ? '#aaa' : '', padding: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }} key={key} onClick={() => onChange?.(key)}>
+                                {render_Icon(key, { style: { fontSize: 20 } })}{node}
                             </List.Item>
                         )}
                     />
