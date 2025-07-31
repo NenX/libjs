@@ -66,7 +66,7 @@ export interface IMchc_FormDescriptions_InputProps {
     standalone?: boolean
     node?: ReactNode
     component?: FC<{ value?: any, onChange?(v: any): void, form?: FormInstance }>
-    width?: number
+    width?: number | 'auto' | 'unset' | string
     startIndex?: number
     inputWidth?: number
     size?: SizeType
