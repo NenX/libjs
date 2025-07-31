@@ -4,6 +4,7 @@ import React, { FC, forwardRef, useEffect, useState } from 'react';
 import { Dropdown_L } from '../LazyAntd';
 import { TCommonComponent } from '../util-types';
 import { IIconMap, IMyIconSelectProps } from './types';
+import { MyInput } from '../MyInput';
 export * from './types';
 
 
@@ -65,7 +66,7 @@ const MyIconSelect: TCommonComponent<IMyIconSelectProps, string> = forwardRef<In
                         grid={{ column: 12 }}
                         dataSource={all_keys}
                         renderItem={(key) => (
-                            <List.Item style={{ cursor: 'pointer' }} key={key} onClick={() => onChange?.(key)}>
+                            <List.Item style={{ cursor: 'pointer', background: key === value ? '#aaa' : '' }} key={key} onClick={() => onChange?.(key)}>
                                 {render_Icon(key)}{node}
                             </List.Item>
                         )}
@@ -74,11 +75,12 @@ const MyIconSelect: TCommonComponent<IMyIconSelectProps, string> = forwardRef<In
             }
         }
     >
-        <Input
+        <MyInput
             addonBefore={render_Icon(value)}
             placeholder={'请选择'}
             value={value}
             allowClear
+            onChange={onChange}
             onClear={() => onChange?.('')}
         />
     </Dropdown_L >
