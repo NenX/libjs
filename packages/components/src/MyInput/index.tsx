@@ -1,9 +1,9 @@
 import { Input, InputRef } from 'antd';
 import React, { forwardRef, useEffect, useState } from 'react';
-import { getInputStyle, } from '../utils';
-import { IMyInputProps } from './types';
-import { TCommonComponent } from '../util-types';
 import { MyInputNumber } from '../MyInputNumber';
+import { TCommonComponent } from '../util-types';
+import { get_status_cls, getInputStyle, } from '../utils';
+import { IMyInputProps } from './types';
 export * from './types';
 const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<InputRef, IMyInputProps>((props, myRef) => {
     const { width, style = {}, placeholder, name, warning, form, value, onChange, type, ...others } = props
@@ -17,14 +17,15 @@ const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<InputRef, IM
     const _style = getInputStyle(props)
 
 
-    return <Input title={JSON.stringify(_style)} ref={myRef} value={_value}
+    return <Input ref={myRef} value={_value}
         onChange={e => {
             const v = e.target.value
             set_value(v)
             onChange?.(v)
         }}
-
-
+        classNames={{
+            input: get_status_cls(props.status)
+        }}
 
         style={_style}
         {...others}
@@ -38,4 +39,4 @@ MyInput.DisplayFC = (props) => {
     return props.value
 }
 
-export { MyInput }
+export { MyInput };

@@ -1,21 +1,31 @@
-import { isInt } from "@noah-libjs/utils"
-import React from "react"
-
-interface IBase { style?: React.CSSProperties, width?: any, inputWidth?: any, disabled?: boolean, warning?: boolean, warn?: boolean }
+import { InputStatus } from "antd/es/_util/statusUtils";
+import React from "react";
+import theme from '../theme.less';
+interface IBase { style?: React.CSSProperties, width?: any, inputWidth?: any, disabled?: boolean, status?: InputStatus; }
 interface IProps extends IBase {
 
 }
+export function get_status_cls(status?: InputStatus) {
+    if (status === 'error')
+        return theme['error']
+    if (status === 'warning')
+        return theme['warning']
+
+}
 export function getInputStyle(props: IProps = {}) {
-    const { style = {}, width, inputWidth, warning, warn } = props
+    const { style = {}, width, inputWidth, status } = props
     if (width) {
         style.width = style.width || width
     }
     if (inputWidth) {
         style.minWidth = style.minWidth || inputWidth
     }
-    if (warning || warn) {
-        style.border = '1px solid red';
-        style.color = 'red';
+
+    if (status === 'error') {
+        style.color = 'red !important';
+    }
+    if (status === 'warning') {
+        style.color = 'yellow !important';
     }
     // if (isInt(popupMatchSelectWidth))
     //     style.width = style.width || (popupMatchSelectWidth / 2)

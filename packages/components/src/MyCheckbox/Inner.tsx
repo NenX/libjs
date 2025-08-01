@@ -149,7 +149,7 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
           {_parentheses && checked ? <span style={{ margin: "0 2px", whiteSpace: 'nowrap', }}>)</span> : null}
         </>
         return (
-          <div title={JSON.stringify(options)} key={index} style={{ display: 'flex', alignItems: 'center', marginRight: 2 }} className={(option.warning && checked) ? styles['warning'] : undefined}>
+          <div key={index} style={{ display: 'flex', alignItems: 'center', marginRight: 2 }} className={(option.warning && checked) ? styles['warning'] : undefined}>
             <span
               onFocus={(e) => {
 

@@ -1,7 +1,7 @@
 import { Checkbox, InputNumber, InputNumberProps } from 'antd';
 import React from 'react';
 import { TCommonComponent } from '../util-types';
-import { get_unknown_conf, getInputStyle } from '../utils';
+import { get_status_cls, get_unknown_conf, getInputStyle } from '../utils';
 import { IMyInputNumberProps } from './types';
 export * from './types';
 // .ant-input-affix-wrapper-borderless
@@ -17,7 +17,7 @@ const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNum
   }
 
   // const node = <Input disabled={disabled} {...others} placeholder={placeholder ?? '请输入数值'} allowClear style={_style} type='number' value={isUnkown ? undefined : value!} onChange={e => onChange?.(e.target.value)} />
-  const node = <InputNumber controls={false} {...others}
+  const node = <InputNumber className={get_status_cls(props.status)} controls={false} {...others}
     disabled={disabled}
     placeholder={placeholder ?? '请输入'}
     style={{ width: '100%', ..._style, }}

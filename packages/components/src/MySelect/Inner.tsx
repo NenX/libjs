@@ -107,9 +107,8 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
   // 多选不支持 非 marshal 不支持
   const isR = !is_multiple && marshal && target
   const select_node = loading ? <span>'数据加载中...'</span> : <Select_L
-    title={JSON.stringify(options)}
     loading={loading}
-    className={_warning  ? styles['warning'] : undefined}
+    className={_warning ? styles['warning'] : undefined}
     style={_style}
     allowClear
     value={_value}

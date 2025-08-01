@@ -20,7 +20,6 @@ const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(pr
     return <Switch_L
         {...props}
 
-        title={JSON.stringify(props)}
         value={value === checked_value}
 
         onChange={v => {

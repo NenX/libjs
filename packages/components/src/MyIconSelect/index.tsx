@@ -16,7 +16,6 @@ function use_icon(props: IMyIconSelectProps) {
     const [all_keys, set_all_keys] = useState<string[]>([])
 
     const QuestionOutlined = all_icons['QuestionOutlined'] || (() => <span>?</span>)
-    console.log('all_keys', { all_keys, all_icons })
 
 
     function render_Icon(t?: string, p: IconComponentProps = {}) {

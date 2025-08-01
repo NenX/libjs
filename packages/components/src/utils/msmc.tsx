@@ -1,7 +1,7 @@
 import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
-import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isFunction, isNull, isNumber, isString, numberLikeCompare, safe_json_parse_arr } from "@noah-libjs/utils";
+import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isEmpty, isFunction, isNull, isNumber, isString, numberLikeCompare, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
-import { IMchc_FormDescriptions_Field_Nullable, TOptions } from "../util-types";
+import { IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
 
 export type TMarshal = 0 | 1 | 2
 export type TMode = 'multiple' | 'tags'
@@ -24,24 +24,35 @@ interface ICompatibleProps {
 
 export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nullable[]) {
   if (!Array.isArray(configs)) return {}
-  const children = configs.filter(_ => ['MC', 'MA', 'MS'].includes(_?.inputType!) || Array.isArray(_?.children))
+  const children = configs.filter(_ => ['MC', 'MA', 'MS', 'MSW'].includes(_?.inputType!) || Array.isArray(_?.children))
 
   const check_invert_values = children
     .filter(_ => !_?.disabled_check)
     .reduce((a, item, idx) => {
       // const name = SMchc_FormDescriptions.get_form_item_name_raw(item)
 
-      const name = item?.name ?? item?.key ?? item?.dataIndex
-      const props = { ...(item?.inputProps! ?? {}), config: item } as any
-      const options = parse_MC_option(props)
-      const firstOption = options[0]
+
       const cArr = item?.children
-      let cObj = {}
       if (Array.isArray(cArr)) {
+        let cObj = {}
         cObj = get_check_invert_values(cArr)
         return { ...a, ...cObj }
+
       } else {
-        return { ...a, [`${name}`]: [parse_MC_value(props, [firstOption]), null, { props, options }], }
+
+        const props = { ...(item?.inputProps! ?? {}), config: item } as IMchc_FormDescriptions_InputProps
+        const name = item?.name ?? item?.key ?? item?.dataIndex
+        const inputType = item?.inputType
+        const options = parse_MC_option(props as any)
+
+        if (inputType === 'MSW') {
+          return { ...a, [`${name}`]: [props.checked_value ?? true, props.unchecked_value ?? false] }
+        }
+        if (inputType === 'MA' && isEmpty(options)) {
+          return a
+        }
+        const firstOption = options[0]
+        return { ...a, [`${name}`]: [parse_MC_value(props as any, [firstOption]), null, { props, options }], }
       }
     }, {} as { [x: string]: any[] })
   return check_invert_values

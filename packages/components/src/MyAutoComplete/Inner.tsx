@@ -1,7 +1,7 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { AutoComplete, Button } from 'antd';
 import React from 'react';
-import { getInputStyle } from 'src/utils';
+import { get_status_cls, getInputStyle } from 'src/utils';
 import { IMyAutoCompleteProps } from './types';
 import { useConfig_MyAutoComplete } from './useConfig';
 import { isInt } from '@noah-libjs/utils';
@@ -31,8 +31,7 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
   return (
     <AutoComplete
       // dropdownStyle={{ minWidth: 180 }}
-
-      title={JSON.stringify(options)}
+      classNames={{ root: get_status_cls(props.status), }}
       popupMatchSelectWidth={popupMatchSelectWidth}
       style={_style}
       // bordered={false}

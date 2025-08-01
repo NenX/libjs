@@ -41,6 +41,7 @@ export const packs = {
     MySwitch,
     switch: MySwitch,
     Switch: MySwitch,
+    MSW: MySwitch,
     ArrayInput,
     MArr: ArrayInput,
 

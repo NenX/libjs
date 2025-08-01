@@ -8,6 +8,7 @@ import { IMchc_FormDescriptions_Rules } from "./Rules"
 import { IMchc_FormDescriptions_SpecialConfig } from "./SpecialConfig"
 import { IMchc_FormDescriptions_TranferRules } from "./TranferRules"
 import { T_FETCH_OPTIONS } from "@noah-libjs/request"
+import { InputStatus } from "antd/es/_util/statusUtils"
 // export { ButtonProps, FormInstance, CSSProperties, FC, ReactNode, SizeType, AnyObject, ICommonOption, T_FETCH_OPTIONS }
 export type TOptions = string | ICommonOption[] | string[]
 export interface IMchc_FormDescriptions_InputProps {
@@ -15,6 +16,8 @@ export interface IMchc_FormDescriptions_InputProps {
     showTime?: boolean
     showEdit?: boolean
     height?: any
+    status?: InputStatus
+
     dependency?: {
         show?: { key: string, value: any[] }
         disabled?: { key: string, value: any[] }
@@ -56,7 +59,7 @@ export interface IMchc_FormDescriptions_InputProps {
     pressure_key1?: string
     pressure_key2?: string
     style?: CSSProperties
-    marshal?: number
+    marshal?: 0 | 1 | 2
     TemplateTextarea_type?: {
         url?: string,
         method?: 'post' | 'get',
@@ -166,12 +169,14 @@ export type IMchc_FormDescriptions_Field<RAW = false> = {
     showDeps?: AnyObject<any[] | ((v: any) => boolean)> | ((f: FormInstance) => boolean)
     requiredDeps?: AnyObject<any[] | ((v: any) => boolean)> | ((f: FormInstance) => boolean)
     disabledDeps?: AnyObject<any[] | ((v: any) => boolean)> | ((f: FormInstance) => boolean)
+    warning_deps?: AnyObject<any[] | ((v: any) => boolean)> | ((f: FormInstance) => boolean)
+    error_deps?: AnyObject<any[] | ((v: any) => boolean)> | ((f: FormInstance) => boolean)
     //  兼容 components MyForm
 
     // 自定义
     processRemote?(v: any, form?: FormInstance): any
     processLocal?(v: any, form?: FormInstance): any
-    checkWarn?(v: any, form?: FormInstance): boolean
+    checkWarn?(v: any, form?: FormInstance): boolean | InputStatus
     fd_lazy?: boolean
 }
 export type IMchc_FormDescriptions_Field_Nullable<RAW = false> = IMchc_FormDescriptions_Field<RAW> | null
