@@ -4,7 +4,7 @@ import React from "react";
 import { Switch_L } from "../LazyAntd";
 import { TCommonComponent } from "../util-types";
 import { IMySwitchProps } from "./types";
-import MyCheckbox from 'src/MyCheckbox/Inner';
+import { MyCheckbox } from '../MyCheckbox';
 const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(props) {
     const { checked_value = true, unchecked_value = false, onChange, value } = props
     if (props.switch_type === 'checkbox')
