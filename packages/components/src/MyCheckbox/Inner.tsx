@@ -81,7 +81,7 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
     } = option;
     const targetData = __data.find(d => d.value === option.value)
     if (!targetData || !inputType) return null
-    let C = components[inputType as keyof typeof components]
+    let C = components?.[inputType as keyof typeof components]
     const inputValue = targetData.text;
 
     const props: any = option.props ?? {}

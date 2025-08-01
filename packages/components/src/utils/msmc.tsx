@@ -1,5 +1,5 @@
 import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
-import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isFunction, isNumber, isString, numberLikeCompare, safe_json_parse_arr } from "@noah-libjs/utils";
+import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isFunction, isNull, isNumber, isString, numberLikeCompare, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
 import { IMchc_FormDescriptions_Field_Nullable, TOptions } from "../util-types";
 
@@ -157,7 +157,7 @@ function getData(value: any, options: ICommonOption[], marshal: number, type?: T
       )
   const safeData = (Array.isArray(v))
     ? v
-    : ((isNumber(v) || isString(v) || isBoolean(v))
+    : ((isNumber(v) || isString(v) || isBoolean(v) || isNull(v))
       // ? options.filter(_ => _.value === v)
       ? options.filter(_ => numberLikeCompare(_.value, v))
       : [])

@@ -172,7 +172,7 @@ export function safeGetFromFuncOrData(fn: any) {
     return safeExec(fn) ?? fn
 }
 
-export function numberLikeCompare(a: number | string | boolean, b: number | string | boolean) {
+export function numberLikeCompare(a: number | string | boolean | null, b: number | string | boolean | null) {
     if (a === b) return true
     if (isString(a) && isString(b)) {
         return a === b

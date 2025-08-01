@@ -1,4 +1,4 @@
-import { packs } from 'src/packs';
+import { packs } from '../packs';
 export const components = packs
 
 

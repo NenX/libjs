@@ -21,7 +21,7 @@ export interface ICompatibleProps {
 }
 
 export interface IMyCheckboxProps {
-    value?: string | number | ICommonOption[];
+    value?: boolean | null | string | number | ICommonOption[];
     options?: TOptions | (() => TOptions)
 
     onChange?(v?: any): void;
