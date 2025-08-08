@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 export interface IMyButtonProps extends Omit<ButtonProps, 'form'> {
     btn_text?: string,
     form?: FormInstance
-    on_btn_click?: (e: React.MouseEvent<HTMLElement, MouseEvent>, form?: FormInstance) => void
+    on_btn_click?: (e: React.MouseEvent<HTMLElement, MouseEvent>, form?: FormInstance) => any
     defaultIcon?: React.ReactNode,
     primary?: boolean
 }
