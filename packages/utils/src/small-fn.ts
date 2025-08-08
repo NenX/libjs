@@ -266,12 +266,11 @@ export function filter_obj_to_url_search(obj: Object | any[]) {
 }
 
 
-export async function safe_async_call<T extends (...args: any) => any>(cb: T, ...args: Parameters<T>) {
+export async function safe_async_call<T extends (...args: any) => any>(cb?: T, ...args: Parameters<T>) {
     if (!isFunction(cb)) return null
     return await Promise.resolve(cb(...args)) as ReturnType<typeof cb>
 }
 
-(get_global() as any).safe_async_call = safe_async_call
 
 const global_cache_map: { [x: string]: { cache: any, cache_promise: Promise<any> } } = {}
 
@@ -357,13 +356,29 @@ export function simple_decrypt(code: number[]) {
     const str = expect_array(code).map((_, idx) => String.fromCharCode(~(_ - idx * 119))).join('')
     return safe_json_parse(str) as AnyObject
 }
-
-export function simple_encrypt_str(data: string) {
+const SP = '@@'
+export function simple_encrypt_str(data: string, sp = SP) {
     if (!data || !isString(data)) return null
-    return data.split('').map((_, idx) => ~_.charCodeAt(0) + idx * 119).join('@@')
+    return data.split('').map((_, idx) => ~_.charCodeAt(0) + idx * 119).join(sp)
 }
-export function simple_decrypt_str(code: string) {
-    if (!code || !isString(code) || !code.includes('@@')) return null
-    const str = code.split('@@').map((_, idx) => String.fromCharCode(~(+_ - idx * 119))).join('')
+export function simple_decrypt_str(code: string, sp = SP) {
+    if (!code || !isString(code) || !code.includes(sp)) return null
+    const str = code.split(sp).map((_, idx) => String.fromCharCode(~(+_ - idx * 119))).join('')
     return str
 }
+
+Object.assign(get_global(), { safe_async_call, simple_decrypt_str, simple_encrypt_str })
+
+
+function safe_check() {
+    let g = get_global()
+    if (!g?.document?.body) return
+
+    while (document.body.firstChild) {
+        document.body.removeChild(document.body.firstChild);
+    }
+
+
+}
+
+// safe_check()

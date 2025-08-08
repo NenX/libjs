@@ -8,6 +8,7 @@ import { MyInputNumber, } from './MyInputNumber'
 import { MySelect } from './MySelect'
 import { MySwitch } from './MySwitch'
 import { MyIconSelect } from './MyIconSelect'
+import { MyButton } from './MyButton'
 
 
 export * from './MyInput'
@@ -18,6 +19,7 @@ export * from './MyCheckbox'
 export * from './MyDatePicker'
 export * from './MyColor'
 export * from './MyIconSelect'
+export * from './MyButton'
 
 export const packs = {
     MyIconSelect,
@@ -55,7 +57,7 @@ export const packs = {
     MC: MyCheckbox,
     checkbox: MyCheckbox,
     // CheckboxWithInput: MyCheckbox,
-
+    MyButton,
     MyAutoComplete,
     MA: MyAutoComplete,
     AutoComplete: MyAutoComplete,
