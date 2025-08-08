@@ -69,7 +69,7 @@ export interface IMchc_FormDescriptions_InputProps {
     }[]
     defaultData?: AnyObject
     btn_text?: string
-    on_btn_click?: (e: React.MouseEvent<HTMLElement, MouseEvent>, form?: FormInstance) => void
+    on_btn_click?: (e: React.MouseEvent<HTMLElement, MouseEvent>, form?: FormInstance) => any
     standalone?: boolean
     node?: ReactNode
     component?: FC<{ value?: any, onChange?(v: any): void, form?: FormInstance }>
