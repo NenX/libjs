@@ -17,7 +17,8 @@ export interface IMchc_FormDescriptions_InputProps {
     showEdit?: boolean
     height?: any
     status?: InputStatus
-
+    addonBefore?: string
+    addonAfter?: string
     dependency?: {
         show?: { key: string, value: any[] }
         disabled?: { key: string, value: any[] }
