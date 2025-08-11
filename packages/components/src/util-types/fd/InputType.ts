@@ -91,6 +91,7 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "bloodPressureInput" |
     "MyAutoComplete" |
     "MA" |
+    "MI" |
     "MArr" |
     "textareaWithTemplate" |
     "blank" |
