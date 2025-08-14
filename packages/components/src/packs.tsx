@@ -19,6 +19,7 @@ export * from './MyCheckbox'
 export * from './MyDatePicker'
 export * from './MyColor'
 export * from './MyIconSelect'
+export * from './MyAutoComplete'
 export * from './MyButton'
 
 export const packs = {
