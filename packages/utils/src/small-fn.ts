@@ -1,4 +1,4 @@
-import { isFunction, isNumber, isObject, isString, keys, toInt, toFloat, } from "./helper";
+import { isFunction, isNumber, isObject, isString, keys, toInt, toFloat, cloneDeep, } from "./helper";
 import { safe_json_parse } from "./json-helper";
 import { isBoolean, isNil, isNull, isObjectLike, toString } from "./helper";
 import { AnyObject } from "./type-utils";
@@ -274,7 +274,11 @@ export async function safe_async_call<T extends (...args: any) => any>(cb?: T, .
 
 const global_cache_map: { [x: string]: { cache: any, cache_promise: Promise<any> } } = {}
 
-export async function cache_fetch<T = any>(key: string, cb: () => Promise<T>): Promise<T> {
+export async function cache_fetch<T = any>(key: string, cb: () => Promise<T>, deep = false) {
+    let raw = await cache_fetch_inner(key, cb)
+    return deep ? cloneDeep(raw)! : raw
+}
+async function cache_fetch_inner<T = any>(key: string, cb: () => Promise<T>): Promise<T> {
     let conf = global_cache_map[key] = global_cache_map[key] ?? {}
     if (conf.cache) return conf.cache
     if (conf.cache_promise) return conf.cache_promise
