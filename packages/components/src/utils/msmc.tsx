@@ -2,10 +2,12 @@ import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
 import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isEmpty, isFunction, isNull, isNumber, isString, numberLikeCompare, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
 import { IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
+import { FormInstance } from "antd";
 
 export type TMarshal = 0 | 1 | 2
 export type TMode = 'multiple' | 'tags'
 interface ICompatibleProps {
+  form?: FormInstance,
   value?: string | number | ICommonOption[]
   uniqueKey?: string,
   optionKey?: string,
@@ -101,7 +103,7 @@ export function get_mode(props: ICompatibleProps,) {
 
 
 export function use_options(props: ICompatibleProps) {
-  const { fetch_options, optionKey, options: _options, uniqueKey } = props
+  const { fetch_options, optionKey, options: _options, uniqueKey, form } = props
   const [options, set_options] = useState<ICommonOption[]>([])
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<ICommonOption[]>([]);
@@ -123,7 +125,7 @@ export function use_options(props: ICompatibleProps) {
   useEffect(() => {
     if (fetch_options) {
       setLoading(true)
-      safe_fetch_options(fetch_options)
+      safe_fetch_options(fetch_options, form)
         .then(set_options)
         .finally(() => setLoading(false))
     }

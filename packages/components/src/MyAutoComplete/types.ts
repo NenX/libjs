@@ -1,5 +1,5 @@
 import { ICommonOption } from '@noah-libjs/utils';
-import { AutoCompleteProps } from 'antd';
+import { AutoCompleteProps, FormInstance } from 'antd';
 import { TOptions } from '../util-types';
 import { T_FETCH_OPTIONS } from '@noah-libjs/request';
 
@@ -14,7 +14,7 @@ export interface IMemoriseItem {
 export type IMyAutoCompleteProps = Omit<AutoCompleteProps, 'options' | 'onChange'> & {
     onChange?(str?: string): void
     fetch_options?: T_FETCH_OPTIONS
-
+    form?: FormInstance,
     optionKey?: string,
     uniqueKey?: string,
     memorieskey?: string,

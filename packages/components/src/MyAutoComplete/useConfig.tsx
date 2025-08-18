@@ -11,6 +11,7 @@ const defaultOptions: ICommonOption[] = []
 export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
 
     const {
+        form,
         optionKey,
         options = defaultOptions,
         searchKey,
@@ -42,7 +43,7 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
     }, [optionKey, options, searchKey])
     useEffect(() => {
         if (fetch_options) {
-            safe_fetch_options(fetch_options)
+            safe_fetch_options(fetch_options, form)
                 .then(set__options)
         }
 
