@@ -21,7 +21,7 @@ interface ICompatibleProps {
   sp?: any[],
   config?: any,
   startIndex?: any,
-
+  display_linker?: string
 }
 
 export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nullable[]) {
@@ -103,7 +103,7 @@ export function get_mode(props: ICompatibleProps,) {
 
 
 export function use_options(props: ICompatibleProps) {
-  const { fetch_options, optionKey, options: _options, uniqueKey, form } = props
+  const { fetch_options, optionKey, options: _options, uniqueKey, form, display_linker = ',' } = props
   const [options, set_options] = useState<ICommonOption[]>([])
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<ICommonOption[]>([]);
@@ -140,7 +140,7 @@ export function use_options(props: ICompatibleProps) {
 
   // mchcLogger.log('MySelect', { data, options, props })
 
-  const label = is_multiple ? data.map(_ => _.label).join(',') : data[0]?.label
+  const label = is_multiple ? data.map(_ => _.label).join(display_linker) : data[0]?.label
   const safe_node = label ?? ''
   const display_node = (
     <span title={safe_node}>

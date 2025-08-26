@@ -18,6 +18,8 @@ export interface ICompatibleProps {
     startIndex?: any,
     value?: any,
     uniqueKey?: string
+    display_linker?: string
+
 }
 
 export interface IMyCheckboxProps {
@@ -37,6 +39,7 @@ export interface IMyCheckboxProps {
     startIndex?: number
     onBlur?(e: any): void
     style?: React.CSSProperties
+    display_linker?: string
 }
 
 
