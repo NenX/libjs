@@ -22,6 +22,7 @@ interface ICompatibleProps {
   config?: any,
   startIndex?: any,
   display_linker?: string
+  linker?: string
 }
 
 export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nullable[]) {
@@ -74,7 +75,7 @@ export function getMarshal(props?: ICompatibleProps) {
 }
 
 export function parse_MC_value(props: ICompatibleProps, changedValue: ICommonOption[]) {
-
+  const { linker = ',' } = props
   if (props.config?.inputType === 'MA') return changedValue?.[0]?.value;
 
 
@@ -87,7 +88,7 @@ export function parse_MC_value(props: ICompatibleProps, changedValue: ICommonOpt
     return marshal === 2 ? changedValue : JSON.stringify(changedValue,)
 
   if (type === 'multiple' || type === 'tags')
-    return changedValue.map(_ => _.value).join(',')
+    return changedValue.map(_ => _.value).join(linker)
   return changedValue[0]?.value
 }
 export function check_multiple(props: ICompatibleProps,) {
@@ -103,7 +104,7 @@ export function get_mode(props: ICompatibleProps,) {
 
 
 export function use_options(props: ICompatibleProps) {
-  const { fetch_options, optionKey, options: _options, uniqueKey, form, display_linker = ',' } = props
+  const { fetch_options, optionKey, options: _options, uniqueKey, form, linker = ',', display_linker } = props
   const [options, set_options] = useState<ICommonOption[]>([])
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<ICommonOption[]>([]);
@@ -116,7 +117,7 @@ export function use_options(props: ICompatibleProps) {
 
 
   useEffect(() => {
-    const safeData = getData(value, options, marshal, type)
+    const safeData = getData(value, options, marshal, type, linker)
 
     setData(safeData)
   }, [value, options]);
@@ -140,7 +141,7 @@ export function use_options(props: ICompatibleProps) {
 
   // mchcLogger.log('MySelect', { data, options, props })
 
-  const label = is_multiple ? data.map(_ => _.label).join(display_linker) : data[0]?.label
+  const label = is_multiple ? data.map(_ => _.label).join(display_linker ?? linker) : data[0]?.label
   const safe_node = label ?? ''
   const display_node = (
     <span title={safe_node}>
@@ -153,9 +154,9 @@ export function use_options(props: ICompatibleProps) {
   return { loading, options, data, setData, display_node }
 }
 
-function getData(value: any, options: ICommonOption[], marshal: number, type?: TMode) {
+function getData(value: any, options: ICommonOption[], marshal: number, type?: TMode, l = ',') {
   const unMarshalData = safe_json_parse_arr(value, value)
-  const splitValue = () => isString(value) ? value.split(',').filter(_ => _) : []
+  const splitValue = () => isString(value) ? value.split(l).filter(_ => _) : []
   const v =
     [1, 2].includes(marshal)
       ? unMarshalData :
@@ -225,9 +226,9 @@ function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
 
 }
 
-export function displayValue(_options: ICommonOption[], value: ICommonOption[], isMul: boolean) {
+export function displayValue(_options: ICommonOption[], value: ICommonOption[], l = ',') {
   const _value = _options.filter(o => value.find(v => v.value == o.value))
-  return _value.map(_ => _.label).join(',')
+  return _value.map(_ => _.label).join(l)
 
 }
 export function get_unknown_conf(props: { showUnknown?: boolean, unknown?: boolean }) {
