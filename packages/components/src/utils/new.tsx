@@ -17,7 +17,7 @@ export function handle_form_error(error: any, form?: FormInstance) {
     return null
 }
 
-export function form_validate<T = AnyObject>(form: FormInstance) {
+export function form_validate<T = AnyObject>(form?: FormInstance | null) {
     return new Promise<T>((res, rej) => {
         if (!form) {
             rej({ text: 'form 不存在' })
