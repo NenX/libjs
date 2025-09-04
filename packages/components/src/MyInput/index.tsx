@@ -29,8 +29,7 @@ const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<InputRef, IM
 
         style={_style}
         {...others}
-        // placeholder={placeholder ?? '请输入'}
-        placeholder={'请输入'}
+        placeholder={placeholder ?? '请输入'}
     />
 })
 
