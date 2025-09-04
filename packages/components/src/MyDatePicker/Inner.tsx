@@ -11,6 +11,7 @@ function CusDatePicker(_props: IMyDatePickerProps) {
   const props = formatDatePickerProps(_props)
   const {
     value = undefined,
+    onBlur,
     onChange,
     valueType,
     minDate,
@@ -43,6 +44,9 @@ function CusDatePicker(_props: IMyDatePickerProps) {
 
     const newValue = handleChangeValue(props, date)
     onChange?.(newValue);
+    setTimeout(() => {
+      onBlur?.({} as any, { range: 'end' })
+    }, 10);
   }
 
   const disabledDate = useCallback(
@@ -78,6 +82,8 @@ function CusDatePicker(_props: IMyDatePickerProps) {
       disabledDate={disabledDate}
       format={format}
       {...rest}
+      // onBlur={undefined}
+      // onBlurCapture={undefined}
       style={_style}
       placeholder={'请选择'}
     />
@@ -91,7 +97,8 @@ function CusDatePicker(_props: IMyDatePickerProps) {
       {...rest}
       style={_style}
       placeholder={'请选择'}
-
+      // onBlur={undefined}
+      // onBlurCapture={undefined}
 
     />
 
