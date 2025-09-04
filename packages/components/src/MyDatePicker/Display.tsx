@@ -7,6 +7,7 @@ export const DisplayFC = (_props: IMyDatePickerProps) => {
   const props = formatDatePickerProps(_props)
 
   const { value, format } = props
+  if(!value) return null
   const isUnknown = getIsUnknown(props)
 
   const m = getMomentObj(value)
