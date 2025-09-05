@@ -1,5 +1,5 @@
 import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
-import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isEmpty, isFunction, isNull, isNumber, isString, numberLikeCompare, safe_json_parse_arr } from "@noah-libjs/utils";
+import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
 import { IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
 import { FormInstance } from "antd";
@@ -16,7 +16,7 @@ interface ICompatibleProps {
   type?: TMode,
   options?: TOptions | (() => TOptions)
   fetch_options?: T_FETCH_OPTIONS
-
+  frugal?: boolean
   useString?: boolean,
   sp?: any[],
   config?: any,
@@ -84,8 +84,10 @@ export function parse_MC_value(props: ICompatibleProps, changedValue: ICommonOpt
   if (!changedValue.length)
     return null
 
-  if (marshal)
-    return marshal === 2 ? changedValue : JSON.stringify(changedValue,)
+  if (marshal) {
+    const frugal_value = process_frugal_local(props, changedValue)
+    return marshal === 2 ? frugal_value : JSON.stringify(frugal_value,)
+  }
 
   if (type === 'multiple' || type === 'tags')
     return changedValue.map(_ => _.value).join(linker)
@@ -104,7 +106,7 @@ export function get_mode(props: ICompatibleProps,) {
 
 
 export function use_options(props: ICompatibleProps) {
-  const { fetch_options, optionKey, options: _options, uniqueKey, form, linker = ',', display_linker } = props
+  const { fetch_options, optionKey, options: _options, uniqueKey, form, linker = ',', frugal, display_linker } = props
   const [options, set_options] = useState<ICommonOption[]>([])
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<ICommonOption[]>([]);
@@ -117,7 +119,7 @@ export function use_options(props: ICompatibleProps) {
 
 
   useEffect(() => {
-    const safeData = getData(value, options, marshal, type, linker)
+    const safeData = getData(value, options, marshal, type, linker, frugal)
 
     setData(safeData)
   }, [value, options]);
@@ -153,9 +155,27 @@ export function use_options(props: ICompatibleProps) {
 
   return { loading, options, data, setData, display_node }
 }
+function process_frugal_local(props: ICompatibleProps, changedValue: ICommonOption[]) {
+  const { frugal } = props
+  if (!frugal)
+    return changedValue
+  console.log('frugal_value local', changedValue[0])
 
-function getData(value: any, options: ICommonOption[], marshal: number, type?: TMode, l = ',') {
-  const unMarshalData = safe_json_parse_arr(value, value)
+  return changedValue[0]
+
+}
+function process_frugal_remote(value: any, frugal: boolean) {
+  if (!frugal)
+    return safe_json_parse_arr<ICommonOption>(value, value)
+  const frugal_value = safe_json_parse<ICommonOption>(value)
+  console.log('frugal_value remote', frugal_value)
+  if (isNil(frugal_value?.value)) return []
+  return [frugal_value]
+}
+
+
+function getData(value: any, options: ICommonOption[], marshal: number, type?: TMode, l = ',', frugal = false) {
+  const unMarshalData = process_frugal_remote(value, frugal)
   const splitValue = () => isString(value) ? value.split(l).filter(_ => _) : []
   const v =
     [1, 2].includes(marshal)
