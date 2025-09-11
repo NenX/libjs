@@ -1,8 +1,8 @@
-import { isObject, isString } from './helper'
+import { isArray, isObject, isString } from './helper'
 
 export function safe_json_parse<T = any>(str?: any, retOnErr: T | null = null) {
     if (!str) return retOnErr
-    if (isObject(str)) return str as T
+    if (isObject(str) || isArray(str)) return str as T
     if (!isString(str)) return retOnErr
 
     try {
