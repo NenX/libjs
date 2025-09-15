@@ -9,6 +9,7 @@ import { IMchc_FormDescriptions_SpecialConfig } from "./SpecialConfig"
 import { IMchc_FormDescriptions_TranferRules } from "./TranferRules"
 import { T_FETCH_OPTIONS } from "@noah-libjs/request"
 import { InputStatus } from "antd/es/_util/statusUtils"
+import { UploadListType } from "antd/es/upload/interface"
 // export { ButtonProps, FormInstance, CSSProperties, FC, ReactNode, SizeType, AnyObject, ICommonOption, T_FETCH_OPTIONS }
 export type TOptions = string | ICommonOption[] | string[]
 export interface IMchc_FormDescriptions_InputProps {
@@ -28,6 +29,9 @@ export interface IMchc_FormDescriptions_InputProps {
     genRowData?: (oldlist?: any[]) => any
     type?: 'multiple' | 'single' | 'tags' | 'number'
     mode?: 'multiple' | 'single'
+    listType?: UploadListType,
+
+    action?: string
     unit?: string
     tip?: string
     span?: number
