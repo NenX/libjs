@@ -30,7 +30,7 @@ export interface IMchc_FormDescriptions_InputProps {
     type?: 'multiple' | 'single' | 'tags' | 'number'
     mode?: 'multiple' | 'single'
     listType?: UploadListType,
-
+    linker?: string,
     action?: string
     unit?: string
     tip?: string
