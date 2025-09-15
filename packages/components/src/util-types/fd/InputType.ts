@@ -20,6 +20,8 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "TemplateTextarea" |
     "MyTemplateTextarea" |
     "MC" |
+    "UploadFile" |
+    "upload_file" |
     "component" |
     "node" |
     "textareaWithResult" |
