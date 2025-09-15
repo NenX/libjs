@@ -27,6 +27,7 @@ export interface IMchc_FormDescriptions_InputProps {
     allowClear?: boolean
     genRowData?: (oldlist?: any[]) => any
     type?: 'multiple' | 'single' | 'tags' | 'number'
+    mode?: 'multiple' | 'single'
     unit?: string
     tip?: string
     span?: number
