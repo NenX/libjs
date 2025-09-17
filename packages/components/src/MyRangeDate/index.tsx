@@ -1,14 +1,43 @@
 import { lazy } from 'react';
 import { TCommonComponent } from '../util-types';
 import { DisplayFC } from './Display';
-import { IMyDatePickerProps } from './utils';
-export { formatDatePickerProps } from './utils'
-export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
-export { TMyDatePicker };
+import { IMyRangePickerProps, MyValue } from './utils';
+import React from 'react';
+import dayjs from 'dayjs';
 
-type TMyDatePicker = TCommonComponent<IMyDatePickerProps, string>
-const MyDatePicker: TMyDatePicker = lazy(() => import('./Inner'))
+type TMyDatePicker = TCommonComponent<IMyRangePickerProps, MyValue>
+const RangePicker_ = lazy(() => import('./Inner'))
 
-MyDatePicker.DisplayFC = DisplayFC
 
-export default MyDatePicker
+export const MyRangeDate: TMyDatePicker = function (props) {
+    const { placeholder, ...rest } = props
+    return (
+        <RangePicker_
+            // ranges={getMomentRange(dayjs) as any}
+            format="YYYY-MM-DD"
+            style={{ width: 230 }}
+
+            {...rest}
+
+        />
+    );
+}
+export const MyRangeDateTime: TMyDatePicker = function (props: IMyRangePickerProps) {
+    const { placeholder, ...rest } = props
+    return (
+        <RangePicker_
+            // ranges={getMomentRange(dayjs) as any}
+            showTime={{
+                defaultValue: [dayjs('00:00', 'HH:mm'), dayjs('23:59', 'HH:mm')],
+            }}
+            format="YYYY-MM-DD HH:mm"
+            style={{ width: 320 }}
+            {...rest}
+
+        />
+    );
+}
+
+
+MyRangeDate.DisplayFC = DisplayFC
+MyRangeDateTime.DisplayFC = DisplayFC

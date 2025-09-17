@@ -38,7 +38,7 @@ export function formatDatePickerProps<T extends ICommonProps>(props: T) {
 
 
     const data = { ...props }
-    if (!data.format) {
+    if (data.format === undefined) {
 
         if (props.time_only) {
             data.format = 'HH:mm'

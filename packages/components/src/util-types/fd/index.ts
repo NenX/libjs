@@ -57,7 +57,8 @@ export interface IMchc_FormDescriptions_InputProps {
     uniqueKey?: string
     separator?: string
     sp?: ICommonOption[]
-    format?: 'YYYY-MM-DD' | 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD HH:mm' | 'HH:mm:ss' | 'HH:mm'
+    format?: 'YYYY-MM-DD' | 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD HH:mm' | 'HH:mm:ss' | 'HH:mm' | null
+    picker?: 'week' | 'month' | 'year' | 'quarter'
     time_only?: boolean
     placeholder?: string
     disabled?: boolean
