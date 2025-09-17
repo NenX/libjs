@@ -3,7 +3,7 @@ import { MyAutoComplete } from './MyAutoComplete'
 import { MyCheckbox } from './MyCheckbox'
 import { MyColor } from './MyColor'
 import MyDatePicker from './MyDatePicker'
-import { MyRangeDate, MyRangeDateTime } from './MyRangeDate'
+import { MyRangeDate, MyRangeDateTime, MyRangePicker } from './MyRangeDate'
 import { MyInput } from './MyInput'
 import { MyInputNumber, } from './MyInputNumber'
 import { MySelect } from './MySelect'
@@ -41,6 +41,13 @@ export const packs = {
     single_date_picker: MyDatePicker,
     CusDatePicker: MyDatePicker,
     date: MyDatePicker,
+
+
+
+    MyRangePicker,
+    RangePicker: MyRangePicker,
+    rangePicker: MyRangePicker,
+    range_picker: MyRangePicker,
 
     MyRangeDate,
     RangeDate: MyRangeDate,

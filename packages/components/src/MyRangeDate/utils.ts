@@ -32,7 +32,7 @@ export type IMyRangePickerProps = {
 export function process_value_remote(value: MyValue, marshal: number, linker: string) {
     const _value = value
     let safeValue: any[] = []
-
+    if (isArray(_value)) return _value
     switch (marshal) {
         case 0:
             if (isString(_value))
