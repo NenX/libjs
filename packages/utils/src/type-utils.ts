@@ -1,4 +1,5 @@
 
+export type PropertyKey = string | number | symbol;
 
 export type PartialAll<T> = {
     [P in keyof T]?: T[P] extends Array<any>

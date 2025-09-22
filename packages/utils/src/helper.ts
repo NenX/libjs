@@ -1,4 +1,5 @@
-import { isArray, isObject, isString, isSymbol, get as r_get } from "radash";
+import { isArray, isFunction, isObject, isString, isSymbol, get as r_get } from "radash";
+import { AnyObject } from "./type-utils";
 
 export * from "radash";
 
@@ -70,3 +71,6 @@ export function cloneDeep<T>(value: T): T | null {
         return null
     }
 }
+export function hasOwn(obj: AnyObject, key: PropertyKey) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+};
