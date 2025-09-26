@@ -10,6 +10,7 @@ import { MySelect } from './MySelect'
 import { MySwitch } from './MySwitch'
 import { MyIconSelect } from './MyIconSelect'
 import { MyButton } from './MyButton'
+import { Divider } from 'antd'
 
 
 export * from './MyInput'
@@ -25,6 +26,7 @@ export * from './MyAutoComplete'
 export * from './MyButton'
 
 export const packs = {
+    Divider,
     MyIconSelect,
     MI: MyInput,
     input: MyInput,
