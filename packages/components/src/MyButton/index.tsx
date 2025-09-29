@@ -10,7 +10,7 @@ export interface IMyButtonProps extends Omit<ButtonProps, 'form'> {
     primary?: boolean
 }
 export function MyButton(props: IMyButtonProps) {
-    const { btn_text, defaultIcon, onClick, form, children, icon, loading, primary, hidden, on_btn_click, ...others } = props
+    const { btn_text, defaultIcon, onClick, form, children, icon, loading, primary, hidden, on_btn_click, title, ...others } = props
     if (hidden) return null
     let type = props.type
     const [visible, setVisible] = useState(false)
@@ -40,7 +40,7 @@ export function MyButton(props: IMyButtonProps) {
     }
     // const node = (visible) ? tip : (text ?? children)
     return (
-        <Button  {...others} title={btn_text} icon={_icon} type={type}
+        <Button  {...others} title={title || btn_text} icon={_icon} type={type}
             onClick={on_click}>
             {btn_text ?? children}
         </Button>
