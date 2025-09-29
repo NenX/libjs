@@ -42,5 +42,6 @@ export interface IMySelectProps extends Omit<SelectProps<any>, 'options'> {
     marshal?: TMarshal
     startIndex?: number
     useString?: boolean
+    useDefault?: boolean
     fetch_options?: T_FETCH_OPTIONS
 }

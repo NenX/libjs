@@ -370,6 +370,15 @@ export function simple_decrypt_str(code: string, sp = SP) {
     const str = code.split(sp).map((_, idx) => String.fromCharCode(~(+_ - idx * 119))).join('')
     return str
 }
+export function text_ellipsis(text: string, max: number) {
+    if (!text || !isNumber(max)) return ''
+
+    if (text.length <= max) return text
+
+    return text.slice(0, max) + '...'
+
+}
+
 
 Object.assign(get_global(), { safe_async_call, simple_decrypt_str, simple_encrypt_str })
 

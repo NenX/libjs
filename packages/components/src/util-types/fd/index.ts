@@ -84,6 +84,8 @@ export interface IMchc_FormDescriptions_InputProps {
     startIndex?: number
     inputWidth?: number
     size?: SizeType
+    useDefault?: boolean,
+    useString?: boolean,
     memorable?: boolean,
     memorieskey?: string,
     memoriesname?: string,

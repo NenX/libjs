@@ -18,6 +18,7 @@ interface ICompatibleProps {
   fetch_options?: T_FETCH_OPTIONS
   frugal?: boolean
   useString?: boolean,
+  useDefault?: boolean,
   sp?: any[],
   config?: any,
   startIndex?: any,
@@ -232,7 +233,7 @@ export function parse_MC_dict_options(props?: ICompatibleProps): ICommonOption[]
 }
 function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   if (!props) return []
-  const { useString, type, config, startIndex, sp } = props
+  const { useString, useDefault = true, type, config, startIndex, sp } = props
   const _options = isFunction(props.options) ? props.options() : props.options
   if (!isString(_options)) return isArray(_options) ? _options.map(_ => isString(_) ? { value: _, label: _ } : _) : []
 
@@ -240,7 +241,7 @@ function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   const multiple = type === 'multiple'
   const marshal = getMarshal(props)
 
-  const options = getDualModeOptions(_options, { sp, useString: (multiple && !marshal) || useString, start: startIndex })
+  const options = getDualModeOptions(_options, { sp, useString: (multiple && !marshal) || useString, start: startIndex, useDefault })
 
   return input_type === 'MA' ? options[1] : options[0]
 

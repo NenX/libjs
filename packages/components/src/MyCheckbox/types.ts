@@ -11,6 +11,7 @@ export interface ICompatibleProps {
     marshal?: any,
     optionKey?: string,
     useString?: boolean,
+    useDefault?: boolean,
     options?: any,
     sp?: any[],
     config?: any,
