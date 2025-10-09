@@ -78,6 +78,7 @@ function MyRangePickerInner(_props: IMyRangePickerProps) {
     </span>
   );
 }
-const RangePicker_ = memo<IMyRangePickerProps>(MyRangePickerInner, areEqual)
+// const RangePicker_ = memo<IMyRangePickerProps>(MyRangePickerInner, areEqual)
+const RangePicker_ = MyRangePickerInner
 
 export default RangePicker_
