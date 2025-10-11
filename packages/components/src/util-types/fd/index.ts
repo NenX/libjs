@@ -13,6 +13,7 @@ import { UploadListType } from "antd/es/upload/interface"
 // export { ButtonProps, FormInstance, CSSProperties, FC, ReactNode, SizeType, AnyObject, ICommonOption, T_FETCH_OPTIONS }
 export type TOptions = string | ICommonOption[] | string[]
 export interface IMchc_FormDescriptions_InputProps {
+    inputType?: IMchc_FormDescriptions_InputType
     language?: 'json' | 'javascript' | 'rust' | 'java'
     showTime?: boolean
     showEdit?: boolean

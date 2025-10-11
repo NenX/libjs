@@ -9,7 +9,7 @@ import { packs } from '../packs';
 import { use_array_marshal } from '../utils/use_array_marshal';
 import { IArraySingleProps } from './types';
 
-const ArrayPanel: TCommonComponent<IArraySingleProps, string | any[]> = (props) => {
+const ArraySingleInner: TCommonComponent<IArraySingleProps, string | any[]> = (props) => {
     const {
         inputType = 'input',
         linker,
@@ -61,7 +61,7 @@ const ArrayPanel: TCommonComponent<IArraySingleProps, string | any[]> = (props) 
                             ? <Divider style={{ margin: '4px 0', fontSize: 12, color: '#ccc' }} > {tip}{idx + 1}</Divider>
                             : null
                     }
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: tip ? 0 : 2 }}>
 
 
                         <div style={{ flex: 1 }}>
@@ -88,4 +88,4 @@ const ArrayPanel: TCommonComponent<IArraySingleProps, string | any[]> = (props) 
 
     </div>
 }
-export default ArrayPanel
+export default ArraySingleInner
