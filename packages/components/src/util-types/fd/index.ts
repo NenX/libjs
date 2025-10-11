@@ -108,7 +108,7 @@ export interface IMchc_FormDescriptions_InputProps {
     on_row_value_change?(data: any[], index: number, changed?: AnyObject, form?: FormInstance): void
     onFocus?: React.FocusEventHandler<HTMLInputElement>
     onBlur?: React.FocusEventHandler<HTMLInputElement>
-    component_map: AnyObject<FC<any>>
+    component_map?: AnyObject<FC<any>>
 }
 type IMchc_FormDescriptions_FilterTypeRaw = 'in' | 'equals' | 'contains' | 'greaterOrEqualThan' | 'lessOrEqualThan';
 export type IMchc_FormDescriptions_FilterType = IMchc_FormDescriptions_FilterTypeRaw | `${IMchc_FormDescriptions_FilterTypeRaw},${IMchc_FormDescriptions_FilterTypeRaw}`
