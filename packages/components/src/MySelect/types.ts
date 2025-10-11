@@ -44,4 +44,5 @@ export interface IMySelectProps extends Omit<SelectProps<any>, 'options'> {
     useString?: boolean
     useDefault?: boolean
     fetch_options?: T_FETCH_OPTIONS
+    fetch_options_on_open?: boolean
 }

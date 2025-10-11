@@ -24,6 +24,7 @@ interface ICompatibleProps {
   startIndex?: any,
   display_linker?: string
   linker?: string
+  fetch_options_on_open?: boolean
 }
 
 export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nullable[]) {
@@ -107,7 +108,7 @@ export function get_mode(props: ICompatibleProps,) {
 
 
 export function use_options(props: ICompatibleProps) {
-  const { fetch_options, optionKey, options: _options, uniqueKey, form, linker = ',', frugal, display_linker } = props
+  const { fetch_options, optionKey, options: _options, uniqueKey, form, linker = ',', frugal, display_linker, fetch_options_on_open } = props
   const [options, set_options] = useState<ICommonOption[]>([])
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<ICommonOption[]>([]);
@@ -126,20 +127,24 @@ export function use_options(props: ICompatibleProps) {
   }, [value, options]);
 
 
+  // useEffect(() => {
+  //   process_options()
+
+  // }, []);
   useEffect(() => {
+    process_options()
+  }, [optionKey, _options, uniqueKey]);
+  function process_options() {
     if (fetch_options) {
       setLoading(true)
       safe_fetch_options(fetch_options, form)
         .then(set_options)
         .finally(() => setLoading(false))
-    }
-  }, []);
-  useEffect(() => {
-    if (!fetch_options) {
+    } else {
       set_options(parse_MC_option(props))
-    }
-  }, [optionKey, _options, uniqueKey]);
 
+    }
+  }
   const is_multiple = check_multiple(props)
 
   // mchcLogger.log('MySelect', { data, options, props })
@@ -154,7 +159,7 @@ export function use_options(props: ICompatibleProps) {
     </span>
   );
 
-  return { loading, options, data, setData, display_node }
+  return { loading, options, data, setData, display_node, process_options }
 }
 function process_frugal_local(props: ICompatibleProps, changedValue: ICommonOption[]) {
   const { frugal } = props
@@ -234,21 +239,21 @@ export function parse_MC_dict_options(props?: ICompatibleProps): ICommonOption[]
 function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   if (!props) return []
   const { useString, useDefault = true, type, config, startIndex, sp } = props
-  const _options = isFunction(props.options) ? props.options() : props.options
-  if (!isString(_options)) return isArray(_options) ? _options.map(_ => isString(_) ? { value: _, label: _ } : _) : []
+  const _opt = isFunction(props.options) ? props.options() : props.options
+  if (!isString(_opt)) return isArray(_opt) ? _opt.map(_ => isString(_) ? { value: _, label: _ } : _) : []
 
   const input_type = config?.inputType ?? 'MC'
   const multiple = type === 'multiple'
   const marshal = getMarshal(props)
 
-  const options = getDualModeOptions(_options, { sp, useString: (multiple && !marshal) || useString, start: startIndex, useDefault })
+  const options = getDualModeOptions(_opt, { sp, useString: (multiple && !marshal) || useString, start: startIndex, useDefault })
 
   return input_type === 'MA' ? options[1] : options[0]
 
 }
 
-export function displayValue(_options: ICommonOption[], value: ICommonOption[], l = ',') {
-  const _value = _options.filter(o => value.find(v => v.value == o.value))
+export function displayValue(_opt: ICommonOption[], value: ICommonOption[], l = ',') {
+  const _value = _opt.filter(o => value.find(v => v.value == o.value))
   return _value.map(_ => _.label).join(l)
 
 }

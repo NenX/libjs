@@ -48,6 +48,7 @@ export interface IMchc_FormDescriptions_InputProps {
     targetLabelCol?: number
     options?: TOptions | (() => TOptions),
     fetch_options?: T_FETCH_OPTIONS,
+    fetch_options_on_open?: boolean,
     optionKey?: string
     switch_type?: 'switch' | 'checkbox'
     unchecked_text?: string
@@ -107,7 +108,7 @@ export interface IMchc_FormDescriptions_InputProps {
     on_row_value_change?(data: any[], index: number, changed?: AnyObject, form?: FormInstance): void
     onFocus?: React.FocusEventHandler<HTMLInputElement>
     onBlur?: React.FocusEventHandler<HTMLInputElement>
-
+    component_map: AnyObject<FC<any>>
 }
 type IMchc_FormDescriptions_FilterTypeRaw = 'in' | 'equals' | 'contains' | 'greaterOrEqualThan' | 'lessOrEqualThan';
 export type IMchc_FormDescriptions_FilterType = IMchc_FormDescriptions_FilterTypeRaw | `${IMchc_FormDescriptions_FilterTypeRaw},${IMchc_FormDescriptions_FilterTypeRaw}`

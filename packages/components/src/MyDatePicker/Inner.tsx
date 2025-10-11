@@ -7,7 +7,7 @@ import { TCommonComponent } from '../util-types';
 import { get_unknown_conf, getInputStyle } from 'src/utils';
 import { formatDatePickerProps, getIsUnknown, handleChangeValue, IMyDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
 export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
-function CusDatePicker(_props: IMyDatePickerProps) {
+function MyDatePicker_Inner(_props: IMyDatePickerProps) {
   const props = formatDatePickerProps(_props)
   const {
     value = undefined,
@@ -127,9 +127,9 @@ function CusDatePicker(_props: IMyDatePickerProps) {
       </span > : node
   );
 }
-const df = CusDatePicker
-// const df = memo<IMyDatePickerProps>(CusDatePicker, areEqual)
-CusDatePicker.MonthPicker = MonthPicker_L;
+const df = MyDatePicker_Inner
+// const df = memo<IMyDatePickerProps>(MyDatePicker_Inner, areEqual)
+MyDatePicker_Inner.MonthPicker = MonthPicker_L;
 const MyDatePickerInner: TCommonComponent<IMyDatePickerProps, string> = df
 
 export default MyDatePickerInner

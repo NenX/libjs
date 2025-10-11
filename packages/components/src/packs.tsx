@@ -1,4 +1,5 @@
 import { ArrayInput } from './ArrayInput'
+import { ArraySingle } from './ArraySingle'
 import { MyAutoComplete } from './MyAutoComplete'
 import { MyCheckbox } from './MyCheckbox'
 import { MyColor } from './MyColor'
@@ -17,6 +18,7 @@ export * from './MyInput'
 export * from './MySelect'
 export * from './MyCheckbox'
 export * from './ArrayInput'
+export * from './ArraySingle'
 export * from './MyCheckbox'
 export * from './MyDatePicker'
 export * from './MyRangeDate'
@@ -68,7 +70,9 @@ export const packs = {
     Switch: MySwitch,
     MSW: MySwitch,
     ArrayInput,
-    MArr: ArrayInput,
+
+    ArraySingle,
+
 
     MySelect,
     MS: MySelect,

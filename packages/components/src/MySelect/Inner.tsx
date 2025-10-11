@@ -39,9 +39,9 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     fetch_options,
     uniqueKey,
     popupMatchSelectWidth = 140,
-
+    fetch_options_on_open,
     ...others } = props
-  const { options, loading, data, setData } = use_options(props)
+  const { options, loading, data, setData, process_options } = use_options(props)
   const _style = getInputStyle(props)
 
 
@@ -106,7 +106,12 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
   const target = (Array.isArray(data) ? data : []).find(_ => _.inputType)
   // 多选不支持 非 marshal 不支持
   const isR = !is_multiple && marshal && target
-  const select_node = loading ? <span>'数据加载中...'</span> : <Select_L
+  const select_node = (loading && !fetch_options_on_open) ? <span>'数据加载中...'</span> : <Select_L
+    onOpenChange={v => {
+      if (v && fetch_options_on_open) {
+        process_options()
+      }
+    }}
     loading={loading}
     className={_warning ? styles['warning'] : undefined}
     style={_style}
