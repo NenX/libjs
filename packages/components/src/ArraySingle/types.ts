@@ -12,7 +12,7 @@ export interface IArraySingleProps {
     linker?: string
     value?: string
     onChange?(v: string | any[]): void
-    marshal?: 0 | 1 | 2
+    marshal?: IMchc_FormDescriptions_InputProps['marshal']
     form?: FormInstance
     tip?: string
     addBtnStyle?: ButtonProps

@@ -9,6 +9,7 @@ import { IMyInputProps } from 'src/MyInput';
 import { IMySelectProps } from '../MySelect';
 import { IMyCheckboxProps } from 'src/MyCheckbox';
 import { SizeType } from 'antd/es/config-provider/SizeContext';
+import { IMchc_FormDescriptions_InputProps } from 'src/util-types';
 
 
 
@@ -42,7 +43,7 @@ export interface IArrayInputProps {
     optionKey?: string
     onChange?(v: string | any[]): void
     separator?: string
-    marshal?: number
+    marshal?: IMchc_FormDescriptions_InputProps['marshal']
     onBlur?: FocusEventHandler<any>,
     options?: (TOption & ICommonOption)[]
     sp?: (TOption & ICommonOption)[]

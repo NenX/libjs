@@ -1,10 +1,10 @@
 import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
-import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
+import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isPrimitive, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
 import { IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
 import { FormInstance } from "antd";
 
-export type TMarshal = 0 | 1 | 2
+export type TMarshal = IMchc_FormDescriptions_InputProps['marshal']
 export type TMode = 'multiple' | 'tags'
 interface ICompatibleProps {
   form?: FormInstance,
@@ -87,6 +87,10 @@ export function parse_MC_value(props: ICompatibleProps, changedValue: ICommonOpt
     return null
 
   if (marshal) {
+    if (marshal === 3) {
+      return changedValue.map(_ => _.value)
+    }
+
     const frugal_value = process_frugal_local(props, changedValue)
     return marshal === 2 ? frugal_value : JSON.stringify(frugal_value,)
   }
@@ -179,8 +183,18 @@ function process_frugal_remote(value: any, frugal: boolean) {
   return [frugal_value]
 }
 
-
+function process_primary_array_value(value: any[], options: ICommonOption[],) {
+  if (isArray(value) && value.every(isPrimitive)) {
+    return value.map(v => options.find(opt => numberLikeCompare(v, opt.value)) ?? ({ value: v, label: v }))
+  }
+  return []
+}
 function getData(value: any, options: ICommonOption[], marshal: number, type?: TMode, l = ',', frugal = false) {
+
+  if (marshal === 3) {
+    return process_primary_array_value(value, options)
+  }
+
   const unMarshalData = process_frugal_remote(value, frugal)
   const splitValue = () => isString(value) ? value.split(l).filter(_ => _) : []
   const v =
@@ -189,17 +203,14 @@ function getData(value: any, options: ICommonOption[], marshal: number, type?: T
       (
         (type === 'multiple' || type === 'tags') && isString(value)
 
-          ? (
-            splitValue().map(value => options.find(_ => numberLikeCompare(value, _.value)) ?? ({ value, label: value }))
-          )
-
+          ? process_primary_array_value(splitValue(), options)
           : value
       )
   const safeData = (Array.isArray(v))
     ? v
     : ((isNumber(v) || isString(v) || isBoolean(v) || isNull(v))
       // ? options.filter(_ => _.value === v)
-      ? options.filter(_ => numberLikeCompare(_.value, v))
+      ? options.filter(opt => numberLikeCompare(opt.value, v))
       : [])
 
   // mchcLogger.log('MySelect', { numberLikeCompare, v, options })

@@ -5,10 +5,10 @@ import { IArrayInputProps } from "../ArrayInput";
 import { IMyDatePickerProps } from "../MyDatePicker/utils";
 import { IMyInputProps } from "../MyInput";
 import { TMarshal, TMode } from "../utils";
-import { TOptions } from "../util-types";
+import { IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
 
 export interface ICompatibleProps {
-    marshal?: any,
+    marshal?: IMchc_FormDescriptions_InputProps['marshal'],
     optionKey?: string,
     useString?: boolean,
     useDefault?: boolean,

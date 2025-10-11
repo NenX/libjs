@@ -21,6 +21,8 @@ export interface IMchc_FormDescriptions_InputProps {
     status?: InputStatus
     addonBefore?: string
     addonAfter?: string
+    suffix?: string
+    prefix?: string
     dependency?: {
         show?: { key: string, value: any[] }
         disabled?: { key: string, value: any[] }
@@ -33,7 +35,6 @@ export interface IMchc_FormDescriptions_InputProps {
     listType?: UploadListType,
     linker?: string,
     action?: string
-    unit?: string
     tip?: string
     span?: number
     min?: number
@@ -68,7 +69,7 @@ export interface IMchc_FormDescriptions_InputProps {
     pressure_key1?: string
     pressure_key2?: string
     style?: CSSProperties
-    marshal?: 0 | 1 | 2
+    marshal?: 0 | 1 | 2 | 3
     TemplateTextarea_type?: {
         url?: string,
         method?: 'post' | 'get',
@@ -147,6 +148,7 @@ export type IMchc_FormDescriptions_Field<RAW = false> = {
     sort?: number
     align?: 'center'
     fixed?: 'left' | 'right'
+    unit?: string
     required?: boolean | (() => boolean)
     ellipsis?: { showTitle?: boolean; } | boolean
     updatedTime?: string
