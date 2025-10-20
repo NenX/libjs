@@ -1,10 +1,10 @@
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, InputProps } from 'antd';
 import React, { FC, useEffect, useRef } from 'react';
 // import FormSection, { IFormSectionProps } from '../../BaseModalForm/FormSection';
 // import { RenderEditItemStandalone, formatFormConfig } from '../../BaseModalForm/utils';
 import { get } from '@noah-libjs/utils';
 import { TCommonComponent } from 'src/util-types';
+import { MyIcon } from '../MyIconSelect';
 import { packs } from '../packs';
 import { use_array_marshal } from '../utils/use_array_marshal';
 import { IArraySingleProps } from './types';
@@ -74,7 +74,7 @@ const ArraySingleInner: TCommonComponent<IArraySingleProps, string | any[]> = (p
                             />
                         </div>
                         <div style={{ width: 32, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <MinusCircleOutlined style={{ color: 'red' }} rev={''} onClick={() => onDel(idx)} />
+                            <MyIcon value='MinusCircleOutlined' style={{ color: 'red' }} onClick={() => onDel(idx)} />
                         </div>
 
                     </div>
@@ -82,7 +82,7 @@ const ArraySingleInner: TCommonComponent<IArraySingleProps, string | any[]> = (p
                 </div>
             })
         }
-        <Button disabled={disabled} style={{ marginTop: 6 }} type="dashed" block icon={<PlusOutlined rev={''} />} {...addBtnStyle} onClick={() => onChangeSafeValue([...safe_value, genDefaultData()])} >
+        <Button disabled={disabled} style={{ marginTop: 6 }} type="dashed" block icon={<MyIcon value='PlusOutlined' />} {...addBtnStyle} onClick={() => onChangeSafeValue([...safe_value, genDefaultData()])} >
             新增{tip}
         </Button>
 

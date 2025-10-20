@@ -1,7 +1,7 @@
-import { LoadingOutlined } from '@ant-design/icons';
 import { safe_async_call, sleep } from '@noah-libjs/utils';
 import { Button, ButtonProps, FormInstance } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { MyIcon } from '../MyIconSelect';
 export interface IMyButtonProps extends Omit<ButtonProps, 'form'> {
     btn_text?: string,
     form?: FormInstance
@@ -14,7 +14,7 @@ export function MyButton(props: IMyButtonProps) {
     if (hidden) return null
     let type = props.type
     const [visible, setVisible] = useState(false)
-    const _icon = visible ? (defaultIcon ?? <LoadingOutlined />) : icon
+    const _icon = visible ? (defaultIcon ?? <MyIcon value='LoadingOutlined' />) : icon
     if (primary) {
         type = 'primary'
     }

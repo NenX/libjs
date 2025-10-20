@@ -1,4 +1,5 @@
-import { CloseOutlined } from '@ant-design/icons';
+import { MyIcon } from '../MyIconSelect';
+
 import { AutoComplete, Button } from 'antd';
 import React from 'react';
 import { get_status_cls, getInputStyle } from 'src/utils';
@@ -55,7 +56,7 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
                   title="删除"
                   size='small'
                   type='dashed'
-                  icon={<CloseOutlined />}
+                  icon={<MyIcon value='CloseOutlined' />}
                   onClick={e => {
                     e.stopPropagation()
                     const ok = confirm('确定删除吗？')
