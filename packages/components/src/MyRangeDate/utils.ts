@@ -1,7 +1,8 @@
 
 
-import { isArray, isString, safe_json_parse, safe_json_parse_arr, safe_json_stringify } from '@noah-libjs/utils';
+import { AnyObject, isArray, isString, safe_json_parse, safe_json_parse_arr, safe_json_stringify } from '@noah-libjs/utils';
 import dayjs, { Dayjs } from 'dayjs';
+import React from 'react';
 import { RangePickerProps } from 'src/LazyAntd';
 export const defaultGetPopupContainer = () => document.body
 
@@ -27,7 +28,11 @@ export type IMyRangePickerProps = {
     getPopupContainer?: any
     format?: any
     showUnknown?: boolean
-} & Omit<RangePickerProps, 'value' | 'disabled'>
+    placeholder?: any
+    style?: React.CSSProperties
+    showTime?: AnyObject<Dayjs[]>
+}
+// & Omit<RangePickerProps, 'value' | 'disabled'>
 
 export function process_value_remote(value: MyValue, marshal: number, linker: string) {
     const _value = value
