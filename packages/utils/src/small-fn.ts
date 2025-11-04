@@ -1,7 +1,8 @@
-import { isFunction, isNumber, isObject, isString, keys, toInt, toFloat, cloneDeep, } from "./helper";
+import { isFunction, isNumber, isObject, isString, keys, toInt, toFloat, cloneDeep, identity, } from "./helper";
 import { safe_json_parse } from "./json-helper";
 import { isBoolean, isNil, isNull, isObjectLike, toString } from "./helper";
 import { AnyObject } from "./type-utils";
+import { ICommonOption } from "./types";
 
 export type TCommonFileType = 'application/vnd.ms-excel' | 'text/csv;charset=utf-8' | 'application/msword'
 // export function sleep(sec: number) {
@@ -284,16 +285,24 @@ async function cache_fetch_inner<T = any>(key: string, cb: () => Promise<T>): Pr
     if (conf.cache_promise) return conf.cache_promise
     return conf.cache_promise = cb().then(r => conf.cache = r)
 }
-
+function join_option_value(value?: ICommonOption) {
+    if (!isObjectLike(value)) return value
+    const msg = value?.label || value?.value
+    const text = value?.text
+    if (!msg) return null
+    return text ? `${msg}(${text})` : msg
+}
 export function speculate_on_display(value?: any): string {
     if (!value) return ''
     if (isNumber(value)) return value + ''
     if (Array.isArray(value)) {
-        const item0 = value[0]
-        return item0?.label || item0?.value
+        const arr = value
+            .map(join_option_value)
+            .filter(identity)
+        return arr.join('/')
     }
     if (isObjectLike(value)) {
-        return value.label || value.value
+        return join_option_value(value)
     }
     if (isString(value)) {
         const obj = safe_json_parse(value)
