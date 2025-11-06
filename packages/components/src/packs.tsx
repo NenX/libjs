@@ -26,6 +26,7 @@ export * from './MyColor'
 export * from './MyIconSelect'
 export * from './MyAutoComplete'
 export * from './MyButton'
+export * from './MySwitch'
 
 export const packs = {
     Divider,
