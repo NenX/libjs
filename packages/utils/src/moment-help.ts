@@ -103,7 +103,7 @@ export function dayjs_quarter(input: Dayjs, which_quarter?: number): [Dayjs, num
     }
 }
 
-export function diff_between(a: ConfigType, b: ConfigType, unit: QUnitType | OpUnitType, float = true) {
+export function diff_between(a: ConfigType, b: ConfigType, unit: QUnitType | OpUnitType, float = true): number {
     return dayjs(a).diff(dayjs(b), unit, float);
 }
 

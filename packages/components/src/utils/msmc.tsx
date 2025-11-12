@@ -1,5 +1,5 @@
 import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
-import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isPrimitive, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
+import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, identity, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isPrimitive, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
 import { IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
 import { FormInstance } from "antd";
@@ -48,16 +48,16 @@ export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nu
         const props = { ...(item?.inputProps! ?? {}), config: item } as IMchc_FormDescriptions_InputProps
         const name = item?.name ?? item?.key ?? item?.dataIndex
         const inputType = item?.inputType
-        const options = parse_MC_option(props as any)
+        const opts = parse_MC_option(props as any)
 
         if (inputType === 'MSW') {
           return { ...a, [`${name}`]: [props.checked_value ?? true, props.unchecked_value ?? false] }
         }
-        if (inputType === 'MA' && isEmpty(options)) {
+        if (inputType === 'MA' && isEmpty(opts)) {
           return a
         }
-        const firstOption = options[0]
-        return { ...a, [`${name}`]: [parse_MC_value(props as any, [firstOption]), null, { props, options }], }
+        const firstOption = opts[0]
+        return { ...a, [`${name}`]: [parse_MC_value(props as any, [firstOption]), null, { props, options: opts }], }
       }
     }, {} as { [x: string]: any[] })
   return check_invert_values
@@ -224,9 +224,8 @@ export function parse_MC_option(props: ICompatibleProps) {
   const optionKey: any = props.optionKey
   const preOptions = optionKey ? getPresetOptions(optionKey, marshal === 0) : null
   const dicOptions = parse_MC_dict_options(props)
-  const options = dicOptions ?? preOptions ?? parse_MC_string_options(props) ?? defaultOptions
-  // const multiple_compatible_options = options.map(_ => ({ value:}))
-  return options as ICommonOption[]
+  const opts = dicOptions ?? preOptions ?? parse_MC_string_options(props) ?? defaultOptions
+  return opts as ICommonOption[]
 }
 
 export function parse_MC_dict_options(props?: ICompatibleProps): ICommonOption[] | undefined {
@@ -251,15 +250,15 @@ function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   if (!props) return []
   const { useString, useDefault = true, type, config, startIndex, sp } = props
   const _opt = isFunction(props.options) ? props.options() : props.options
-  if (!isString(_opt)) return isArray(_opt) ? _opt.map(_ => isString(_) ? { value: _, label: _ } : _) : []
+  if (!isString(_opt)) return isArray(_opt) ? _opt.map(_ => isString(_) ? { value: _, label: _ } : _).filter(identity) : []
 
   const input_type = config?.inputType ?? 'MC'
   const multiple = type === 'multiple'
   const marshal = getMarshal(props)
 
-  const options = getDualModeOptions(_opt, { sp, useString: (multiple && !marshal) || useString, start: startIndex, useDefault })
+  const opts = getDualModeOptions(_opt, { sp, useString: (multiple && !marshal) || useString, start: startIndex, useDefault })
 
-  return input_type === 'MA' ? options[1] : options[0]
+  return input_type === 'MA' ? opts[1] : opts[0]
 
 }
 
