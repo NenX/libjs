@@ -162,15 +162,30 @@ export function copyText(text: string) {
     return res;
 }
 
+export function dyn_cb<T>(cb: (ctx: T) => void, g_ctx: () => T,): boolean {
+    try {
+        cb(g_ctx())
+        return false
+    } catch (error: any) {
+        console.error('dyn_cb', { error })
+        return true
+    }
 
+}
 
 
 export function safeExec<T extends (...args: any) => any>(fn?: T, ...args: Parameters<T>) {
     return isFunction(fn) ? fn(...args) : null
 }
 
-export function safeGetFromFuncOrData(fn: any) {
-    return safeExec(fn) ?? fn
+export function safeGetFromFuncOrData(fn: any, default_v: any = null) {
+    try {
+        return safeExec(fn) ?? fn
+    } catch (error) {
+        if (default_v)
+            return default_v
+        throw error
+    }
 }
 
 export function numberLikeCompare(a: number | string | boolean | null, b: number | string | boolean | null) {
