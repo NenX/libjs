@@ -7,9 +7,7 @@ import { IMyAutoCompleteProps } from './types';
 import { useConfig_MyAutoComplete } from './useConfig';
 import { isInt } from '@noah-libjs/utils';
 
-
 export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
-
   const {
     popupMatchSelectWidth = 140,
     getPopupContainer = () => document.body,
@@ -22,17 +20,16 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
     onChange,
     ...rest
   } = props;
-  const _style = getInputStyle({ ...props })
+  const _style = getInputStyle({ ...props });
 
-
-
-  const { safeOnChange, onBlur, options, remove, init_value } = useConfig_MyAutoComplete(props)
-
+  const { safeOnChange, onBlur, options, remove, init_value } =
+    useConfig_MyAutoComplete(props);
 
   return (
     <AutoComplete
+      title={value}
       // dropdownStyle={{ minWidth: 180 }}
-      classNames={{ root: get_status_cls(props.status), }}
+      classNames={{ root: get_status_cls(props.status) }}
       popupMatchSelectWidth={popupMatchSelectWidth}
       style={_style}
       // bordered={false}
@@ -43,32 +40,39 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
       onChange={safeOnChange}
       // options={options}
       getPopupContainer={getPopupContainer}
-      placeholder={placeholder ?? "请选择或输入"}
-
+      placeholder={placeholder ?? '请选择或输入'}
     >
       {options.map((item) => (
         <AutoComplete.Option key={item.value} value={item.value}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div title={item.label} style={{ flex: 1, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', color: item.warning ? 'red' : '' }}>{item.label}</div>
-            {
-              item.id
-                ? <Button
-                  title="删除"
-                  size='small'
-                  type='dashed'
-                  icon={<MyIcon value='CloseOutlined' />}
-                  onClick={e => {
-                    e.stopPropagation()
-                    const ok = confirm('确定删除吗？')
-                    ok && remove(item)
-                  }}
-                ></Button>
-                : null
-            }
+            <div
+              title={item.label}
+              style={{
+                flex: 1,
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                color: item.warning ? 'red' : '11234512',
+              }}
+            >
+              {item.label}
+            </div>
+            {item.id ? (
+              <Button
+                title="删除"
+                size="small"
+                type="dashed"
+                icon={<MyIcon value="CloseOutlined" />}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const ok = confirm('确定删除吗？');
+                  ok && remove(item);
+                }}
+              ></Button>
+            ) : null}
           </div>
         </AutoComplete.Option>
       ))}
     </AutoComplete>
-
   );
 }
