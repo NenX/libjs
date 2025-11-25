@@ -52,7 +52,7 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
                 textOverflow: 'ellipsis',
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
-                color: item.warning ? 'red' : '11234512',
+                color: item.warning ? 'red' : '',
               }}
             >
               {item.label}
