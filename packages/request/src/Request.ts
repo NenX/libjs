@@ -148,8 +148,7 @@ export class Request extends EventEmitter<{
       this.emit('request', config);
 
       // TODO: remove
-      config.headers!.Authorization =
-        config.headers!.Authorization || this.token || '';
+      headers.Authorization = headers.Authorization || this.token || '';
       // params.pathname = location.pathname
 
       return onRequest(config);
