@@ -1,5 +1,5 @@
 import { isNil } from "@noah-libjs/utils";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch_L } from "../LazyAntd";
 import { TCommonComponent } from "../util-types";
 import { IMySwitchProps } from "./types";
@@ -7,23 +7,37 @@ import { MyCheckbox } from '../MyCheckbox';
 import { MyIcon } from '../MyIconSelect';
 const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(props) {
     const { checked_value = true, unchecked_value = false, onChange, value } = props
+
+    const [local_value, setLocal_value] = useState<boolean>()
+    useEffect(() => {
+
+        setLocal_value(value)
+        return () => {
+
+        }
+    }, [value])
+    function local_change(v: boolean) {
+        onChange?.(v)
+        setLocal_value(v)
+
+    }
     if (props.switch_type === 'checkbox')
         return <MyCheckbox {...props} options={[{ value: checked_value }]} marshal={0}
 
-            value={value === checked_value ? checked_value : null}
+            value={local_value === checked_value ? checked_value : null}
 
             onChange={v => {
                 console.log('switch', v)
 
-                onChange?.(v === null ? unchecked_value : checked_value)
+                local_change(v === null ? unchecked_value : checked_value)
             }} />
     return <Switch_L
         {...props}
 
-        value={value === checked_value}
+        value={local_value === checked_value}
 
         onChange={v => {
-            onChange?.(v !== true ? unchecked_value : checked_value)
+            local_change(v !== true ? unchecked_value : checked_value)
         }}
     />
 }

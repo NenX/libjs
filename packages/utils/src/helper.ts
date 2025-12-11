@@ -3,7 +3,7 @@ import { AnyObject } from "./type-utils";
 
 export * from "radash";
 
-export function get<T = any>(value: T, path: string, defaultValue?: T | undefined): T {
+export function get<T = any>(value: any, path: string, defaultValue?: T | undefined): T {
     //@ts-ignore
     let direct_value = value?.[path]
     if (direct_value) return direct_value
