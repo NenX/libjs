@@ -1,4 +1,4 @@
-import { isFunction, isNumber, isObject, isString, keys, toInt, toFloat, cloneDeep, identity, } from "./helper";
+import { isFunction, isNumber, isObject, isString, keys, toInt, toFloat, cloneDeep, identity, isArray, } from "./helper";
 import { safe_json_parse } from "./json-helper";
 import { isBoolean, isNil, isNull, isObjectLike, toString } from "./helper";
 import { AnyObject } from "./type-utils";
@@ -402,7 +402,25 @@ export function text_ellipsis(text: string, max: number) {
     return text.slice(0, max) + '...'
 
 }
+export function calc_number(data: AnyObject | any[] | number | string | boolean) {
+    if (isNil(data))
+        return 0
+    let data_to_calc: number[] | null = null
+    if (isArray(data))
+        data_to_calc = data
+    if (isObject(data))
+        data_to_calc = Object.values(data)
 
+    if (isString(data) || isBoolean(data) || isNumber(data)) {
+        const v = Number(data)
+        if (!isNaN(v))
+            data_to_calc = [v]
+    }
+    if (data_to_calc)
+        return data_to_calc.filter(_ => isNumber(_) && !isNaN(_)).reduce((sum, a) => sum + a, 0)
+    return 0
+
+}
 
 Object.assign(get_global(), { safe_async_call, simple_decrypt_str, simple_encrypt_str })
 
