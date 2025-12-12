@@ -12,4 +12,5 @@ export interface ICommonOption {
     id?: any
     text?: any
     code?: any
+    disabled?: boolean
 }
