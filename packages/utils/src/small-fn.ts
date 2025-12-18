@@ -402,14 +402,14 @@ export function text_ellipsis(text: string, max: number) {
     return text.slice(0, max) + '...'
 
 }
-export function calc_number(data: AnyObject | any[] | number | string | boolean) {
+export function calc_number(data: AnyObject | any[] | number | string | boolean): number {
     if (isNil(data))
         return 0
     let data_to_calc: number[] | null = null
     if (isArray(data))
-        data_to_calc = data
+        data_to_calc = data.map(calc_number)
     if (isObject(data))
-        data_to_calc = Object.values(data)
+        data_to_calc = Object.values(data).map(calc_number)
 
     if (isString(data) || isBoolean(data) || isNumber(data)) {
         const v = Number(data)
