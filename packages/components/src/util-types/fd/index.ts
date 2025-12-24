@@ -188,8 +188,8 @@ export type IMchc_FormDescriptions_Field<RAW = false> = {
     //  兼容 components MyForm
 
     // 自定义
-    processRemote?(v: any, form?: FormInstance): any
-    processLocal?(v: any, form?: FormInstance): any
+    processRemote?(v: any, form?: FormInstance, conf?: IMchc_FormDescriptions_Field): any
+    processLocal?(v: any, form?: FormInstance, conf?: IMchc_FormDescriptions_Field): any
     checkWarn?(v: any, form?: FormInstance): boolean | InputStatus
     fd_lazy?: boolean
 }
