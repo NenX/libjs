@@ -1,6 +1,7 @@
 export interface ICommonOption {
     value?: any;
     label?: string;
+    tip?: string;
     prefix?: string;
     sufix?: string;
     suffix?: string;

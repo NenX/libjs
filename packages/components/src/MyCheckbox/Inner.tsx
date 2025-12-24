@@ -8,6 +8,8 @@ import MyCheckbox_DisplayFC from './Display';
 import { components } from './components';
 import styles from './index.module.less';
 import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
+import { Tooltip } from 'antd';
+import { MyIcon } from 'src/MyIconSelect';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
   const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {} } = props;
 
@@ -169,6 +171,12 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
             >
               <Checkbox_L value={option.value} >
                 {option.label}
+                {option.tip
+                  ? <Tooltip title={option.tip} >
+                    <MyIcon value='QuestionCircleOutlined' style={{ cursor: 'help', marginLeft: 2 }} />
+                  </Tooltip>
+                  : null
+                }
               </Checkbox_L>
             </span>
             {
