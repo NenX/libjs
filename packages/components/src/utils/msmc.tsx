@@ -106,7 +106,7 @@ export function check_multiple(props: ICompatibleProps,) {
   return ['tags', 'multiple'].includes(type!)
 }
 export function get_mode(props: ICompatibleProps,) {
-  return props?.mode ?? props.type
+  return props?.mode || props.type
 }
 
 
@@ -253,10 +253,10 @@ function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   if (!isString(_opt)) return isArray(_opt) ? _opt.map(_ => isString(_) ? { value: _, label: _ } : _).filter(identity) : []
 
   const input_type = config?.inputType ?? 'MC'
-  const multiple = type === 'multiple'
+  const multi = type === 'multiple'
   const marshal = getMarshal(props)
 
-  const opts = getDualModeOptions(_opt, { sp, useString: (multiple && !marshal) || useString, start: startIndex, useDefault })
+  const opts = getDualModeOptions(_opt, { sp, useString: (multi && !marshal) || useString, start: startIndex, useDefault })
 
   return input_type === 'MA' ? opts[1] : opts[0]
 
