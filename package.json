@@ -12,7 +12,7 @@
         "check-packages": "pnpm clean && pnpm test && pnpm lint && pnpm build",
         "precommit": "lint-staged",
         "boot": "lerna bootstrap",
-        "lerna:publish": "lerna publish from-package --registry=https://registry.npmjs.org/ --legacy-auth -y",
+        "lerna:publish": "lerna publish from-package --registry=https://registry.npmjs.org/ -y",
         "release": "pnpm build && pnpm lerna:publish",
         "release:local": "./compress_packages.sh",
         "commit:release": "git add . && git commit -m 'publish'",
