@@ -32,3 +32,4 @@ jobs:
       - run: pnpm lerna:publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: echo "这个工作流是因为创建了Release而触发的！"
