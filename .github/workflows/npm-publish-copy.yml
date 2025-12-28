@@ -4,11 +4,11 @@
 name: npm-publish-copy
 
 on:
-  workflow_dispatch: # 添加手动触发支持
-  release:
-    types: [created, edited, published]
+  workflow_dispatch:
+  # release:
+  #   types: [created, edited, published]  # 记得这里放开
 
-  
+
 jobs:
 
 
