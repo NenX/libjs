@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0  # 获取完整历史记录
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 25
       - uses: pnpm/action-setup@v4.2.0
         with:
           version: latest
