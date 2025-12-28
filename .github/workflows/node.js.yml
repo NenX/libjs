@@ -1,4 +1,4 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+  # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: Node.js CI
@@ -11,12 +11,23 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
 
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.PAT }}  # 使用 Personal Access Token
     - name: Use Node.js
-      uses: actions/setup-node@v4
-    - run: node -v
+    - run: echo 1 >> hi.txt
+    - name: Commit and Push
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "test: hi.txt"
+        commit_options: '--no-verify'  # 跳过 pre-commit hooks
+        push_options: '--force'
+        # file_pattern: '*.json *.md' 
+        skip_fetch: true
+        skip_checkout: true
 
