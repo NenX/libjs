@@ -45,6 +45,7 @@ jobs:
         with:
           # Version of pnpm to install
           version: latest
+      - run: rm .nx -rf
       - run: pnpm lerna:publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
