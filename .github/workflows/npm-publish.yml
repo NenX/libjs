@@ -7,7 +7,9 @@ on:
   workflow_dispatch: # 添加手动触发支持
   release:
     types: [created, edited, published]
-
+permissions:
+  actions: read|write|none
+  
 jobs:
 
 
