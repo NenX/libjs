@@ -1,6 +1,6 @@
 {
     "name": "@noah-libjs/request",
-    "version": "0.0.24",
+    "version": "0.0.25",
     "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -21,7 +21,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@noah-libjs/utils": "^0.0.24",
+        "@noah-libjs/utils": "^0.0.25",
         "axios": "^0.26.1",
         "store": "2.x"
     },
