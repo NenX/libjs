@@ -9,7 +9,15 @@ on:
     types: [created, edited, published]
 
 jobs:
+  env:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pnpm/action-setup@v4.2.0
+        with:
+          # Version of pnpm to install
+          version: 10.26.2
   build:
+    needs: env
     runs-on: ubuntu-latest
     steps:
 
@@ -34,3 +42,5 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: echo "这个工作流是因为创建了Release而触发的！"
+
+    
