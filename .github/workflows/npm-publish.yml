@@ -8,7 +8,7 @@ on:
   release:
     types: [published]
 
-  
+
 jobs:
 
 
@@ -34,8 +34,8 @@ jobs:
       - run: pnpm install --no-frozen-lockfile
       - run: pnpm run build
 
-      - run: git config --global user.email "you@example.com"
-      - run: git config --global user.name "Your Name"
+      - run: git config --global user.email "noah199@qq.com"
+      - run: git config --global user.name "NenX"
 
 
       - name: Build Auto Commit
@@ -70,13 +70,9 @@ jobs:
           branch: ${{ github.ref_name }}  # 修复：使用当前分支而不是head_ref
         # Commit options
           commit_options: '--no-verify'
-        # Name used for the commit user
-          commit_user_name: 'releaase bot'
-        # Email address used for the commit user
-          commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'
         # Push options
           push_options: '--force'
-      - run: echo "这个工作流是因为创建了Release而触发的！"
+      - run: echo "release 成功！"
 
 
 
