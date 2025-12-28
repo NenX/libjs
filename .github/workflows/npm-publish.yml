@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0  # 获取完整历史记录
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org/
       - uses: pnpm/action-setup@v4.2.0
         with:
