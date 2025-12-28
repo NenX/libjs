@@ -31,8 +31,7 @@ jobs:
 
     
     - name: Install dependencies
-      run: npm -v
-      run: node -v
+      run:  echo "11 -> ${{ github.ref_name }} PAT --> ${{ secrets.PAT }}"
 
     
     - name: Create test file
