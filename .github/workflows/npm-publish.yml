@@ -35,10 +35,19 @@ jobs:
 
       - run: git config --global user.email "you@example.com"
       - run: git config --global user.name "Your Name"
-      - run: git add .
-      - run: git commit -m "after build:!!"
 
 
+      - name: Build Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v7.1.0
+        with:
+        # Commit message
+          commit_message: "after build !!"
+        # Git branch name, where changes should be pushed too
+          branch: ${{ github.ref_name }}  # 修复：使用当前分支而不是head_ref
+        # Commit options
+          commit_options: '--no-verify'
+        # Push options
+          push_options: '--force'
 
 
 
