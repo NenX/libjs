@@ -18,11 +18,11 @@ jobs:
       contents: write
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.PAT }}  # 使用 Personal Access Token
-        fetch-depth: 0  # 获取完整历史记录
+    # - name: Checkout repository
+    #   uses: actions/checkout@v4
+    #   with:
+    #     token: ${{ secrets.PAT }}  # 使用 Personal Access Token
+    #     fetch-depth: 0  # 获取完整历史记录
     
     - name: Use Node.js
       uses: actions/setup-node@v4
@@ -30,12 +30,11 @@ jobs:
         node-version: '20'  # 指定Node.js版本
 
     
-    - name: Install dependencies
-      run:  echo "11 -> ${{ github.ref_name }} PAT --> ${{ secrets.PAT }}"
-
-    
     - name: Create test file
       run: echo "1" >> hi.txt  # 创建或修改文件
+
+    - name: xx
+      run: git status
     
     - name: Git Auto Commit
       uses: stefanzweifel/git-auto-commit-action@v7.1.0
