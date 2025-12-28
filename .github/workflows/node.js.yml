@@ -1,51 +1,58 @@
-  # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: Node.js CI
 
 on:
   workflow_dispatch: # 添加手动触发支持
-
+  # 添加触发条件，例如push或schedule
+  # push:
+  #   branches: [ main, develop ]
+  # schedule:
+  #   - cron: '0 0 * * *' # 每天运行
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
-
+    
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.PAT }}  # 使用 Personal Access Token
+        fetch-depth: 0  # 获取完整历史记录
+    
     - name: Use Node.js
-    - run: echo 1 >> hi.txt
-    - name: Commit and Push
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # 指定Node.js版本
+
+    
+    - name: Install dependencies
+      run: npm -v
+
+    
+    - name: Create test file
+      run: echo "1" >> hi.txt  # 创建或修改文件
+    
     - name: Git Auto Commit
-  # You may pin to the exact commit or the version.
-  # uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9
       uses: stefanzweifel/git-auto-commit-action@v7.1.0
       with:
         # Commit message
-        commit_message: "test:hi.txt"
-        # Git branch name, where changes should be pushed too. Required if Action is used on the `pull_request` event
-        branch: ${{ github.head_ref }}
-        # Commit options (eg. --no-verify)
-        commit_options:  --no-verify
-
-
-
+        commit_message: "test: add hi.txt"
+        # Git branch name, where changes should be pushed too
+        branch: ${{ github.ref_name }}  # 修复：使用当前分支而不是head_ref
+        # Commit options
+        commit_options: '--no-verify'
         # Name used for the commit user
-        commit_user_name: github-actions[bot]
+        commit_user_name: 'github-actions[bot]'
         # Email address used for the commit user
-        commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+        commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'
+        # Push options
+        push_options: '--force'
 
-
-
-        # Push options (eg. --force)
-        push_options: --force 
-    - run: echo "这个工作流是因为创建了Release而触发的！"
-
-
-
+    
+    - name: Log message
+      run: echo "这个工作流是因为手动触发而运行的！"
