@@ -34,7 +34,7 @@ jobs:
       run: echo "1" >> hi.txt  # 创建或修改文件
       
     - name: gg
-      run:  ls -lah && pwd ll .. -lah
+      run:  ls -lah && pwd && ls .. -lah
 
     - name: xx
       run: git status
