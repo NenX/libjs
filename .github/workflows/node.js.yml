@@ -22,12 +22,30 @@ jobs:
     - name: Use Node.js
     - run: echo 1 >> hi.txt
     - name: Commit and Push
-      uses: stefanzweifel/git-auto-commit-action@v5
+    - name: Git Auto Commit
+  # You may pin to the exact commit or the version.
+  # uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9
+      uses: stefanzweifel/git-auto-commit-action@v7.1.0
       with:
-        commit_message: "test: hi.txt"
-        commit_options: '--no-verify'  # 跳过 pre-commit hooks
-        push_options: '--force'
-        # file_pattern: '*.json *.md' 
-        skip_fetch: true
-        skip_checkout: true
+        # Commit message
+        commit_message: "test:hi.txt"
+        # Git branch name, where changes should be pushed too. Required if Action is used on the `pull_request` event
+        branch: ${{ github.head_ref }}
+        # Commit options (eg. --no-verify)
+        commit_options:  --no-verify
+
+
+
+        # Name used for the commit user
+        commit_user_name: github-actions[bot]
+        # Email address used for the commit user
+        commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+
+
+
+        # Push options (eg. --force)
+        push_options: --force 
+        # Skip the check if the git repository is dirty and always try to create a commit.
+
+
 
