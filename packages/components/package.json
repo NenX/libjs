@@ -1,6 +1,6 @@
 {
     "name": "@noah-libjs/components",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -38,8 +38,8 @@
         "rollup-plugin-postcss": "^4.0.2"
     },
     "dependencies": {
-        "@noah-libjs/request": "^0.0.11",
-        "@noah-libjs/utils": "^0.0.11"
+        "@noah-libjs/request": "^0.0.12",
+        "@noah-libjs/utils": "^0.0.12"
     },
     "publishConfig": {
         "access": "public"
