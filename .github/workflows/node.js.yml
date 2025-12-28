@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
     # - name: Checkout repository
     #   uses: actions/checkout@v4
@@ -25,11 +25,11 @@ jobs:
     #     fetch-depth: 0  # 获取完整历史记录
 
     - uses: actions/checkout@v4
-    
+
     - name: Create test file
       run: echo "+ test" >> hi.txt  # 创建或修改文件
 
-    
+
     - name: Git Auto Commit
       uses: stefanzweifel/git-auto-commit-action@v7.1.0
       with:
@@ -46,6 +46,6 @@ jobs:
         # Push options
         push_options: '--force'
 
-    
+
     - name: Log message
       run: echo "这个工作流是因为手动触发而运行的！"

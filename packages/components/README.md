@@ -1,4 +1,4 @@
-# @lm_fe/components 5
+# @lm_fe/components 6
 
 ## 安装
 
