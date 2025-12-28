@@ -4,8 +4,9 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*' # 推送类似 v1.0.0 的标签时触发发布
 
 jobs:
   build:
