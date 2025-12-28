@@ -12,7 +12,7 @@
         "check-packages": "pnpm clean && pnpm test && pnpm lint && pnpm build",
         "precommit": "lint-staged",
         "boot": "lerna bootstrap",
-        "release": "pnpm run build && lerna publish --registry=https://registry.npmjs.org/",
+        "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/",
         "release:local": "./compress_packages.sh",
         "commit:release": "git add . && git commit -m 'publish'",
         "helper:serve": "pm2 start ./helper/target/release/lmfe_server",
