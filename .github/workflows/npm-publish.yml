@@ -26,13 +26,18 @@ jobs:
       - run: pnpm run build
 
 
-      - run: ls -lah
+
+
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+
 
 
       - run: pnpm lerna:publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: git status
+      
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v7.1.0
         with:
