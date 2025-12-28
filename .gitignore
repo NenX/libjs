@@ -137,4 +137,6 @@ dist
 .pnp.*
 
 
-pnpm-lock.yaml
+# pnpm-lock.yaml
+test.mjs
+test.ps1
