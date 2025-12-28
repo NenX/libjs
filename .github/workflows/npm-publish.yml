@@ -14,8 +14,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read|write
+    # permissions:
+    #   contents: read|write
     steps:
 
       - uses: actions/checkout@v4
