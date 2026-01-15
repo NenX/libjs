@@ -375,13 +375,25 @@ export function confirm_operation() {
 // '😎'.charCodeAt(1).toString(16) == 'de0e'
 // '😎'.codePointAt(0)?.toString(16) == '1f60e'// Unicode 码点
 
+const rnums = [
+    731, 842, 953, 164, 275, 386, 497, 508, 619, 720,
+    123, 456, 789, 101, 202, 303, 404, 505, 606, 707,
+    808, 909, 111, 222, 333, 444, 555, 666, 777, 888,
+    999, 100, 200, 300, 400, 500, 600, 700, 800, 900,
+    99, 198, 297, 396, 495, 594, 693, 792, 891, 990,
+    12, 345, 678, 901, 234, 567, 890, 123, 456, 789,
+    987, 654, 321, 109, 876, 543, 210, 987, 654, 321,
+    135, 246, 357, 468, 579, 680, 791, 802, 913, 124,
+    235, 346, 457, 568, 679, 780, 891, 902, 13, 134,
+    255, 376, 497, 518, 639, 750, 861, 972, 83, 194
+]
 export function simple_encrypt(data: AnyObject | any[]) {
     if (!data) return null
-    return JSON.stringify(data).split('').map((_, idx) => ~_.charCodeAt(0) + idx * 119)
+    return JSON.stringify(data).split('').map((_, idx) => ~_.charCodeAt(0) + rnums[idx % 100])
 }
 export function simple_decrypt(code: number[]) {
     if (!code) return null
-    const str = expect_array(code).map((_, idx) => String.fromCharCode(~(_ - idx * 119))).join('')
+    const str = expect_array(code).map((_, idx) => String.fromCharCode(~(_ - rnums[idx % 100]))).join('')
     return safe_json_parse(str) as AnyObject
 }
 const SP = '@@'
@@ -422,7 +434,7 @@ export function calc_number(data: AnyObject | any[] | number | string | boolean)
 
 }
 
-Object.assign(get_global(), { safe_async_call, simple_decrypt_str, simple_encrypt_str })
+Object.assign(get_global(), { safe_async_call, simple_decrypt_str, simple_encrypt_str, simple_decrypt, simple_encrypt })
 
 
 function safe_check() {
