@@ -388,7 +388,7 @@ const rnums = [
     789, 102, 495, 84, 226, 667, 913, 154, 542, 329,
     758, 61, 417, 188, 501, 283, 626, 977, 39, 145
 ]
-const day_of_year_plus_2 = dayOf('year') + 2
+const day_of_year_plus_2 = dayOf('year')
 export function simple_encrypt(data: AnyObject | any[]) {
     if (!data) return null
     return JSON.stringify(data).split('').map((_, idx) => ~_.charCodeAt(0) + rnums[idx % 100] + rnums[day_of_year_plus_2 % 100])
