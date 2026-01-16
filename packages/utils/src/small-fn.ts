@@ -3,6 +3,7 @@ import { safe_json_parse } from "./json-helper";
 import { isBoolean, isNil, isNull, isObjectLike, toString } from "./helper";
 import { AnyObject } from "./type-utils";
 import { ICommonOption } from "./types";
+import { dayOf, getMomentObj } from "./moment-help";
 
 export type TCommonFileType = 'application/vnd.ms-excel' | 'text/csv;charset=utf-8' | 'application/msword'
 // export function sleep(sec: number) {
@@ -376,24 +377,25 @@ export function confirm_operation() {
 // '😎'.codePointAt(0)?.toString(16) == '1f60e'// Unicode 码点
 
 const rnums = [
-    731, 842, 953, 164, 275, 386, 497, 508, 619, 720,
-    123, 456, 789, 101, 202, 303, 404, 505, 606, 707,
-    808, 909, 111, 222, 333, 444, 555, 666, 777, 888,
-    999, 100, 200, 300, 400, 500, 600, 700, 800, 900,
-    99, 198, 297, 396, 495, 594, 693, 792, 891, 990,
-    12, 345, 678, 901, 234, 567, 890, 123, 456, 789,
-    987, 654, 321, 109, 876, 543, 210, 987, 654, 321,
-    135, 246, 357, 468, 579, 680, 791, 802, 913, 124,
-    235, 346, 457, 568, 679, 780, 891, 902, 13, 134,
-    255, 376, 497, 518, 639, 750, 861, 972, 83, 194
+    723, 41, 886, 159, 37, 902, 208, 645, 12, 571,
+    498, 83, 709, 246, 317, 58, 943, 162, 650, 29,
+    811, 476, 135, 528, 76, 918, 203, 689, 344, 107,
+    552, 795, 86, 431, 278, 614, 957, 18, 392, 506,
+    734, 129, 851, 46, 237, 698, 925, 141, 563, 305,
+    778, 89, 422, 196, 535, 261, 674, 908, 35, 173,
+    599, 712, 48, 836, 219, 641, 962, 115, 387, 519,
+    746, 25, 453, 138, 827, 574, 291, 638, 93, 366,
+    789, 102, 495, 84, 226, 667, 913, 154, 542, 329,
+    758, 61, 417, 188, 501, 283, 626, 977, 39, 145
 ]
+const day_of_year_plus_2 = dayOf('year') + 2
 export function simple_encrypt(data: AnyObject | any[]) {
     if (!data) return null
-    return JSON.stringify(data).split('').map((_, idx) => ~_.charCodeAt(0) + rnums[idx % 100])
+    return JSON.stringify(data).split('').map((_, idx) => ~_.charCodeAt(0) + rnums[idx % 100] + rnums[day_of_year_plus_2 % 100])
 }
 export function simple_decrypt(code: number[]) {
     if (!code) return null
-    const str = expect_array(code).map((_, idx) => String.fromCharCode(~(_ - rnums[idx % 100]))).join('')
+    const str = expect_array(code).map((_, idx) => String.fromCharCode(~(_ - rnums[idx % 100] - rnums[day_of_year_plus_2 % 100]))).join('')
     return safe_json_parse(str) as AnyObject
 }
 const SP = '@@'
@@ -434,7 +436,7 @@ export function calc_number(data: AnyObject | any[] | number | string | boolean)
 
 }
 
-Object.assign(get_global(), { safe_async_call, simple_decrypt_str, simple_encrypt_str, simple_decrypt, simple_encrypt })
+Object.assign(get_global(), { safe_async_call, simple_decrypt_str, simple_encrypt_str, simple_decrypt, simple_encrypt, getMomentObj, dayOf })
 
 
 function safe_check() {
