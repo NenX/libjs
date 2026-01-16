@@ -7,7 +7,8 @@ export function safe_json_parse<T = any>(str?: any, retOnErr: T | null = null) {
 
     try {
         const v = JSON.parse(str) as T
-        return (isObject(v) || Array.isArray(v)) ? v : retOnErr
+        // return (isObject(v) || Array.isArray(v)) ? v : retOnErr
+        return v
 
     } catch (error) {
         return retOnErr
