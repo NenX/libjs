@@ -14,6 +14,8 @@ import {
   AnyObject,
   EventEmitter,
   getSearchParamsAll,
+  isNil,
+  isObject,
   map,
   MyLog,
 } from '@noah-libjs/utils';
@@ -31,7 +33,7 @@ export class Request extends EventEmitter<{
     super();
     this.spawn(config);
   }
-  static CONFIG = { successCode: [200, 1, 0] };
+  static CONFIG = { successCode: [200, 1, 0, '200'] };
 
   static logger = new MyLog('Request');
   static checkRTCode(res?: AxiosResponse<any>) {
@@ -200,7 +202,7 @@ export class Request extends EventEmitter<{
 export const request = new Request();
 
 function doUnboxing(res: any) {
-  const isBoxing = typeof res?.code === 'number' && !!res.data;
+  const isBoxing = (!isNil(res?.code) || !isNil(res?.status)) && isObject(res.data);
   if (isBoxing) {
     return res.data;
   }
