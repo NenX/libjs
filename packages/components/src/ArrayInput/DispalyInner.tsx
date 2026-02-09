@@ -1,10 +1,8 @@
-import { safe_json_parse_arr } from '@noah-libjs/utils';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { TCommonComponentDisplay } from '../util-types';
+import { use_options } from '../utils';
 import { componentMap } from './components';
 import { IArrayInputProps } from './types';
-import { getOption } from './utils';
-import { parse_MC_option, use_options } from '../utils';
 
 const DisplayFC: TCommonComponentDisplay<IArrayInputProps, string> = (props) => {
 

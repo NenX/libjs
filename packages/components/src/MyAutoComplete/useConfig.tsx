@@ -65,7 +65,7 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
 
     function init() {
         const searchValue = searchKey ? getSearchParamsValue(searchKey) : null
-        const _options = parse_MC_option({ ...props, useString: true })
+        const _options = parse_MC_option({ ...props, useString: true, config: { inputType: 'MA' } })
 
         if (searchValue) {
             _options.push({ value: searchValue, label: searchValue })

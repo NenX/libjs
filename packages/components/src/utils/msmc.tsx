@@ -1,7 +1,7 @@
 import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
 import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, identity, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isPrimitive, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
-import { IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
+import { IMchc_FormDescriptions_Field, IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
 import { FormInstance } from "antd";
 
 export type TMarshal = IMchc_FormDescriptions_InputProps['marshal']
@@ -20,7 +20,7 @@ interface ICompatibleProps {
   useString?: boolean,
   useDefault?: boolean,
   sp?: any[],
-  config?: any,
+  config?: IMchc_FormDescriptions_Field,
   startIndex?: any,
   display_linker?: string
   linker?: string
@@ -257,6 +257,7 @@ function parse_MC_string_options(props?: ICompatibleProps): ICommonOption[] {
   const marshal = getMarshal(props)
 
   const opts = getDualModeOptions(_opt, { sp, useString: (multi && !marshal) || useString, start: startIndex, useDefault })
+  console.log('MA props 00', props, opts, input_type, config)
 
   return input_type === 'MA' ? opts[1] : opts[0]
 
