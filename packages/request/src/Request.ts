@@ -11,12 +11,10 @@ import {
   TRequest_SimpleReq,
 } from './types';
 import {
-  AnyObject,
   EventEmitter,
   getSearchParamsAll,
   isNil,
-  isObject,
-  map,
+  isObjectLike,
   MyLog,
 } from '@noah-libjs/utils';
 export * from './types';
@@ -202,7 +200,7 @@ export class Request extends EventEmitter<{
 export const request = new Request();
 
 function doUnboxing(res: any) {
-  const isBoxing = (!isNil(res?.code) || !isNil(res?.status)) && isObject(res.data);
+  const isBoxing = (!isNil(res?.code) || !isNil(res?.status)) && isObjectLike(res.data);
   if (isBoxing) {
     return res.data;
   }

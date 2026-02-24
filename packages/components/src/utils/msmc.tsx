@@ -169,7 +169,7 @@ function process_frugal_local(props: ICompatibleProps, changedValue: ICommonOpti
   const { frugal } = props
   if (!frugal)
     return changedValue
-  console.log('frugal_value local', changedValue[0])
+  // console.log('frugal_value local', changedValue[0])
 
   return changedValue[0]
 
@@ -178,7 +178,7 @@ function process_frugal_remote(value: any, frugal: boolean) {
   if (!frugal)
     return safe_json_parse_arr<ICommonOption>(value, value)
   const frugal_value = safe_json_parse<ICommonOption>(value)
-  console.log('frugal_value remote', frugal_value)
+  // console.log('frugal_value remote', frugal_value)
   if (isNil(frugal_value?.value)) return []
   return [frugal_value]
 }
