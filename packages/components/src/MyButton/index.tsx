@@ -15,7 +15,7 @@ export function MyButton(props: IMyButtonProps) {
     let type = props.type
     const [visible, setVisible] = useState(false)
     const _icon = visible ? (defaultIcon ?? <MyIcon value='LoadingOutlined' />) : icon
-    if (primary) {
+    if (primary && !type) {
         type = 'primary'
     }
     useEffect(() => {
