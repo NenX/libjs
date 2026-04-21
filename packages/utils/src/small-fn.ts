@@ -163,7 +163,7 @@ export function copyText(text: string) {
     return res;
 }
 
-export function dyn_cb<T>(cb: (ctx: T) => void, g_ctx: () => T,): boolean {
+function dyn_cb<T>(cb: (ctx: T) => void, g_ctx: () => T,): boolean {
     try {
         cb(g_ctx())
         return false
@@ -172,6 +172,15 @@ export function dyn_cb<T>(cb: (ctx: T) => void, g_ctx: () => T,): boolean {
         return true
     }
 
+}
+
+export function safe_evaluate_context(str: any, g_ctx: () => any,) {
+    let ret: any = null
+    if (typeof str !== 'string') return { is_err: true, data: ret }
+
+    const is_err = dyn_cb((ctx) => { eval(str) }, g_ctx)
+
+    return { is_err, data: ret }
 }
 
 
