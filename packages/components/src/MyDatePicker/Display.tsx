@@ -7,11 +7,16 @@ export const DisplayFC = (_props: IMyDatePickerProps) => {
   const props = formatDatePickerProps(_props)
 
   const { value, format } = props
-  if(!value) return null
-  const isUnknown = getIsUnknown(props)
+  if (!value) return EMPTY_PLACEHOLDER
+
+  if (getIsUnknown(props))
+    return <span>不详</span>
+
+  if (props.time_only)
+    return <span>{value}</span>
 
   const m = getMomentObj(value)
   return <span>
-    {isUnknown ? '不详' : (m.isValid() ? m.format(format) : EMPTY_PLACEHOLDER)}
+    {m.isValid() ? m.format(format) : EMPTY_PLACEHOLDER}
   </span>
 }
