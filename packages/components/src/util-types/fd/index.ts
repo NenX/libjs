@@ -168,7 +168,7 @@ export type IMchc_FormDescriptions_Field<RAW = false> = {
     // fucking 兼容
     name?: RAW extends false ? string : never
     hidden?: RAW extends false ? boolean : never
-    form_hidden?: RAW extends false ? boolean : never
+    form_hidden?: RAW extends false ? (boolean | (() => boolean)) : never
     input_type?: RAW extends false ? any : never
     special_config?: RAW extends false ? any : never
     tranfer_rules?: RAW extends false ? any : never
