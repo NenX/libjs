@@ -139,12 +139,19 @@ export class Request extends EventEmitter<{
       config.logger && Request.logger.error(e);
       return onRejected(e);
     };
-    ins.interceptors.request.use((config) => {
-      const args = getSearchParamsAll();
+    ins.interceptors.request.use((config: IRequest_AxiosRequestConfig) => {
+      if (config.pure_req)
+        return onRequest(config);
+
       const headers = config.headers ?? (config.headers = {});
-      Object.entries(args).forEach(([k, v]) => {
-        headers[`X-Arg-${k}`] = encodeURI(v);
-      });
+      if (!config.ignore_x_arg) {
+        const args = getSearchParamsAll();
+        Object.entries(args).forEach(([k, v]) => {
+          headers[`X-Arg-${k}`] = encodeURI(v);
+        });
+      }
+
+
       this.emit('request', config);
 
       // TODO: remove

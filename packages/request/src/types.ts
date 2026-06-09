@@ -11,6 +11,8 @@ export interface IRequest_AxiosRequestConfig<D = any> extends AxiosRequestConfig
     errText?: string,
     ignore_usr?: boolean
     ignore_env?: boolean
+    ignore_x_arg?: boolean
+    pure_req?: boolean
 }
 export interface IRequest_ResponseError<D = any> { msg: string; data?: D; status?: number; url?: string; error?: AxiosError<any, any>; }
 export interface IRequest_SpawnConfig { config?: IRequest_AxiosRequestConfig, onRequest?(value: IRequest_AxiosRequestConfig): IRequest_AxiosRequestConfig, onResponse?(value: AxiosResponse): any, onRejected?(err: IRequest_ResponseError): Promise<any> }
