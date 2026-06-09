@@ -140,6 +140,7 @@ export class Request extends EventEmitter<{
       return onRejected(e);
     };
     ins.interceptors.request.use((config: IRequest_AxiosRequestConfig) => {
+      Request.logger.log('request', { config })
       if (config.pure_req)
         return onRequest(config);
 
