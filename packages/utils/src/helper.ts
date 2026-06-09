@@ -74,3 +74,22 @@ export function cloneDeep<T>(value: T): T | null {
 export function hasOwn(obj: AnyObject, key: PropertyKey) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 };
+
+export function object_to_formData(obj: AnyObject, formData = new FormData(), parentKey = '') {
+    for (const key in obj) {
+        const value = obj[key]
+        const dataKey = parentKey ? `${parentKey}.${key}` : key
+
+        if (value === null || value === undefined) {
+            formData.append(dataKey, '')
+        } else if (value instanceof File) {
+            formData.append(dataKey, value)
+        } else if (typeof value === 'object') {
+            // 递归处理对象/数组
+            object_to_formData(value, formData, dataKey)
+        } else {
+            formData.append(dataKey, value)
+        }
+    }
+    return formData
+}

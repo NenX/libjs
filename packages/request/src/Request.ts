@@ -33,7 +33,7 @@ export class Request extends EventEmitter<{
   }
   static CONFIG = { successCode: [200, 1, 0, '200'] };
 
-  static logger = new MyLog('Request');
+  static req_log = new MyLog('Request');
   static checkRTCode(res?: AxiosResponse<any>) {
     if (!res) return false;
     const headerCode = res.headers['lm-code'];
@@ -136,11 +136,13 @@ export class Request extends EventEmitter<{
 
     const _onErr = (e: IRequest_ResponseError) => {
       this.emit('error', e);
-      config.logger && Request.logger.error(e);
+      config.logger && Request.req_log.error(e);
       return onRejected(e);
     };
     ins.interceptors.request.use((config: IRequest_AxiosRequestConfig) => {
-      Request.logger.log('request', { config })
+
+      config.logger && Request.req_log.log('request', config)
+
       if (config.pure_req)
         return onRequest(config);
 
@@ -170,7 +172,7 @@ export class Request extends EventEmitter<{
         this.displayMsg(response);
         if (Request.checkRTCode(response)) {
           logger &&
-            Request.logger.log({ url, data, params, method }, response.data);
+            Request.req_log.log({ url, data, params, method }, response.data);
           this.emit('response', response);
           const isSameOrigin = url?.startsWith('http')
             ? new URL(url).origin === location.origin
@@ -188,7 +190,7 @@ export class Request extends EventEmitter<{
         return _onErr(e);
       },
       (error: AxiosError) => {
-        Request.logger.error('请求出错：', { error });
+        Request.req_log.error('请求出错：', { error });
         this.displayMsg(error.response);
 
         const response = error?.response;
