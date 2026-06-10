@@ -93,3 +93,28 @@ export function object_to_formData(obj: AnyObject, formData = new FormData(), pa
     }
     return formData
 }
+
+export function object_to_searchparams(obj: AnyObject) {
+    const params = new URLSearchParams();
+
+    for (const key in obj) {
+        let value = obj[key];
+
+        // 过滤 undefined，null 转空字符串
+        if (value === undefined) continue;
+        if (value === null) value = "";
+
+        // 数组处理：如 ids: [1,2,3] → ids=1&ids=2&ids=3
+        if (Array.isArray(value)) {
+            value.forEach(item => {
+                params.append(key, item);
+            });
+        }
+        // 普通值直接添加
+        else {
+            params.append(key, value);
+        }
+    }
+
+    return params;
+}
