@@ -28,7 +28,9 @@ export type IMyRangePickerProps = {
     getPopupContainer?: any
     format?: any
     showUnknown?: boolean
+    quick_selector?: string[]
     placeholder?: any
+    size?: any
     style?: React.CSSProperties
     showTime?: AnyObject<Dayjs[]>
 }
@@ -75,10 +77,10 @@ export function format_range_props(props: IMyRangePickerProps) {
 }
 
 
-export const handleChangeValue = ({ format, marshal, linker }: IMyRangePickerProps, date?: (Dayjs | null)[],) => {
+export const format_changed_value = ({ format, marshal, linker }: IMyRangePickerProps, date: (Dayjs | null | undefined)[], format_str?: [string, string]) => {
     if (!date) return null
-    const format_date = date.map(_ => _?.format(format) ?? null)
-    console.log('format change', { marshal, format_date })
+    const format_date = format_str ?? date.map(_ => _?.format(format) ?? null)
+
     switch (marshal) {
         case 0:
             return format_date.join(linker)
