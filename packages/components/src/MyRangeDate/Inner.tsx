@@ -81,25 +81,21 @@ function MyRangePickerInner(_props: IMyRangePickerProps) {
   // disabled={isUnknown}
 
   />
-  if (!presets_filtered) {
-    return node
-  }
+
   return (
-    <Space.Compact size={size}>
+    <span>
       {node}
-      <Radio.Group size={size}>
-        {/* {presets_filtered.map(({ label, value }) => (
+      {
+        presets_filtered && <span style={{ marginLeft: 8 }}>
+          {presets_filtered.map(({ label, value }) => (
             <a key={label as string} onClick={() => {
               handleChange(value as any,)
             }} style={{ marginRight: 8 }}>{label}</a>
-          ))} */}
-        {presets_filtered.map(({ label, value }) => (
-          <Radio.Button key={label as string} onClick={() => {
-            handleChange(value as any,)
-          }} >{label}</Radio.Button>
-        ))}
-      </Radio.Group>
-    </Space.Compact>
+          ))}
+        </span>
+      }
+
+    </span>
   );
 }
 // const RangePicker_ = memo<IMyRangePickerProps>(MyRangePickerInner, areEqual)
