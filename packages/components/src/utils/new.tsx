@@ -1,4 +1,4 @@
-import { AnyObject, get, isEmpty } from "@noah-libjs/utils"
+import { AnyObject, get, isEmpty, set } from "@noah-libjs/utils"
 import { FormInstance } from "antd"
 import { useRef } from "react"
 
@@ -69,4 +69,20 @@ export function fuck_focus(props: { onBlur?(e: EFocus): void }) {
         // }, 10);
     }
     return { child_blur, child_focus, parent_blur, parent_focus }
+}
+
+export function fuck_the_form(action: '覆' | '插', form: FormInstance, data: AnyObject, keys: string[], joiner = '/') {
+    if (action === '覆') {
+        form.setFieldsValue(data)
+    } else {
+        const values = form.getFieldsValue()
+        const obj = keys.reduce((res, k) => {
+            const v = get(data, k)
+            if (!v) return res
+            const old_v = get(values, k)
+            const new_v = old_v ? `${old_v} ${joiner} ${v}` : v
+            return set(res, k, new_v)
+        }, {})
+        form.setFieldsValue(obj)
+    }
 }
