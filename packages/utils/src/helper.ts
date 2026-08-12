@@ -3,11 +3,12 @@ import { AnyObject } from "./type-utils";
 
 export * from "radash";
 
-export function get<T = any>(value: any, path: string, defaultValue?: T | undefined): T {
+export function get<T = any>(value: any, path: any, defaultValue?: T | undefined): T {
+    const safe_path = toString(path)
     //@ts-ignore
-    let direct_value = value?.[path]
+    let direct_value = value?.[safe_path]
     if (direct_value) return direct_value
-    return r_get(value, path, defaultValue)
+    return r_get(value, safe_path, defaultValue)
 }
 
 export function identity<T>(value: T) {
