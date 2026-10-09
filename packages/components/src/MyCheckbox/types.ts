@@ -32,7 +32,7 @@ export interface IMyCheckboxProps {
     disabled?: boolean;
     inputWidth?: number;
     optionKey?: string
-    config?: { inputType?: string }
+    config?: { inputType?: any }
     uniqueKey?: string
     marshal?: TMarshal
     sp?: ICommonOption[]

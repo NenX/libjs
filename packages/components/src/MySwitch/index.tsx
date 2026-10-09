@@ -6,8 +6,8 @@ import { IMySwitchProps } from "./types";
 import { MyCheckbox } from '../MyCheckbox';
 import { MyIcon } from '../MyIconSelect';
 const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(props) {
-    const { checked_value = true, unchecked_value = false, onChange, value } = props
-
+    const { checked_value = true, unchecked_value = false, onChange, value, is_read } = props
+    if (is_read) return <MySwitch.DisplayFC {...props} />
     const [local_value, setLocal_value] = useState<boolean>()
     useEffect(() => {
 
@@ -42,10 +42,10 @@ const MySwitch: TCommonComponent<IMySwitchProps, boolean> = function MySwitch(pr
     />
 }
 
-MySwitch.DisplayFC = ({ value, checkedChildren, checked_text, unCheckedChildren, unchecked_text }) => {
+MySwitch.DisplayFC = ({ value, checkedChildren, unCheckedChildren }) => {
     if (isNil(value))
         return ''
-    return value ? (checkedChildren ?? checked_text ?? <MyIcon value='CheckOutlined' />) : (unCheckedChildren ?? unchecked_text ?? <MyIcon value='CloseOutlined' />);
+    return value ? (checkedChildren ?? <MyIcon value='CheckOutlined' />) : (unCheckedChildren ?? <MyIcon value='CloseOutlined' />);
 }
 
 export { MySwitch };

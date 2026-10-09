@@ -19,9 +19,10 @@ const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<
     value,
     onChange,
     type,
+    is_read,
     ...others
   } = props;
-
+  if (is_read) return value
   if (type === "number") return <MyInputNumber {...(props as any)} />;
   const [_value, set_value] = useState(value);
 

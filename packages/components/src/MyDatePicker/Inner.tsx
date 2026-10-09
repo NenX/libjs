@@ -6,6 +6,7 @@ import { DatePicker_L, MonthPicker_L, TimePicker_L } from 'src/LazyAntd';
 import { TCommonComponent } from '../util-types';
 import { get_unknown_conf, getInputStyle } from 'src/utils';
 import { formatDatePickerProps, getIsUnknown, handleChangeValue, IMyDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
+import { DisplayFC } from './Display';
 export { IMyDatePickerProps as ICusDatePickerProps, UNKNOWN_TIME_SYMBOL } from './utils';
 function MyDatePicker_Inner(_props: IMyDatePickerProps) {
   const props = formatDatePickerProps(_props)
@@ -21,12 +22,13 @@ function MyDatePicker_Inner(_props: IMyDatePickerProps) {
     time_only,
     format,
     style,
+    is_read,
     ...rest
   } = props
   const isUnknown = getIsUnknown(props)
   const _style = getInputStyle(props)
 
-
+  if(is_read) return <DisplayFC {...props} />
 
   const transValue = useCallback(
     (date?: any) => {

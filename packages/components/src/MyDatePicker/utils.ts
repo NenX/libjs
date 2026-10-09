@@ -29,6 +29,7 @@ export type IMyDatePickerProps = {
     format?: any
     showUnknown?: boolean
     unknown?: boolean
+    is_read?: boolean
 } & Omit<DatePickerProps, 'value'>
 
 

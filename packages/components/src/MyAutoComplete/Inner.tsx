@@ -18,8 +18,12 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
     placeholder,
     width,
     onChange,
+    is_read,
     ...rest
   } = props;
+
+  if (is_read) return value
+
   const _style = getInputStyle({ ...props });
 
   const { safeOnChange, onBlur, options, remove, init_value } =

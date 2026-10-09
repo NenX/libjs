@@ -8,9 +8,10 @@ export interface IMyButtonProps extends Omit<ButtonProps, 'form'> {
     on_btn_click?: (e: React.MouseEvent<HTMLElement, MouseEvent>, form?: FormInstance) => any
     defaultIcon?: React.ReactNode,
     primary?: boolean
+    emit_after?: number
 }
 export function MyButton(props: IMyButtonProps) {
-    const { btn_text, defaultIcon, onClick, form, children, icon, loading, primary, hidden, on_btn_click, title, ...others } = props
+    const { btn_text, defaultIcon, onClick, form, children, emit_after, icon, loading, primary, hidden, on_btn_click, title, ...others } = props
     if (hidden) return null
     let type = props.type
     const [visible, setVisible] = useState(false)
@@ -22,6 +23,10 @@ export function MyButton(props: IMyButtonProps) {
         if (loading)
             setVisible(false)
     }, [loading])
+    useEffect(() => {
+        if (emit_after)
+            setTimeout(on_click, emit_after)
+    }, [emit_after])
     async function on_click_call(e: React.MouseEvent<HTMLElement, MouseEvent>) {
         await safe_async_call(onClick, e)
         await safe_async_call(on_btn_click, e, form)

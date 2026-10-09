@@ -25,5 +25,6 @@ export type IMyAutoCompleteProps = Omit<AutoCompleteProps, 'options' | 'onChange
     searchKey?: string,
     width?: any,
     options?: TOptions | (() => TOptions)
+    is_read?: boolean
 
 }

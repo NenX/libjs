@@ -11,11 +11,11 @@ import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
 import { Tooltip } from 'antd';
 import { MyIcon } from 'src/MyIconSelect';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
-  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {} } = props;
+  const { type = 'single', is_read, value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {} } = props;
 
   const marshal = getMarshal(props)
-  const { options, loading, data: __data, setData } = use_options(props)
-
+  const { options, display_node, data: __data, setData } = use_options(props)
+  if (is_read) return display_node
   const longOptions = options.length > 2
   const forcusInfo = useRef<{ index?: number, type?: 'child' | 'parent' }>({})
   // mchcEnv.logger.log('MyCheckbox', { MyCheckboxProps, options, __data })

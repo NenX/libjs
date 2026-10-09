@@ -6,4 +6,5 @@ export type IMyInputNumberProps = Omit<InputNumberProps, 'onChange' | 'value'> &
     warning?: boolean,
     value?: any,
     onChange?: (v: any) => void
+    is_read?: boolean
 }

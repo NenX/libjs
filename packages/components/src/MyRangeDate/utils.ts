@@ -33,6 +33,7 @@ export type IMyRangePickerProps = {
     size?: any
     style?: React.CSSProperties
     showTime?: AnyObject<Dayjs[]>
+    is_read?: boolean
 }
 // & Omit<RangePickerProps, 'value' | 'disabled'>
 

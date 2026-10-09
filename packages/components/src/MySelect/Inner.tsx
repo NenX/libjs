@@ -40,8 +40,12 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     uniqueKey,
     popupMatchSelectWidth = 140,
     fetch_options_on_open,
+    is_read,
     ...others } = props
-  const { options, loading, data, setData, process_options } = use_options(props)
+  const { options, loading, data, setData, process_options, display_node } = use_options(props)
+
+  if (is_read) return display_node
+
   const _style = getInputStyle(props)
 
 

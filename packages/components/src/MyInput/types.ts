@@ -8,4 +8,5 @@ export interface IMyInputProps extends Omit<InputProps, 'value' | 'onChange' | '
     onChange?(v: string): void
     form?: FormInstance
     warning?: boolean
+    is_read?: boolean
 }

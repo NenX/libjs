@@ -8,13 +8,14 @@ export * from './types';
 const UNKNOWN_NUMBER_SYMBOL = 2147483647
 type IProps = InputNumberProps
 const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNumber_(props) {
-  const { value, onChange, placeholder, warning, disabled, ...others } = props
+  const { value, onChange, placeholder, warning, disabled, is_read, ...others } = props
   const _style = getInputStyle(props)
   const unkown_conf = get_unknown_conf(props)
   const isUnkown = unkown_conf && value === UNKNOWN_NUMBER_SYMBOL
   if (unkown_conf) {
     _style.flex = 1;
   }
+  if (is_read) return value
 
   // const node = <Input disabled={disabled} {...others} placeholder={placeholder ?? '请输入数值'} allowClear style={_style} type='number' value={isUnkown ? undefined : value!} onChange={e => onChange?.(e.target.value)} />
   const node = <InputNumber className={get_status_cls(props.status)} controls={false} {...others}
