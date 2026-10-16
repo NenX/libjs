@@ -1,5 +1,5 @@
 import { safe_fetch_options, T_FETCH_OPTIONS } from "@noah-libjs/request";
-import { getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, identity, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isPrimitive, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
+import { EventEmitter, expect_array, getDictionariesEnumerations, getDualModeOptions, getPresetOptions, ICommonOption, identity, isArray, isBoolean, isEmpty, isFunction, isNil, isNull, isNumber, isPrimitive, isString, numberLikeCompare, safe_json_parse, safe_json_parse_arr } from "@noah-libjs/utils";
 import React, { useEffect, useState } from "react";
 import { IMchc_FormDescriptions_Field, IMchc_FormDescriptions_Field_Nullable, IMchc_FormDescriptions_InputProps, TOptions } from "../util-types";
 import { FormInstance } from "antd";
@@ -25,6 +25,8 @@ interface ICompatibleProps {
   display_linker?: string
   linker?: string
   fetch_options_on_open?: boolean
+  form_event?: EventEmitter<any>
+  event_name?: string
 }
 
 export function get_check_invert_values(configs: IMchc_FormDescriptions_Field_Nullable[]) {
@@ -112,7 +114,7 @@ export function get_mode(props: ICompatibleProps,) {
 
 
 export function use_options(props: ICompatibleProps) {
-  const { fetch_options, optionKey, options: _options, uniqueKey, form, linker = ',', frugal, display_linker, fetch_options_on_open } = props
+  const { fetch_options, form_event, event_name, optionKey, options: _options, uniqueKey, form, linker = ',', frugal, display_linker, fetch_options_on_open } = props
   const [options, set_options] = useState<ICommonOption[]>([])
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<ICommonOption[]>([]);
@@ -138,6 +140,27 @@ export function use_options(props: ICompatibleProps) {
   useEffect(() => {
     process_options()
   }, [optionKey, _options, uniqueKey]);
+
+  useEffect(() => {
+
+    const rm = event_name ? form_event?.on_rm(event_name, e => {
+      const action = e?.action
+      console.log('form_event', e)
+      switch (action) {
+        case 'set_options':
+          set_options(expect_array(e?.data))
+          break;
+        default:
+          break;
+      }
+
+    }) : () => { }
+
+    return () => {
+      rm?.()
+    }
+  }, [])
+
   function process_options() {
     if (fetch_options) {
       setLoading(true)
