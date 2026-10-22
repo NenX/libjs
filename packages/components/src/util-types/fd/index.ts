@@ -65,6 +65,7 @@ export interface IMchc_FormDescriptions_InputProps {
     time_only?: boolean
     placeholder?: string
     disabled?: boolean
+    is_read?: boolean
     unknown?: boolean
     pressure_key1?: string
     pressure_key2?: string

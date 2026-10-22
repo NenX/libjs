@@ -28,7 +28,7 @@ function MyDatePicker_Inner(_props: IMyDatePickerProps) {
   const isUnknown = getIsUnknown(props)
   const _style = getInputStyle(props)
 
-  if(is_read) return <DisplayFC {...props} />
+  if (is_read) return <DisplayFC {...props} />
 
   const transValue = useCallback(
     (date?: any) => {
@@ -99,8 +99,8 @@ function MyDatePicker_Inner(_props: IMyDatePickerProps) {
       {...rest}
       style={_style}
       placeholder={'请选择'}
-      // onBlur={undefined}
-      // onBlurCapture={undefined}
+    // onBlur={undefined}
+    // onBlurCapture={undefined}
 
     />
 
