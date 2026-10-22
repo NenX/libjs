@@ -1,4 +1,4 @@
-import { isArray, isFunction, isObject, isString, isSymbol, get as r_get } from "radash";
+import { isArray, isFunction, isObject, isString, isSymbol, set, get as r_get, assign } from "radash";
 import { AnyObject } from "./type-utils";
 
 export * from "radash";
@@ -9,6 +9,10 @@ export function get<T = any>(value: any, path: any, defaultValue?: T | undefined
     let direct_value = value?.[safe_path]
     if (direct_value) return direct_value
     return r_get(value, safe_path, defaultValue) ?? defaultValue
+}
+export function set_dirty<T extends object, K>(initial: T, path: string, value: K): T {
+    const copy_value = set(initial, path, value)
+    return assign(initial, copy_value)
 }
 
 export function identity<T>(value: T) {
