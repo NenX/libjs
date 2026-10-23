@@ -2,7 +2,7 @@ import { Input, InputRef } from "antd";
 import React, { forwardRef, useEffect, useState } from "react";
 import { MyInputNumber } from "../MyInputNumber";
 import { TCommonComponent } from "../util-types";
-import { get_status_cls, getInputStyle } from "../utils";
+import { form_item_read, get_status_cls, getInputStyle } from "../utils";
 import { IMyInputProps } from "./types";
 export * from "./types";
 const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<
@@ -19,10 +19,12 @@ const MyInput: TCommonComponent<IMyInputProps, string> = forwardRef<
     value,
     onChange,
     type,
-    is_read,
     ...others
   } = props;
-  if (is_read) return value
+
+  const [is_r, n] = form_item_read(props, value)
+  if (is_r)
+    return n
   if (type === "number") return <MyInputNumber {...(props as any)} />;
   const [_value, set_value] = useState(value);
 

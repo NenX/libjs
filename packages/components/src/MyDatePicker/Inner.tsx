@@ -22,14 +22,14 @@ function MyDatePicker_Inner(_props: IMyDatePickerProps) {
     time_only,
     format,
     style,
-    is_read,
     ...rest
   } = props
   const isUnknown = getIsUnknown(props)
   const _style = getInputStyle(props)
 
-  if (is_read) return <DisplayFC {...props} />
-
+  const [is_r, n] = form_item_read(props, <DisplayFC {...props} />)
+  if (is_r)
+    return n
   const transValue = useCallback(
     (date?: any) => {
       let result = undefined;

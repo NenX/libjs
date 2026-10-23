@@ -3,7 +3,7 @@ import { default as classNames, default as classnames } from 'classnames';
 import React, { CSSProperties, useEffect, useRef } from 'react';
 import { Checkbox_L } from 'src/LazyAntd';
 import { TCommonComponent } from '../util-types';
-import { getMarshal, parse_MC_value, use_options } from 'src/utils';
+import { form_item_read, getMarshal, parse_MC_value, use_options } from '../utils';
 import MyCheckbox_DisplayFC from './Display';
 import { components } from './components';
 import styles from './index.module.less';
@@ -11,11 +11,14 @@ import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
 import { Tooltip } from 'antd';
 import { MyIcon } from 'src/MyIconSelect';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
-  const { type = 'single', is_read, value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {} } = props;
+  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {} } = props;
 
   const marshal = getMarshal(props)
   const { options, display_node, data: __data, setData } = use_options(props)
-  if (is_read) return display_node
+
+  const [is_r, n] = form_item_read(props, display_node)
+  if (is_r)
+    return n
   const longOptions = options.length > 2
   const forcusInfo = useRef<{ index?: number, type?: 'child' | 'parent' }>({})
   // mchcEnv.logger.log('MyCheckbox', { MyCheckboxProps, options, __data })

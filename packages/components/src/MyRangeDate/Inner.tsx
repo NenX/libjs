@@ -3,7 +3,7 @@ import { Radio, Space } from 'antd';
 import dayjs from 'dayjs';
 import React, { useCallback } from 'react';
 import { RangePicker_L } from '../LazyAntd';
-import { getInputStyle } from '../utils';
+import { form_item_read, getInputStyle } from '../utils';
 import { IMyRangePickerProps, format_changed_value, format_range_props } from './utils';
 import { DisplayFC } from './Display';
 export { IMyRangePickerProps } from './utils';
@@ -23,11 +23,12 @@ function MyRangePickerInner(_props: IMyRangePickerProps) {
     style,
     quick_selector,
     size,
-    is_read,
     ...rest
   } = safe_props
 
-  if (is_read) return <DisplayFC {..._props} />
+  const [is_r, n] = form_item_read(safe_props, <DisplayFC {..._props} />)
+  if (is_r)
+    return n
   const _style = getInputStyle(safe_props)
 
 

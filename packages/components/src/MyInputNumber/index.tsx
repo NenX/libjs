@@ -1,22 +1,23 @@
 import { Checkbox, InputNumber, InputNumberProps } from 'antd';
 import React from 'react';
 import { TCommonComponent } from '../util-types';
-import { get_status_cls, get_unknown_conf, getInputStyle } from '../utils';
+import { form_item_read, get_status_cls, get_unknown_conf, getInputStyle } from '../utils';
 import { IMyInputNumberProps } from './types';
 export * from './types';
 // .ant-input-affix-wrapper-borderless
 const UNKNOWN_NUMBER_SYMBOL = 2147483647
 type IProps = InputNumberProps
 const MyInputNumber: TCommonComponent<IMyInputNumberProps> = function MyInputNumber_(props) {
-  const { value, onChange, placeholder, warning, disabled, is_read, ...others } = props
+  const { value, onChange, placeholder, warning, disabled, ...others } = props
   const _style = getInputStyle(props)
   const unkown_conf = get_unknown_conf(props)
   const isUnkown = unkown_conf && value === UNKNOWN_NUMBER_SYMBOL
   if (unkown_conf) {
     _style.flex = 1;
   }
-  if (is_read) return value
-
+  const [is_r, n] = form_item_read(props, value)
+  if (is_r)
+    return n
   // const node = <Input disabled={disabled} {...others} placeholder={placeholder ?? '请输入数值'} allowClear style={_style} type='number' value={isUnkown ? undefined : value!} onChange={e => onChange?.(e.target.value)} />
   const node = <InputNumber className={get_status_cls(props.status)} controls={false} {...others}
     disabled={disabled}

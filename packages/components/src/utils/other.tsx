@@ -1,4 +1,6 @@
 import { AnyObject, EMPTY_PLACEHOLDER, get } from "@noah-libjs/utils"
+import { InputStatus } from "antd/es/_util/statusUtils"
+import React from "react"
 
 export function isUrl(string: string) {
   const protocolRE = /^(?:\w+:)?\/\/(\S+)$/
@@ -11,9 +13,21 @@ export const getArray = (arr: any[], defaultValue = []) => {
   if (Array.isArray(arr)) return arr
   return defaultValue
 }
-export const form_item_read = (props: AnyObject, value: any) => {
-  if (get(props, 'is_read')) return [true, value || EMPTY_PLACEHOLDER]
-  return [false]
+export function form_item_read(props: AnyObject, value: any): [boolean, any] {
+
+  const status: InputStatus = get(props, 'status')
+  const v = value || EMPTY_PLACEHOLDER
+  if (get(props, 'is_read')) {
+    switch (status) {
+      case 'error':
+        return [true, <span style={{ color: 'red' }}>{v}</span>]
+      case 'warning':
+        return [true, <span style={{ color: 'yellow' }}>{v}</span>]
+      default:
+        return [true, v]
+    }
+  }
+  return [false, null]
 }
 
 export function getFormat(format: string) {

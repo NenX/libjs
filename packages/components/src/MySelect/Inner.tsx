@@ -2,7 +2,7 @@ import { ICommonOption, isInt, isNil, numberLikeCompare } from '@noah-libjs/util
 import { Col, Row } from 'antd';
 import React, { useMemo } from 'react';
 import { Select_L } from 'src/LazyAntd';
-import { check_multiple, get_mode, getInputStyle, getMarshal, parse_MC_value, use_options } from 'src/utils';
+import { check_multiple, form_item_read, get_mode, getInputStyle, getMarshal, parse_MC_value, use_options } from 'src/utils';
 import { TCommonComponent } from '../util-types';
 import { componentMap } from './components';
 import { IMySelectProps } from './types';
@@ -40,11 +40,13 @@ const MySelect: TCommonComponent<IMySelectProps, string | number> = (props) => {
     uniqueKey,
     popupMatchSelectWidth = 140,
     fetch_options_on_open,
-    is_read,
     ...others } = props
   const { options, loading, data, setData, process_options, display_node } = use_options(props)
 
-  if (is_read) return display_node
+
+  const [is_r, n] = form_item_read(props, display_node)
+  if (is_r)
+    return n
 
   const _style = getInputStyle(props)
 

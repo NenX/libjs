@@ -2,7 +2,7 @@ import { MyIcon } from '../MyIconSelect';
 
 import { AutoComplete, Button } from 'antd';
 import React from 'react';
-import { get_status_cls, getInputStyle } from 'src/utils';
+import { form_item_read, get_status_cls, getInputStyle } from 'src/utils';
 import { IMyAutoCompleteProps } from './types';
 import { useConfig_MyAutoComplete } from './useConfig';
 import { isInt } from '@noah-libjs/utils';
@@ -18,12 +18,12 @@ export default function MyAutoCompleteInner(props: IMyAutoCompleteProps) {
     placeholder,
     width,
     onChange,
-    is_read,
     ...rest
   } = props;
 
-  if (is_read) return value
-
+  const [is_r, n] = form_item_read(props, value)
+  if (is_r)
+    return n
   const _style = getInputStyle({ ...props });
 
   const { safeOnChange, onBlur, options, remove, init_value } =
