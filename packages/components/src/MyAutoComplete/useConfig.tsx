@@ -1,5 +1,5 @@
 // import { ICommonOption, getPresetOptions, getSameOptions } from '@lm_fe/env';
-import { getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption, isFunction } from '@noah-libjs/utils';
+import { expect_array, getPresetOptions, getSameOptions, getSearchParamsValue, ICommonOption, isFunction } from '@noah-libjs/utils';
 import React, { useEffect, useState } from 'react';
 import { IMemoriseItem, IMyAutoCompleteProps } from './types';
 import { request, safe_fetch_options } from '@noah-libjs/request';
@@ -23,6 +23,8 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         name,
         fetch_options,
         onChange,
+        event_name,
+        form_event,
         onBlur,
     } = props;
 
@@ -48,6 +50,23 @@ export function useConfig_MyAutoComplete(props: IMyAutoCompleteProps) {
         }
 
         return () => { }
+    }, [])
+
+    useEffect(() => {
+
+        return form_event?.on_rm('my_form', e => {
+            if (!e || e.type !== 'item' || e.name !== event_name) return
+
+            switch (e.action) {
+                case 'set_options':
+                    set__options(expect_array(e.data))
+                    break;
+                default:
+                    break;
+            }
+
+        })
+
     }, [])
     useEffect(() => {
         // if (!init_value && value) {

@@ -1,4 +1,4 @@
-import { ICommonOption } from '@noah-libjs/utils';
+import { EventEmitter, ICommonOption } from '@noah-libjs/utils';
 import { AutoCompleteProps, FormInstance } from 'antd';
 import { TOptions } from '../util-types';
 import { T_FETCH_OPTIONS } from '@noah-libjs/request';
@@ -23,8 +23,10 @@ export type IMyAutoCompleteProps = Omit<AutoCompleteProps, 'options' | 'onChange
     name?: string,
     formName?: string,
     searchKey?: string,
+    event_name?: string,
     width?: any,
     options?: TOptions | (() => TOptions)
     is_read?: boolean
+    form_event?: EventEmitter<any>
 
 }

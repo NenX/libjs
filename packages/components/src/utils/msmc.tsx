@@ -143,7 +143,7 @@ export function use_options(props: ICompatibleProps) {
 
   useEffect(() => {
 
-    const rm = form_event?.on_rm('my_form', e => {
+    return form_event?.on_rm('my_form', e => {
       if (!e || e.type !== 'item' || e.name !== event_name) return
 
       switch (e.action) {
@@ -156,9 +156,6 @@ export function use_options(props: ICompatibleProps) {
 
     })
 
-    return () => {
-      rm?.()
-    }
   }, [])
 
   function process_options() {
