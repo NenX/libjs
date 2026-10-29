@@ -12,9 +12,13 @@ import { MySwitch } from './MySwitch'
 import { MyIconSelect } from './MyIconSelect'
 import { MyButton } from './MyButton'
 import { Divider } from 'antd'
+import { CheckInvertButton } from './CheckInvertButton'
+import { CheckInvertButtonFucker } from './CheckInvertButtonFucker'
 
 
 export * from './MyInput'
+export * from './CheckInvertButton'
+export * from './CheckInvertButtonFucker'
 export * from './MySelect'
 export * from './MyCheckbox'
 export * from './ArrayInput'
@@ -91,4 +95,9 @@ export const packs = {
     MA: MyAutoComplete,
     AutoComplete: MyAutoComplete,
     autocomplete: MyAutoComplete,
+
+    CheckInvertButton,
+    check_invert_button: CheckInvertButton,
+    CheckInvertButtonFucker,
+    check_invert_button_fucker: CheckInvertButtonFucker,
 }
