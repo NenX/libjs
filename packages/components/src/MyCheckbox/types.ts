@@ -24,6 +24,7 @@ export interface ICompatibleProps {
 }
 
 export interface IMyCheckboxProps {
+    id?: string,
     value?: boolean | null | string | number | ICommonOption[];
     options?: TOptions | (() => TOptions)
 

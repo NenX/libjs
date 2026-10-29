@@ -11,7 +11,7 @@ import { ICheckboxWithInputOption, IMyCheckboxProps } from './types';
 import { Tooltip } from 'antd';
 import { MyIcon } from 'src/MyIconSelect';
 const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOption[]> = (props) => {
-  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {} } = props;
+  const { type = 'single', value, onChange, disabled = false, onBlur, inputWidth = 50, vertical = false, style = {}, id } = props;
 
   const marshal = getMarshal(props)
   const { options, display_node, data: __data, setData } = use_options(props)
@@ -122,76 +122,78 @@ const MyCheckbox: TCommonComponent<IMyCheckboxProps, string | number | ICommonOp
   }
   if (options.length === 0) return null
   return (
-    <Checkbox_L.Group className={classNames([styles['wrapper'], vertical ? styles['block-box'] : styles['flex-box']])} disabled={disabled} value={__data.map(_ => _.value)} onChange={handleBoxGroupChange}
-      style={{
-        ...style,
-        // width: '100%',
-        flexWrap: 'wrap',
-      }}>
-      {options.map((option, index) => {
-        const { prefix, sufix, suffix, parentheses } = option
-        const _parentheses = parentheses ?? (['MC', 'MArr'].includes(option.inputType!) && !!option?.props?.options)
-        const _suffix = sufix ?? suffix
-        const checked = isChecked(option.value)
-        const node = checked ? renderInput(option) : null
+    <div id={id} style={{ display: 'inline-block' }}>
+      <Checkbox_L.Group className={classNames([styles['wrapper'], vertical ? styles['block-box'] : styles['flex-box']])} disabled={disabled} value={__data.map(_ => _.value)} onChange={handleBoxGroupChange}
+        style={{
+          ...style,
+          // width: '100%',
+          flexWrap: 'wrap',
+        }}>
+        {options.map((option, index) => {
+          const { prefix, sufix, suffix, parentheses } = option
+          const _parentheses = parentheses ?? (['MC', 'MArr'].includes(option.inputType!) && !!option?.props?.options)
+          const _suffix = sufix ?? suffix
+          const checked = isChecked(option.value)
+          const node = checked ? renderInput(option) : null
 
-        const surround_node = <>
-          {_parentheses && checked ? <span style={{ margin: "0 2px", }}>(</span> : null}
-          {prefix && checked ? <span style={{ margin: "0 2px", whiteSpace: 'nowrap', }}>{prefix}</span> : null}
-          {node ? <span
-            onFocus={(e) => {
-              forcusInfo.current = { index, type: 'child' }
-            }}
-            onBlur={(e) => {
-              forcusInfo.current = { index: undefined, type: undefined }
-              onBlur?.(e)
-            }}
-
-            style={{
-              // margin: "0 2px",
-            }}>{node}</span> : null}
-          {_suffix && checked ? <span style={{ margin: "0 2px", }}>{_suffix}</span> : null}
-          {_parentheses && checked ? <span style={{ margin: "0 2px", whiteSpace: 'nowrap', }}>)</span> : null}
-        </>
-        return (
-          <div key={index} style={{ display: 'flex', alignItems: 'center', marginRight: 2 }} className={(option.warning && checked) ? styles['warning'] : undefined}>
-            <span
+          const surround_node = <>
+            {_parentheses && checked ? <span style={{ margin: "0 2px", }}>(</span> : null}
+            {prefix && checked ? <span style={{ margin: "0 2px", whiteSpace: 'nowrap', }}>{prefix}</span> : null}
+            {node ? <span
               onFocus={(e) => {
-
-                setTimeout(() => {
-                  forcusInfo.current = { index, type: 'parent' }
-                }, 10);
+                forcusInfo.current = { index, type: 'child' }
               }}
               onBlur={(e) => {
-
-                setTimeout(() => {
-                  if (forcusInfo.current.index === index && forcusInfo.current.type === 'child')
-                    return
-                  forcusInfo.current = { index: undefined, type: undefined }
-                  onBlur?.(e)
-                }, 10);
+                forcusInfo.current = { index: undefined, type: undefined }
+                onBlur?.(e)
               }}
-            >
-              <Checkbox_L value={option.value} >
-                {option.label}
-                {option.tip
-                  ? <Tooltip title={option.tip} >
-                    <MyIcon value='QuestionCircleOutlined' style={{ cursor: 'help', marginLeft: 2 }} />
-                  </Tooltip>
-                  : null
-                }
-              </Checkbox_L>
-            </span>
-            {
-              surround_node
-            }
 
-          </div>
-        );
+              style={{
+                // margin: "0 2px",
+              }}>{node}</span> : null}
+            {_suffix && checked ? <span style={{ margin: "0 2px", }}>{_suffix}</span> : null}
+            {_parentheses && checked ? <span style={{ margin: "0 2px", whiteSpace: 'nowrap', }}>)</span> : null}
+          </>
+          return (
+            <div key={index} style={{ display: 'flex', alignItems: 'center', marginRight: 2 }} className={(option.warning && checked) ? styles['warning'] : undefined}>
+              <span
+                onFocus={(e) => {
+
+                  setTimeout(() => {
+                    forcusInfo.current = { index, type: 'parent' }
+                  }, 10);
+                }}
+                onBlur={(e) => {
+
+                  setTimeout(() => {
+                    if (forcusInfo.current.index === index && forcusInfo.current.type === 'child')
+                      return
+                    forcusInfo.current = { index: undefined, type: undefined }
+                    onBlur?.(e)
+                  }, 10);
+                }}
+              >
+                <Checkbox_L value={option.value} >
+                  {option.label}
+                  {option.tip
+                    ? <Tooltip title={option.tip} >
+                      <MyIcon value='QuestionCircleOutlined' style={{ cursor: 'help', marginLeft: 2 }} />
+                    </Tooltip>
+                    : null
+                  }
+                </Checkbox_L>
+              </span>
+              {
+                surround_node
+              }
+
+            </div>
+          );
 
 
-      })}
-    </Checkbox_L.Group>
+        })}
+      </Checkbox_L.Group>
+    </div>
 
   );
 };
