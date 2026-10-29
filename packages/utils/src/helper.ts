@@ -12,7 +12,7 @@ export function get<T = any>(value: any, path: any, defaultValue?: T | undefined
 }
 export function set_dirty<T extends object, K>(initial: T, path: string, value: K): T {
     const copy_value = set(initial, path, value)
-    return assign(initial, copy_value)
+    return Object.assign(initial, copy_value)
 }
 
 export function identity<T>(value: T) {

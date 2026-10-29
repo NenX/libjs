@@ -151,6 +151,7 @@ export type IMchc_FormDescriptions_InputType = "single_date_picker" |
     "result_textarea" |
     "single_selector" |
     "check_invert_button" |
+    "check_invert_button_fucker" |
     "async_autoComplete" |
     "checkbox-with-extra" |
     "oxytocin_table" |
