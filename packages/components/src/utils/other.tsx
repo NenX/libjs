@@ -14,17 +14,17 @@ export const getArray = (arr: any[], defaultValue = []) => {
   return defaultValue
 }
 export function form_item_read(props: AnyObject, value: any): [boolean, any] {
-
-  const status: InputStatus = get(props, 'status')
+  const id = get(props, 'id')
+  const status: InputStatus | undefined = get(props, 'status')
   const v = value || EMPTY_PLACEHOLDER
   if (get(props, 'is_read')) {
     switch (status) {
       case 'error':
-        return [true, <span style={{ color: 'red' }}>{v}</span>]
+        return [true, <span id={id} style={{ color: 'red' }}>{v}</span>]
       case 'warning':
-        return [true, <span style={{ color: 'yellow' }}>{v}</span>]
+        return [true, <span id={id} style={{ color: 'yellow' }}>{v}</span>]
       default:
-        return [true, v]
+        return [true, <span id={id}>{v}</span>]
     }
   }
   return [false, null]

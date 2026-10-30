@@ -13,17 +13,16 @@ import { MyIconSelect } from './MyIconSelect'
 import { MyButton } from './MyButton'
 import { Divider } from 'antd'
 import { CheckInvertButton } from './CheckInvertButton'
-import { CheckInvertButtonFucker } from './CheckInvertButtonFucker'
+import { AutoReset } from './AutoReset'
 
 
 export * from './MyInput'
 export * from './CheckInvertButton'
-export * from './CheckInvertButtonFucker'
+export * from './AutoReset'
 export * from './MySelect'
 export * from './MyCheckbox'
 export * from './ArrayInput'
 export * from './ArraySingle'
-export * from './MyCheckbox'
 export * from './MyDatePicker'
 export * from './MyRangeDate'
 export * from './MyColor'
@@ -98,6 +97,5 @@ export const packs = {
 
     CheckInvertButton,
     check_invert_button: CheckInvertButton,
-    CheckInvertButtonFucker,
-    check_invert_button_fucker: CheckInvertButtonFucker,
+    AutoReset,
 }
