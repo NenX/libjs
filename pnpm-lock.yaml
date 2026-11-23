@@ -82,10 +82,10 @@ importers:
         specifier: ^4.5.1
         version: 4.7.0(monaco-editor@0.39.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@noah-libjs/request':
-        specifier: ^0.0.74
+        specifier: ^0.0.75
         version: link:../request
       '@noah-libjs/utils':
-        specifier: ^0.0.74
+        specifier: ^0.0.75
         version: link:../utils
       axios:
         specifier: '>=0.26.0'
@@ -131,7 +131,7 @@ importers:
   packages/request:
     dependencies:
       '@noah-libjs/utils':
-        specifier: ^0.0.74
+        specifier: ^0.0.75
         version: link:../utils
       axios:
         specifier: ^0.26.1
@@ -2339,6 +2339,7 @@ packages:
   image-size@0.5.5:
     resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
+    deprecated: Please migrate to image-size@2.x
     hasBin: true
 
   import-cwd@3.0.0:
