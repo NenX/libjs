@@ -25,7 +25,7 @@ export function getInputStyle(props: IProps = {}) {
         style.color = 'red !important';
     }
     if (status === 'warning') {
-        style.color = 'yellow !important';
+        style.color = 'orange !important';
     }
     // if (isInt(popupMatchSelectWidth))
     //     style.width = style.width || (popupMatchSelectWidth / 2)

@@ -22,7 +22,7 @@ export function form_item_read(props: AnyObject, value: any): [boolean, any] {
       case 'error':
         return [true, <span id={id} style={{ color: 'red' }}>{v}</span>]
       case 'warning':
-        return [true, <span id={id} style={{ color: 'yellow' }}>{v}</span>]
+        return [true, <span id={id} style={{ color: 'orange' }}>{v}</span>]
       default:
         return [true, <span id={id}>{v}</span>]
     }
